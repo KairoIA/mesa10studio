@@ -159,38 +159,40 @@
   if (saved === 'en') setLang('en', false);
 
   /* ── Vídeo de fondo del hero ────────────────────────────────
-     Sólo en pantallas anchas: el clip es 16:9 y en un móvil vertical se
-     recortaría hasta dejar sólo pared, además de gastar datos. El fichero ya
-     viene ping-pong (ida y vuelta), así que el bucle no da tirón: basta con
-     `loop`. Entra fundido cuando puede reproducirse de corrido.
+     El clip ya viene ping-pong (ida y vuelta), así que `loop` a secas basta.
+
+     Se descarga ENTERO antes de reproducir, no en streaming. Son 800 kB, y
+     reproduciéndolo a trozos desde un servidor lejano el navegador se queda
+     esperando datos entre fragmento y fragmento: avanzaba menos de un segundo
+     por cada diez reales, o sea que parecía congelado. Desde memoria va suelto.
+
+     Se salta con prefers-reduced-motion o con el ahorro de datos puesto.
      ───────────────────────────────────────────────────────── */
   var fondo = document.querySelector('[data-fondo]');
   if (fondo) {
-    // ?video=1 fuerza el vídeo aunque sea móvil. Es para poder comprobar en un
-    // teléfono real si va fluido; el encuadre no será el bueno hasta que haya
-    // una versión 9:16.
-    var forzado = /[?&]video=1/.test(location.search);
-
-    var anchaBastante = window.matchMedia('(min-width:760px)').matches;
     var quietoPorFavor = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var ahorroDatos = navigator.connection && navigator.connection.saveData;
 
-    if (forzado || (anchaBastante && !quietoPorFavor && !ahorroDatos)) {
-      fondo.addEventListener('canplaythrough', function () {
-        fondo.classList.add('is-ready');
-      }, { once: true });
-      fondo.addEventListener('error', function () { fondo.remove(); }, { once: true });
+    if (quietoPorFavor || ahorroDatos) {
+      fondo.remove();
+    } else {
+      var rendirse = function () { if (fondo.parentNode) fondo.remove(); };
 
-      fondo.src = fondo.dataset.src;
-      fondo.play().catch(function () { fondo.remove(); });
+      fetch(fondo.dataset.src)
+        .then(function (r) { return r.ok ? r.blob() : Promise.reject(r.status); })
+        .then(function (trozo) {
+          fondo.src = URL.createObjectURL(trozo);
+          return fondo.play();
+        })
+        .then(function () { fondo.classList.add('is-ready'); })
+        .catch(rendirse);
 
-      // Si la pestaña se va al fondo no tiene sentido seguir decodificando
+      // Con la pestaña de fondo no tiene sentido seguir decodificando
       document.addEventListener('visibilitychange', function () {
+        if (!fondo.parentNode) return;
         if (document.hidden) fondo.pause();
         else fondo.play().catch(function () {});
       });
-    } else {
-      fondo.remove();
     }
   }
 

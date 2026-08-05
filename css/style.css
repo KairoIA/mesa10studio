@@ -163,6 +163,11 @@ a{color:inherit}
   opacity:0;transition:opacity 1.4s var(--ease);
 }
 .scene__video.is-ready{opacity:1}
+/* El clip es 16:9. En vertical, encuadrado al centro sólo se vería pared:
+   se desplaza hacia la izquierda, que es donde está el olivo. */
+@media (max-width:759px){
+  .scene__video{object-position:26% center}
+}
 /* Que el texto no compita con la pared: un velo casi invisible bajo el bloque */
 .hero::after{
   content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
