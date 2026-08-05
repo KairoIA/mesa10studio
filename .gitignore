@@ -1,0 +1,9 @@
+# Utilidades de preparación: llevan rutas absolutas de la máquina y notas de
+# trabajo. Se quedan en local; el repo es público y lo van a ver clientes.
+_tools/
+LEEME.md
+
+# Windows
+Thumbs.db
+desktop.ini
+.DS_Store

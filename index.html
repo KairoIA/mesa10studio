@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mesa 10 Studio — Producción audiovisual y automatización con IA</title>
+
+<meta name="description" content="Anuncios y automatizaciones hechos enteros con inteligencia artificial, para autónomos, creadores de contenido y pymes. Lo único que no pone la IA es la creatividad.">
+<meta name="theme-color" content="#F3E5D9">
+<link rel="canonical" href="https://mesa10studio.com/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Mesa 10 Studio">
+<meta property="og:title" content="Mesa 10 Studio">
+<meta property="og:description" content="Producción audiovisual y automatización de procesos con IA. Autónomos, creadores de contenido y pymes.">
+<meta property="og:image" content="img/hero_web_es.png">
+<meta property="og:image:width" content="2400">
+<meta property="og:image:height" content="1350">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="img/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="img/favicon_180px.png">
+
+<link rel="preload" href="fonts/CormorantGaramond-300.woff2?v=2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/CormorantGaramond-400.woff2?v=2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/style.css?v=16">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Mesa 10 Studio",
+  "description": "Producción audiovisual y automatización de procesos con inteligencia artificial.",
+  "url": "https://mesa10studio.com/",
+  "image": "https://mesa10studio.com/img/hero_web_es.png",
+  "slogan": "Lo nuevo, bien hecho.",
+  "founder": { "@type": "Person", "name": "Javier" },
+  "areaServed": "ES",
+  "knowsLanguage": ["es", "en"]
+}
+</script>
+</head>
+<body>
+
+<a class="skip" href="#work" data-i18n="skip">Ir al contenido</a>
+
+<header class="head" id="head">
+  <a class="head__logo" href="#top" aria-label="Mesa 10 Studio">
+    <img src="img/mesa10_isotipo.svg" alt="" width="318" height="378">
+    <span class="head__name">Mesa 10 Studio</span>
+  </a>
+
+  <nav class="head__nav" aria-label="Principal">
+    <a href="#work" data-i18n="nav.work">Trabajo</a>
+    <a href="#services" data-i18n="nav.services">Qué hago</a>
+    <a href="#method" data-i18n="nav.method">Cómo</a>
+    <a href="#contact" data-i18n="nav.contact">Contacto</a>
+  </nav>
+
+  <div class="lang" role="group" aria-label="Idioma">
+    <button type="button" data-lang="es" class="is-on">ES</button>
+    <span aria-hidden="true">·</span>
+    <button type="button" data-lang="en">EN</button>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ─────────────────────────── HERO ─────────────────────────── -->
+  <section class="hero">
+    <!-- El escenario. La foto es la base y el fallback; encima entra el clip del
+         olivo al viento, ya ping-pong, así que el bucle no da tirón. Al clip se le
+         quitó el logo que traía generado —se deformaba— y el bueno es el SVG de
+         abajo. En móvil no se carga el vídeo: se queda la foto vertical. -->
+    <div class="scene" aria-hidden="true">
+      <picture class="scene__img">
+        <source media="(min-width:760px)" srcset="img/escena_h.jpg">
+        <img src="img/escena_v.jpg" alt="" width="863" height="1822" fetchpriority="high">
+      </picture>
+
+      <video class="scene__video" data-fondo data-src="media/escena.mp4?v=16"
+             muted loop playsinline preload="none"></video>
+    </div>
+
+    <div class="hero__inner">
+      <img class="hero__lockup reveal" src="img/mesa10_lockup_vertical_color.svg"
+           alt="Mesa 10 Studio" width="977" height="582">
+
+      <h1 class="hero__claim reveal" data-i18n="hero.claim">Producción audiovisual y automatización de procesos con IA.</h1>
+
+      <p class="hero__who reveal" data-i18n="hero.who">Autónomos, creadores de contenido y pymes.</p>
+
+      <!-- Sin filete aquí: el lockup vertical ya lo lleva debajo del wordmark -->
+      <p class="hero__slogan reveal" data-i18n="hero.slogan">Lo nuevo, bien hecho.</p>
+
+      <div class="hero__cta reveal">
+        <a class="btn btn--solid" href="#work" data-i18n="hero.cta1">Ver el trabajo</a>
+        <a class="btn" href="#contact" data-i18n="hero.cta2">Hablemos</a>
+      </div>
+    </div>
+
+    <span class="hero__scroll" aria-hidden="true"></span>
+  </section>
+
+  <!-- ─────────────────────────── TRABAJO ─────────────────────────── -->
+  <section class="sec" id="work">
+    <header class="sec__head reveal">
+      <p class="eyebrow"><span>01</span> <span data-i18n="work.eyebrow">Trabajo</span></p>
+      <h2 class="sec__title" data-i18n="work.title">Nada de esto se ha rodado.</h2>
+      <p class="sec__lead" data-i18n="work.lead">Ni cámara, ni localización, ni actores. Todo lo que ves está generado con inteligencia artificial. Lo que no es de la IA es qué contar y dónde cortar.</p>
+    </header>
+
+    <!-- Caso 1 -->
+    <article class="case reveal">
+      <div class="case__media">
+        <div class="player" data-player>
+          <video data-video data-src="media/chef.mp4" playsinline muted loop preload="none"
+                 poster="img/poster_chef.jpg" width="720" height="1280"></video>
+          <button class="player__sound" type="button" data-sound aria-pressed="false">
+            <span data-i18n="player.sound">Sonido</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="case__text">
+        <p class="case__kicker" data-i18n="case.chef.kicker">Restauración · El mundo real, regenerado</p>
+        <h3 class="case__title">Chef Roberto Vera</h3>
+        <p data-i18n="case.chef.body">El restaurante existe. El anuncio no se grabó nunca. Catorce planos generados con dos modelos distintos y un mismo etalonaje encima, para que parezcan del mismo rodaje. Lo que hace la máquina es el plano; lo que hace que funcione es el orden: sigue el de un menú —el local vacío, la cocina, los platos alternándose con la mesa, el vino, el postre— y ese orden no lo propone ninguna IA.</p>
+        <ul class="case__facts">
+          <li><span data-i18n="case.f.duration">Duración</span><b>52 s · 9:16</b></li>
+          <li><span data-i18n="case.f.shots">Planos</span><b data-i18n="case.chef.shots">14, elegidos a mano</b></li>
+          <li><span data-i18n="case.f.shoot">Rodaje</span><b data-i18n="case.f.none">Ninguno</b></li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- Caso 2 -->
+    <article class="case case--flip reveal">
+      <div class="case__media">
+        <div class="player" data-player>
+          <video data-video data-src="media/serenica.mp4" playsinline muted loop preload="none"
+                 poster="img/poster_serenica.jpg" width="720" height="1280"></video>
+          <button class="player__sound" type="button" data-sound aria-pressed="false">
+            <span data-i18n="player.sound">Sonido</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="case__text">
+        <p class="case__kicker" data-i18n="case.serenica.kicker">E-commerce · Producto real, casa inventada</p>
+        <h3 class="case__title">Serénica</h3>
+        <p data-i18n="case.serenica.body">La lámina que se vende es real y se ve tal cual es. Lo que no existe es el piso donde está colgada: un salón andaluz con el sol de la tarde filtrándose por una cortina de lino, construido entero para ese anuncio. Enseñar un cuadro en su sitio ya no cuesta un piso bonito, un fotógrafo y una tarde de luz buena.</p>
+        <ul class="case__facts">
+          <li><span data-i18n="case.f.duration">Duración</span><b>38 s · 9:16</b></li>
+          <li><span data-i18n="case.f.product">Producto</span><b data-i18n="case.serenica.product">Real, sin retocar</b></li>
+          <li><span data-i18n="case.f.location">Localización</span><b data-i18n="case.f.built">Generada</b></li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- Caso 3 — dos piezas del mismo personaje -->
+    <article class="case case--duo reveal">
+      <div class="case__text">
+        <p class="case__kicker" data-i18n="case.lucy.kicker">Creadora virtual · Hecha de la nada</p>
+        <h3 class="case__title">Lucy Rivero</h3>
+        <p data-i18n="case.lucy.body">Lucy no existe. No es una modelo retocada: no hay nadie detrás. Es andaluza, habla en inglés, recomienda sitios del sur y su cuenta se alimenta de reels generados uno a uno, con voz clonada. Lo difícil no es un plano bonito —eso lo da cualquier modelo—, es que la misma cara aguante trece planos, cambie de ropa y de ciudad y siga siendo ella. Una marca de ropa puede tener la suya sin fichar a nadie y sin sesión de fotos.</p>
+        <ul class="case__facts">
+          <li><span data-i18n="case.f.pieces">Piezas</span><b data-i18n="case.lucy.pieces">Dos formatos</b></li>
+          <li><span data-i18n="case.f.face">Identidad</span><b data-i18n="case.lucy.face">Inventada, y constante</b></li>
+          <li><span data-i18n="case.f.voice">Voz</span><b data-i18n="case.lucy.voice">Generada</b></li>
+        </ul>
+      </div>
+
+      <div class="case__media case__media--duo">
+        <figure class="shot">
+          <div class="player" data-player>
+            <video data-video data-src="media/lucy.mp4" playsinline muted loop preload="none"
+                   poster="img/poster_lucy.jpg" width="720" height="1280"></video>
+            <button class="player__sound" type="button" data-sound aria-pressed="false">
+              <span data-i18n="player.sound">Sonido</span>
+            </button>
+          </div>
+          <figcaption data-i18n="case.lucy.cap1">Consejos de viaje · Cádiz</figcaption>
+        </figure>
+
+        <figure class="shot">
+          <div class="player" data-player>
+            <video data-video data-src="media/urban.mp4" playsinline muted loop preload="none"
+                   poster="img/poster_urban.jpg" width="720" height="1280"></video>
+            <button class="player__sound" type="button" data-sound aria-pressed="false">
+              <span data-i18n="player.sound">Sonido</span>
+            </button>
+          </div>
+          <figcaption data-i18n="case.lucy.cap2">Moda urbana · para marcas de ropa</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <!-- En curso -->
+    <article class="soon reveal">
+      <p class="soon__tag" data-i18n="soon.tag">En curso</p>
+      <div>
+        <h3 class="soon__title" data-i18n="soon.title">Clínica de fisioterapia</h3>
+        <p data-i18n="soon.body">Anuncio de un tratamiento dermatofuncional y, en paralelo, una recepcionista que atiende el teléfono y el WhatsApp de la clínica. Ni el vídeo se rueda ni la recepcionista existe: las dos patas del estudio, generadas, para el mismo cliente.</p>
+      </div>
+    </article>
+  </section>
+
+  <!-- ─────────────────────────── SERVICIOS ─────────────────────────── -->
+  <section class="sec sec--alt" id="services">
+    <header class="sec__head reveal">
+      <p class="eyebrow"><span>02</span> <span data-i18n="serv.eyebrow">Qué hago</span></p>
+      <h2 class="sec__title" data-i18n="serv.title">Dos cosas, y las dos bien.</h2>
+      <p class="sec__lead" data-i18n="serv.lead">Las dos con inteligencia artificial de principio a fin.</p>
+    </header>
+
+    <div class="cards">
+      <article class="card reveal">
+        <span class="card__num" aria-hidden="true">I</span>
+        <h3 data-i18n="serv.video.title">Producción audiovisual</h3>
+        <p data-i18n="serv.video.body">Anuncios, reels y piezas de marca generados enteros. Se puede partir de tres sitios: de una persona real convertida en avatar digital, de un personaje que no existe y se construye de cero, o del mundo que ya tienes —tu producto, tu local— regenerado en escenarios que no hay que alquilar. Después viene lo de siempre: guion, montaje, etalonaje, música y rótulos.</p>
+        <ul class="card__list">
+          <li data-i18n="serv.video.l1">Tu cara, o la de tu equipo, como avatar</li>
+          <li data-i18n="serv.video.l2">Un personaje propio, inventado para tu marca</li>
+          <li data-i18n="serv.video.l3">Tu producto en escenarios generados</li>
+          <li data-i18n="serv.video.l4">Versiones cortas para cada plataforma</li>
+        </ul>
+      </article>
+
+      <article class="card reveal">
+        <span class="card__num" aria-hidden="true">II</span>
+        <h3 data-i18n="serv.auto.title">Automatización de procesos</h3>
+        <p data-i18n="serv.auto.body">Lo que se repite todos los días lo puede hacer una máquina. Una recepcionista que coge el teléfono y agenda citas, respuestas de WhatsApp, presupuestos que se rellenan solos, informes que llegan hechos. El código y las conexiones también los escribe la IA; lo que hay que pensar es qué pasos tiene tu proceso y dónde puede romperse. Se monta sobre las herramientas que ya usas.</p>
+        <ul class="card__list">
+          <li data-i18n="serv.auto.l1">Recepcionista por voz y WhatsApp</li>
+          <li data-i18n="serv.auto.l2">Agenda y recordatorios automáticos</li>
+          <li data-i18n="serv.auto.l3">Facturas y documentos sin teclear</li>
+          <li data-i18n="serv.auto.l4">Conexión entre las apps que ya tienes</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────── MÉTODO (oscuro) ─────────────────────────── -->
+  <section class="sec sec--dark" id="method">
+    <header class="sec__head reveal">
+      <p class="eyebrow"><span>03</span> <span data-i18n="met.eyebrow">Cómo trabajo</span></p>
+      <h2 class="sec__title" data-i18n="met.title">Todo lo hace la IA. Menos lo que decide.</h2>
+      <p class="sec__lead" data-i18n="met.lead">Las herramientas están al alcance de cualquiera y cada mes salen mejores. Lo que no se descarga es saber qué merece contarse y dónde va el corte. Esa es la parte humana, y es la única que no se automatiza.</p>
+    </header>
+
+    <div class="reparto">
+      <section class="reparto__col reveal">
+        <p class="reparto__tag" data-i18n="met.machine.tag">Lo pone la máquina</p>
+        <ul class="reparto__list">
+          <li data-i18n="met.machine.l1">Caras, cuerpos y voces, tuyas o inventadas</li>
+          <li data-i18n="met.machine.l2">Escenarios, productos y luz</li>
+          <li data-i18n="met.machine.l3">Locución, subtítulos y traducción</li>
+          <li data-i18n="met.machine.l4">El código que conecta tus herramientas</li>
+        </ul>
+      </section>
+
+      <section class="reparto__col reparto__col--yo reveal">
+        <p class="reparto__tag" data-i18n="met.human.tag">Lo pongo yo</p>
+        <ul class="reparto__list">
+          <li data-i18n="met.human.l1">Qué contar, en qué orden y a quién</li>
+          <li data-i18n="met.human.l2">Qué plano entra y en qué segundo exacto</li>
+          <li data-i18n="met.human.l3">Que doce planos parezcan un solo rodaje</li>
+          <li data-i18n="met.human.l4">Qué pasos tiene el proceso y dónde se rompe</li>
+        </ul>
+      </section>
+    </div>
+
+    <p class="remate reveal" data-i18n="met.close">Un plano entra en el segundo 6,05 y no en el 5 porque antes hay un pan que se desvanece. Ninguna IA se da cuenta de eso. Ese detalle es el trabajo — y por eso cada pieza se monta entera para ese negocio, y por eso te llevas el máster y los archivos, sin suscripción para seguir teniendo lo tuyo.</p>
+  </section>
+
+  <!-- ─────────────────────────── CONTACTO ─────────────────────────── -->
+  <section class="sec sec--contact" id="contact">
+    <div class="reveal">
+      <p class="eyebrow"><span>04</span> <span data-i18n="cta.eyebrow">Contacto</span></p>
+      <h2 class="sec__title" data-i18n="cta.title">Cuéntame qué quieres enseñar.</h2>
+      <p class="sec__lead" data-i18n="cta.lead">Escríbeme con lo que vendes y a quién. Te digo qué se puede hacer, cuánto tarda y cuánto cuesta. Sin reunión de una hora para eso.</p>
+
+      <!-- Correo pendiente de dar de alta (Google Workspace, plan Flexible) -->
+      <!-- Se monta en JS para no dejar el correo en claro a los rastreadores.
+           Para cambiarlo, estos dos atributos. -->
+      <a class="mail" data-buzon="javier" data-dominio="mesa10studio.com"
+         href="#contact" data-i18n="cta.mail">Escríbeme</a>
+
+      <span class="rule" aria-hidden="true"></span>
+      <p class="hero__slogan" data-i18n="hero.slogan">Lo nuevo, bien hecho.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <img class="foot__logo" src="img/mesa10_lockup_vertical_color_hueso.svg"
+       alt="Mesa 10 Studio" width="600" height="480">
+  <p class="foot__desc" data-i18n="hero.claim">Producción audiovisual y automatización de procesos con IA.</p>
+  <p class="foot__legal">© <span id="year">2026</span> Mesa 10 Studio</p>
+</footer>
+
+<script src="js/main.js?v=16"></script>
+</body>
+</html>

@@ -1,0 +1,439 @@
+/* ============================================================
+   Mesa 10 Studio — hoja de estilo
+   Paleta y tipografía según Logo M10/MARCA.md. El azul petróleo
+   NUNCA sobre fondo oscuro: ahí va --azul-claro (5,53:1).
+   ============================================================ */
+
+@font-face{
+  font-family:'Cormorant Garamond';font-style:normal;font-weight:300;font-display:swap;
+  src:url('../fonts/CormorantGaramond-300.woff2?v=2') format('woff2');
+}
+@font-face{
+  font-family:'Cormorant Garamond';font-style:normal;font-weight:400;font-display:swap;
+  src:url('../fonts/CormorantGaramond-400.woff2?v=2') format('woff2');
+}
+@font-face{
+  font-family:'Jost';font-style:normal;font-weight:300;font-display:swap;
+  src:url('../fonts/Jost-Light.woff2') format('woff2');
+}
+@font-face{
+  font-family:'Jost';font-style:normal;font-weight:500;font-display:swap;
+  src:url('../fonts/Jost-Medium.woff2') format('woff2');
+}
+
+:root{
+  --tinta:#141414;
+  --hueso:#F3E5D9;
+  --azul:#294C62;
+  --azul-claro:#5E93B4;
+  --terracota:#CD7D54;
+
+  --tinta-70:rgba(20,20,20,.70);
+  --tinta-12:rgba(20,20,20,.12);
+  --hueso-72:rgba(243,229,217,.72);
+  --hueso-16:rgba(243,229,217,.16);
+
+  --serif:'Cormorant Garamond',Garamond,'Times New Roman',serif;
+  --sans:'Jost',-apple-system,'Segoe UI',system-ui,sans-serif;
+
+  /* Cormorant tiene la altura-x muy baja: nunca por debajo de 19px en párrafo */
+  --body:clamp(1.19rem,.9rem + .55vw,1.4rem);
+  --gutter:clamp(1.5rem,5vw,6rem);
+  --stack:clamp(5rem,11vh,9rem);
+  --measure:34ch;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--hueso);
+  color:var(--tinta);
+  font-family:var(--serif);
+  font-weight:400;
+  font-size:var(--body);
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+img,video{max-width:100%;height:auto;display:block}
+h1,h2,h3{font-weight:300;line-height:1.06;margin:0;letter-spacing:-.005em}
+p{margin:0 0 1.05em}
+p:last-child{margin-bottom:0}
+ul,ol{margin:0;padding:0;list-style:none}
+
+::selection{background:var(--terracota);color:var(--hueso)}
+
+a{color:inherit}
+:focus-visible{outline:2px solid var(--azul);outline-offset:3px;border-radius:2px}
+
+.skip{
+  position:absolute;left:-9999px;top:0;z-index:99;
+  background:var(--tinta);color:var(--hueso);padding:.7rem 1.1rem;
+  font-family:var(--sans);font-size:.85rem;
+}
+.skip:focus{left:.5rem;top:.5rem}
+
+/* ── El filete bicolor de la marca ─────────────────────────── */
+.rule{
+  display:block;width:190px;height:3px;margin:2.4rem auto;
+  background:linear-gradient(to right,var(--terracota) 0 50%,var(--azul) 50% 100%);
+}
+.sec--dark .rule,.foot .rule{
+  background:linear-gradient(to right,var(--terracota) 0 50%,var(--azul-claro) 50% 100%);
+}
+
+/* ── Cabecera ──────────────────────────────────────────────── */
+.head{
+  position:fixed;inset:0 0 auto 0;z-index:50;
+  display:flex;align-items:center;gap:2rem;
+  padding:1.1rem var(--gutter);
+  background:rgba(243,229,217,0);
+  transition:background .45s var(--ease),box-shadow .45s var(--ease),padding .45s var(--ease);
+}
+.head.is-stuck{
+  background:rgba(243,229,217,.92);
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  box-shadow:0 1px 0 var(--tinta-12);
+  padding-block:.7rem;
+}
+.head__logo{
+  display:flex;align-items:center;gap:.7rem;text-decoration:none;
+  opacity:0;transform:translateY(-6px);
+  transition:opacity .5s var(--ease),transform .5s var(--ease);
+  pointer-events:none;
+}
+.head.is-stuck .head__logo{opacity:1;transform:none;pointer-events:auto}
+.head__logo img{width:auto;height:30px}
+.head__name{
+  font-family:var(--sans);font-weight:500;font-size:.72rem;
+  letter-spacing:.2em;text-transform:uppercase;
+}
+.head__nav{
+  margin-left:auto;display:flex;gap:clamp(1rem,2.4vw,2.4rem);
+  font-family:var(--sans);font-weight:300;font-size:.82rem;
+  letter-spacing:.12em;text-transform:uppercase;
+}
+.head__nav a{text-decoration:none;position:relative;padding-block:.2rem;color:var(--tinta-70)}
+.head__nav a::after{
+  content:'';position:absolute;left:0;right:0;bottom:0;height:1px;
+  background:var(--terracota);transform:scaleX(0);transform-origin:left;
+  transition:transform .35s var(--ease);
+}
+.head__nav a:hover{color:var(--tinta)}
+.head__nav a:hover::after{transform:scaleX(1)}
+
+.lang{
+  display:flex;align-items:center;gap:.4rem;
+  font-family:var(--sans);font-weight:300;font-size:.78rem;letter-spacing:.1em;
+  color:var(--tinta-70);
+}
+.lang button{
+  background:none;border:0;padding:.2rem;cursor:pointer;color:inherit;
+  font:inherit;letter-spacing:inherit;transition:color .3s var(--ease);
+}
+.lang button:hover{color:var(--tinta)}
+.lang button.is-on{color:var(--azul);font-weight:500}
+
+/* ── Hero ──────────────────────────────────────────────────── */
+.hero{
+  min-height:100svh;display:grid;place-items:center;
+  padding:clamp(6rem,12vh,8rem) var(--gutter) clamp(4.5rem,9vh,6rem);
+  position:relative;text-align:center;overflow:hidden;isolation:isolate;
+}
+.hero__inner{max-width:min(62rem,100%);position:relative;z-index:2}
+
+/* ── El escenario ──────────────────────────────────────────────
+   La foto quieta abajo (y en móvil, sola). Encima el clip del olivo al
+   viento, que entra fundido cuando ya puede reproducirse sin cortes —
+   así nunca se ve un hueco ni un salto de negro.
+   ───────────────────────────────────────────────────────────── */
+.scene{
+  position:absolute;inset:0;z-index:0;overflow:hidden;
+  background:var(--hueso);
+}
+.scene__img{position:absolute;inset:0;display:block}
+.scene__img img{width:100%;height:100%;object-fit:cover;object-position:center}
+
+.scene__video{
+  position:absolute;inset:0;
+  width:100%;height:100%;object-fit:cover;object-position:center;
+  opacity:0;transition:opacity 1.4s var(--ease);
+}
+.scene__video.is-ready{opacity:1}
+/* Que el texto no compita con la pared: un velo casi invisible bajo el bloque */
+.hero::after{
+  content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(58% 52% at 50% 46%,
+    rgba(243,229,217,.72) 0%,rgba(243,229,217,.34) 55%,rgba(243,229,217,0) 100%);
+}
+.hero__lockup{
+  width:min(26rem,68vw);height:auto;margin:0 auto clamp(2.2rem,5.5vh,3.8rem);
+}
+.hero__claim{
+  font-size:clamp(2.2rem,1rem + 3.6vw,4.35rem);
+  line-height:1.04;max-width:19ch;margin-inline:auto;
+  text-wrap:balance;
+}
+.hero__who{
+  margin:clamp(1.4rem,3vh,2.1rem) 0 0;
+  font-size:clamp(.8rem,.6rem + .4vw,.98rem);
+  letter-spacing:.24em;text-transform:uppercase;color:var(--azul);
+}
+.hero__slogan{
+  font-size:clamp(1.15rem,1rem + .5vw,1.5rem);
+  color:var(--tinta-70);font-style:italic;margin:0;
+}
+.hero .hero__slogan{margin-top:clamp(1.6rem,3.2vh,2.4rem)}
+.hero__cta{
+  display:flex;flex-wrap:wrap;gap:.8rem;justify-content:center;
+  margin-top:clamp(2.2rem,4.5vh,3.2rem);
+}
+.rule{margin-block:clamp(1.8rem,3.5vh,2.4rem)}
+.hero__scroll{
+  position:absolute;left:50%;bottom:2.2rem;translate:-50% 0;
+  width:1px;height:52px;background:linear-gradient(var(--tinta-12),var(--tinta-70));
+  transform-origin:top;animation:drop 2.6s var(--ease) infinite;
+}
+@keyframes drop{
+  0%{transform:scaleY(0);opacity:0}
+  35%{transform:scaleY(1);opacity:1}
+  75%{transform:scaleY(1);opacity:1}
+  100%{transform:scaleY(1) translateY(52px);opacity:0}
+}
+
+/* ── Botones ───────────────────────────────────────────────── */
+.btn{
+  display:inline-block;text-decoration:none;
+  font-family:var(--sans);font-weight:300;font-size:.82rem;
+  letter-spacing:.16em;text-transform:uppercase;
+  padding:.95rem 1.9rem;border:1px solid var(--tinta-12);
+  transition:border-color .35s var(--ease),background .35s var(--ease),color .35s var(--ease);
+}
+.btn:hover{border-color:var(--tinta)}
+.btn--solid{background:var(--tinta);color:var(--hueso);border-color:var(--tinta)}
+.btn--solid:hover{background:var(--azul);border-color:var(--azul)}
+
+/* ── Secciones ─────────────────────────────────────────────── */
+.sec{padding:var(--stack) var(--gutter)}
+.sec--alt{background:rgba(20,20,20,.028)}
+.sec--dark{background:var(--tinta);color:var(--hueso)}
+.sec--dark .sec__lead{color:var(--hueso-72)}
+
+.sec__head{max-width:44rem;margin:0 auto clamp(3.5rem,8vh,6rem);text-align:center}
+.sec__title{
+  font-size:clamp(2rem,1rem + 3.4vw,3.6rem);
+  text-wrap:balance;
+}
+.sec__lead{
+  margin-top:1.3rem;color:var(--tinta-70);
+  font-size:clamp(1.15rem,1rem + .5vw,1.4rem);
+  max-width:46ch;margin-inline:auto;text-wrap:pretty;
+}
+.eyebrow{
+  font-family:var(--sans);font-weight:500;font-size:.7rem;
+  letter-spacing:.28em;text-transform:uppercase;color:var(--azul);
+  margin:0 0 1.4rem;display:flex;gap:.9rem;justify-content:center;align-items:center;
+}
+.eyebrow span:first-child{color:var(--terracota)}
+.sec--dark .eyebrow{color:var(--azul-claro)}
+
+/* ── Casos de portfolio ────────────────────────────────────── */
+.case{
+  display:grid;gap:clamp(2.5rem,6vw,5rem);align-items:center;
+  max-width:78rem;margin:0 auto clamp(5rem,10vh,8rem);
+}
+@media (min-width:900px){
+  .case{grid-template-columns:minmax(0,.85fr) minmax(0,1fr)}
+  .case--flip .case__media{order:2}
+}
+.case__media{display:flex;justify-content:center}
+.player{
+  position:relative;width:min(21rem,78vw);
+  box-shadow:0 24px 60px -28px rgba(20,20,20,.5),0 2px 10px -4px rgba(20,20,20,.25);
+}
+.player video{width:100%;aspect-ratio:9/16;object-fit:cover;background:var(--tinta)}
+.player__sound{
+  position:absolute;right:.75rem;bottom:.75rem;
+  background:rgba(20,20,20,.55);color:var(--hueso);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  border:1px solid var(--hueso-16);cursor:pointer;
+  font-family:var(--sans);font-weight:300;font-size:.68rem;
+  letter-spacing:.14em;text-transform:uppercase;padding:.45rem .8rem;
+  transition:background .3s var(--ease);
+}
+.player__sound:hover{background:rgba(20,20,20,.8)}
+.player__sound[aria-pressed="true"]{background:var(--azul);border-color:var(--azul)}
+
+/* Caso con dos piezas: el texto manda y los dos vídeos van al lado */
+@media (min-width:900px){
+  .case--duo{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr)}
+}
+.case__media--duo{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:clamp(.9rem,2vw,1.6rem);width:100%;
+}
+.case__media--duo .shot{margin:0;min-width:0}
+.case__media--duo .player{width:100%}
+.case__media--duo figcaption{
+  margin-top:.9rem;
+  font-family:var(--sans);font-weight:300;font-size:.7rem;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--azul);
+  text-align:center;text-wrap:balance;line-height:1.5;
+}
+.case__media--duo .player__sound{right:.5rem;bottom:.5rem;font-size:.62rem;padding:.35rem .6rem}
+
+.case__text{max-width:40rem}
+.case__kicker{
+  font-family:var(--sans);font-weight:300;font-size:.72rem;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--azul);margin-bottom:.9rem;
+  max-width:none;
+}
+.case__title{font-size:clamp(1.9rem,1rem + 2.6vw,3rem);margin-bottom:1.1rem}
+.case__text p{color:var(--tinta-70);max-width:46ch;text-wrap:pretty}
+.case__text p.case__kicker{max-width:none}
+
+.case__facts{
+  display:flex;flex-wrap:wrap;gap:.6rem 2.6rem;
+  margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--tinta-12);
+}
+.case__facts li{display:flex;flex-direction:column;gap:.25rem}
+.case__facts span{
+  font-family:var(--sans);font-weight:300;font-size:.64rem;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--azul);
+}
+.case__facts b{font-weight:400;font-size:1.1rem}
+
+/* En curso */
+.soon{
+  max-width:78rem;margin:0 auto;display:grid;gap:1.4rem;
+  padding:clamp(1.8rem,4vw,2.8rem);
+  border:1px solid var(--tinta-12);
+}
+@media (min-width:760px){.soon{grid-template-columns:auto 1fr;gap:3rem;align-items:baseline}}
+.soon__tag{
+  font-family:var(--sans);font-weight:500;font-size:.66rem;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--terracota);margin:0;
+  white-space:nowrap;
+}
+.soon__title{font-size:1.65rem;margin-bottom:.6rem}
+.soon p{color:var(--tinta-70);max-width:52ch}
+
+/* ── Tarjetas de servicio ──────────────────────────────────── */
+.cards{
+  display:grid;gap:clamp(2.5rem,5vw,4rem);
+  max-width:72rem;margin:0 auto;
+}
+@media (min-width:860px){.cards{grid-template-columns:1fr 1fr}}
+.card{position:relative;padding-top:2.6rem;border-top:1px solid var(--tinta-12)}
+.card__num{
+  position:absolute;top:1.2rem;right:0;
+  font-family:var(--sans);font-weight:300;font-size:.78rem;
+  letter-spacing:.06em;color:var(--terracota);
+}
+.card h3{font-size:clamp(1.6rem,1rem + 1.5vw,2.15rem);margin-bottom:1rem}
+.card p{color:var(--tinta-70);text-wrap:pretty}
+.card__list{margin-top:1.6rem;display:grid;gap:.6rem}
+.card__list li{
+  position:relative;padding-left:1.4rem;color:var(--tinta-70);
+  font-size:calc(var(--body) * .94);
+}
+.card__list li::before{
+  content:'';position:absolute;left:0;top:.72em;
+  width:8px;height:1px;background:var(--azul);
+}
+
+/* ── Método: el reparto máquina / humano ───────────────────── */
+.reparto{
+  display:grid;gap:clamp(2.5rem,5vw,4.5rem);
+  max-width:64rem;margin:0 auto;
+}
+@media (min-width:820px){.reparto{grid-template-columns:1fr 1fr}}
+.reparto__col{padding-top:2.2rem;border-top:1px solid var(--hueso-16)}
+.reparto__col--yo{border-top-color:var(--terracota)}
+.reparto__tag{
+  font-family:var(--sans);font-weight:500;font-size:.72rem;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--azul-claro);
+  margin:0 0 1.6rem;
+}
+.reparto__col--yo .reparto__tag{color:var(--terracota)}
+.reparto__list{display:grid;gap:.95rem}
+.reparto__list li{
+  position:relative;padding-left:1.5rem;color:var(--hueso-72);
+  font-size:clamp(1.1rem,1rem + .45vw,1.32rem);line-height:1.5;text-wrap:pretty;
+}
+.reparto__list li::before{
+  content:'';position:absolute;left:0;top:.66em;
+  width:9px;height:1px;background:var(--azul-claro);
+}
+.reparto__col--yo .reparto__list li{color:var(--hueso)}
+.reparto__col--yo .reparto__list li::before{background:var(--terracota)}
+
+.remate{
+  max-width:52rem;margin:clamp(3.5rem,8vh,5.5rem) auto 0;
+  padding-top:clamp(2.2rem,5vh,3rem);border-top:1px solid var(--hueso-16);
+  color:var(--hueso-72);text-align:center;text-wrap:pretty;
+}
+
+/* ── Contacto ──────────────────────────────────────────────── */
+.sec--contact{text-align:center;padding-block:clamp(6rem,14vh,11rem)}
+.sec--contact > div{max-width:44rem;margin:0 auto}
+.mail{
+  display:inline-block;margin-top:2.4rem;text-decoration:none;
+  font-size:clamp(1.5rem,1rem + 2.2vw,2.6rem);
+  color:var(--azul);position:relative;padding-bottom:.15em;
+  /* Cormorant lleva cifras elzevirianas por defecto: en un correo confunden */
+  font-variant-numeric:lining-nums;font-feature-settings:'lnum' 1;
+}
+.mail::after{
+  content:'';position:absolute;left:0;right:0;bottom:0;height:1px;
+  background:var(--azul);transform:scaleX(0);transform-origin:right;
+  transition:transform .45s var(--ease);
+}
+.mail:hover::after{transform:scaleX(1);transform-origin:left}
+
+/* ── Pie ───────────────────────────────────────────────────── */
+.foot{
+  background:var(--tinta);color:var(--hueso);text-align:center;
+  padding:clamp(4rem,9vh,6.5rem) var(--gutter) clamp(2.5rem,5vh,3.5rem);
+}
+.foot__logo{width:min(13rem,50vw);height:auto;margin:0 auto 2.2rem}
+.foot__desc{color:var(--hueso-72);max-width:34ch;margin:0 auto 2.6rem;font-size:1.1rem}
+.foot__legal{
+  font-family:var(--sans);font-weight:300;font-size:.72rem;
+  /* .45 daba 3,95:1 sobre tinta — por debajo del mínimo para texto pequeño */
+  letter-spacing:.16em;text-transform:uppercase;color:rgba(243,229,217,.58);margin:0;
+}
+
+/* ── Entradas al hacer scroll ──────────────────────────────── */
+.reveal{opacity:0;transform:translateY(22px)}
+.reveal.is-in{
+  opacity:1;transform:none;
+  transition:opacity .9s var(--ease),transform .9s var(--ease);
+}
+.hero .reveal.is-in{transition-delay:var(--d,0s)}
+.hero__lockup{--d:.05s}
+.hero__claim{--d:.18s}
+.hero__who{--d:.3s}
+.hero .rule{--d:.4s}
+.hero__slogan{--d:.48s}
+.hero__cta{--d:.58s}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none}
+  .reveal.is-in{transition:none}
+  .hero__scroll{animation:none;opacity:.4;transform:scaleY(1)}
+  .scene__video{display:none}   /* se queda la foto quieta */
+  *{animation-duration:.01ms !important;transition-duration:.01ms !important}
+}
+
+@media (max-width:640px){
+  .head__nav{display:none}
+  .head{gap:1rem;justify-content:space-between}
+  .lang{margin-left:auto}
+  .hero__cta{flex-direction:column;align-items:stretch;max-width:17rem;margin-inline:auto}
+  .btn{text-align:center}
+}
