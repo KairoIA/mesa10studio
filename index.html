@@ -79,8 +79,10 @@
         <img src="img/escena_v.jpg" alt="" width="863" height="1822" fetchpriority="high">
       </picture>
 
-      <video class="scene__video" data-fondo data-src="media/escena.mp4?v=16"
-             muted loop playsinline preload="none"></video>
+      <!-- autoplay + muted + playsinline: es lo que exige iOS para arrancar solo.
+           El src lo pone el JS cuando el clip ya está descargado entero. -->
+      <video class="scene__video" data-fondo data-src="media/escena.mp4?v=18"
+             autoplay muted loop playsinline preload="none"></video>
     </div>
 
     <div class="hero__inner">
