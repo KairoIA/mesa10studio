@@ -163,10 +163,13 @@ a{color:inherit}
   opacity:0;transition:opacity 1.4s var(--ease);
 }
 .scene__video.is-ready{opacity:1}
-/* El clip es 16:9. En vertical, encuadrado al centro sólo se vería pared:
-   se desplaza hacia la izquierda, que es donde está el olivo. */
+/* El clip es 16:9 y en vertical se recorta a una franja estrecha. Centrado sólo
+   se vería pared, así que se ancla al borde izquierdo: ahí está la rama nítida
+   del olivo y las sombras que cruzan. No es el encuadre de la foto vertical
+   —falta la columna—, pero se mueve, que es lo que tiene que hacer un hero.
+   Cuando haya un clip 9:16 generado, esto sobra. */
 @media (max-width:759px){
-  .scene__video{object-position:26% center}
+  .scene__video{object-position:0% center}
 }
 /* Que el texto no compita con la pared: un velo casi invisible bajo el bloque */
 .hero::after{
