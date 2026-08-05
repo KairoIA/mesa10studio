@@ -24,7 +24,22 @@
 
 <link rel="preload" href="fonts/CormorantGaramond-300.woff2?v=2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/CormorantGaramond-400.woff2?v=2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/style.css?v=19">
+<link rel="stylesheet" href="css/style.css?v=20">
+
+<script>
+/* El clip de fondo empieza a bajarse aquí, antes que el CSS y que main.js, para
+   que el hero se anime cuanto antes. Se descarga entero (440 kB) porque en
+   streaming el navegador se atasca pidiendo trozos y el vídeo va a cámara lenta. */
+(function () {
+  var quieto = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ahorro = navigator.connection && navigator.connection.saveData;
+  if (quieto || ahorro) return;
+  window.__fondo = fetch('media/escena.mp4?v=20').then(function (r) {
+    return r.ok ? r.blob() : Promise.reject(r.status);
+  });
+  window.__fondo.catch(function () {});   // el fallo real se trata en main.js
+})();
+</script>
 
 <script type="application/ld+json">
 {
@@ -81,8 +96,8 @@
 
       <!-- autoplay + muted + playsinline: es lo que exige iOS para arrancar solo.
            El src lo pone el JS cuando el clip ya está descargado entero. -->
-      <video class="scene__video" data-fondo data-src="media/escena.mp4?v=18"
-             autoplay muted loop playsinline preload="none"></video>
+      <video class="scene__video" data-fondo data-src="media/escena.mp4?v=20"
+             autoplay muted loop playsinline preload="auto"></video>
     </div>
 
     <div class="hero__inner">
@@ -117,7 +132,7 @@
     <article class="case reveal" id="chef">
       <div class="case__media">
         <div class="player" data-player>
-          <video data-video data-src="media/chef.mp4" playsinline muted loop preload="none"
+          <video data-video data-src="media/chef.mp4" playsinline muted loop preload="none" controlslist="nodownload noplaybackrate" disablepictureinpicture disableremoteplayback
                  poster="img/poster_chef.jpg" width="720" height="1280"></video>
           <button class="player__sound" type="button" data-sound aria-pressed="false">
             <span data-i18n="player.sound">Sonido</span>
@@ -141,7 +156,7 @@
     <article class="case case--flip reveal" id="serenica">
       <div class="case__media">
         <div class="player" data-player>
-          <video data-video data-src="media/serenica.mp4" playsinline muted loop preload="none"
+          <video data-video data-src="media/serenica.mp4" playsinline muted loop preload="none" controlslist="nodownload noplaybackrate" disablepictureinpicture disableremoteplayback
                  poster="img/poster_serenica.jpg" width="720" height="1280"></video>
           <button class="player__sound" type="button" data-sound aria-pressed="false">
             <span data-i18n="player.sound">Sonido</span>
@@ -177,7 +192,7 @@
       <div class="case__media case__media--duo">
         <figure class="shot">
           <div class="player" data-player>
-            <video data-video data-src="media/lucy.mp4" playsinline muted loop preload="none"
+            <video data-video data-src="media/lucy.mp4" playsinline muted loop preload="none" controlslist="nodownload noplaybackrate" disablepictureinpicture disableremoteplayback
                    poster="img/poster_lucy.jpg" width="720" height="1280"></video>
             <button class="player__sound" type="button" data-sound aria-pressed="false">
               <span data-i18n="player.sound">Sonido</span>
@@ -188,7 +203,7 @@
 
         <figure class="shot">
           <div class="player" data-player>
-            <video data-video data-src="media/urban.mp4" playsinline muted loop preload="none"
+            <video data-video data-src="media/urban.mp4" playsinline muted loop preload="none" controlslist="nodownload noplaybackrate" disablepictureinpicture disableremoteplayback
                    poster="img/poster_urban.jpg" width="720" height="1280"></video>
             <button class="player__sound" type="button" data-sound aria-pressed="false">
               <span data-i18n="player.sound">Sonido</span>
@@ -304,6 +319,6 @@
   <p class="foot__legal">© <span id="year">2026</span> Mesa 10 Studio</p>
 </footer>
 
-<script src="js/main.js?v=19"></script>
+<script src="js/main.js?v=20"></script>
 </body>
 </html>

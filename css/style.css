@@ -224,6 +224,17 @@ a{color:inherit}
 .btn--solid{background:var(--tinta);color:var(--hueso);border-color:var(--tinta)}
 .btn--solid:hover{background:var(--azul);border-color:var(--azul)}
 
+/* En el hero el botón secundario cae sobre la escena, y en vertical le toca
+   justo el bloque de mármol: sin fondo, las letras se pierden. Un velo de hueso
+   con desenfoque detrás lo resuelve sin tocar la tipografía —contornear una
+   didone tan fina la emborrona— y encima queda como cristal esmerilado. */
+.hero .btn:not(.btn--solid){
+  background:rgba(243,229,217,.82);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  border-color:rgba(20,20,20,.3);
+}
+.hero .btn:not(.btn--solid):hover{background:rgba(243,229,217,.95);border-color:var(--tinta)}
+
 /* ── Secciones ─────────────────────────────────────────────── */
 .sec{padding:var(--stack) var(--gutter)}
 .sec--alt{background:rgba(20,20,20,.028)}

@@ -178,13 +178,23 @@
     } else {
       var rendirse = function () { if (fondo.parentNode) fondo.remove(); };
 
-      fetch(fondo.dataset.src)
-        .then(function (r) { return r.ok ? r.blob() : Promise.reject(r.status); })
+      // La descarga la arrancó el script del <head>; aquí sólo se recoge.
+      var bajando = window.__fondo || fetch(fondo.dataset.src).then(function (r) {
+        return r.ok ? r.blob() : Promise.reject(r.status);
+      });
+
+      // Se muestra en cuanto hay imagen, sin esperar a que play() resuelva. El
+      // primer fotograma del clip es igual que la foto de debajo, así que la
+      // entrada nunca se ve como un salto.
+      fondo.addEventListener('loadeddata', function () {
+        fondo.classList.add('is-ready');
+      }, { once: true });
+
+      bajando
         .then(function (trozo) {
           fondo.src = URL.createObjectURL(trozo);
           return fondo.play();
         })
-        .then(function () { fondo.classList.add('is-ready'); })
         .catch(rendirse);
 
       // Con la pestaña de fondo no tiene sentido seguir decodificando
@@ -250,6 +260,14 @@
     video.addEventListener('click', function () {
       if (video.paused) video.play().catch(function () {}); else video.pause();
     });
+  });
+
+  /* Quita el «Guardar vídeo como…» del clic derecho. Es fricción, no candado:
+     los bytes tienen que llegar al navegador para poder verse, así que quien
+     sepa usar las herramientas de desarrollo los saca igual. Lo que de verdad
+     protege es que aquí no están los másteres, sino copias recomprimidas. */
+  document.querySelectorAll('video').forEach(function (v) {
+    v.addEventListener('contextmenu', function (e) { e.preventDefault(); });
   });
 
   if ('IntersectionObserver' in window) {
