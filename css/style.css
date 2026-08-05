@@ -244,6 +244,8 @@ a{color:inherit}
 .case{
   display:grid;gap:clamp(2.5rem,6vw,5rem);align-items:center;
   max-width:78rem;margin:0 auto clamp(5rem,10vh,8rem);
+  /* para que al llegar por enlace directo (#chef) no lo tape la cabecera fija */
+  scroll-margin-top:clamp(5rem,12vh,7rem);
 }
 @media (min-width:900px){
   .case{grid-template-columns:minmax(0,.85fr) minmax(0,1fr)}
