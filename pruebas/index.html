@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tres direcciones — Mesa 10 Studio</title>
+<link rel="icon" href="../img/favicon.svg" type="image/svg+xml">
+<style>
+@font-face{font-family:'Cormorant Garamond';font-weight:300;font-display:swap;
+  src:url('../fonts/CormorantGaramond-300.woff2') format('woff2')}
+@font-face{font-family:'Cormorant Garamond';font-weight:400;font-display:swap;
+  src:url('../fonts/CormorantGaramond-400.woff2') format('woff2')}
+@font-face{font-family:'Jost';font-weight:300;font-display:swap;
+  src:url('../fonts/Jost-Light.woff2') format('woff2')}
+:root{--tinta:#141414;--hueso:#F3E5D9;--azul:#294C62;--terracota:#CD7D54;
+  --ease:cubic-bezier(.22,.61,.36,1)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--hueso);color:var(--tinta);
+  font-family:'Cormorant Garamond',serif;padding:clamp(3rem,8vh,6rem) 6vw;
+  -webkit-font-smoothing:antialiased}
+.ui{font-family:'Jost',sans-serif;font-weight:300;font-size:.72rem;
+  letter-spacing:.22em;text-transform:uppercase}
+header{max-width:44rem;margin:0 auto clamp(3rem,7vh,5rem);text-align:center}
+header img{width:min(15rem,50vw);margin:0 auto 2rem;display:block}
+h1{font-weight:300;font-size:clamp(1.9rem,3.4vw,3rem);line-height:1.06;
+  text-wrap:balance}
+header p{margin-top:1.2rem;color:rgba(20,20,20,.7);font-size:1.2rem;line-height:1.55}
+.tres{display:grid;gap:clamp(1.5rem,3vw,2.5rem);max-width:72rem;margin:0 auto;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+a.op{display:block;text-decoration:none;color:inherit;
+  border-top:1px solid rgba(20,20,20,.14);padding-top:1.8rem;
+  transition:border-color .4s var(--ease)}
+a.op:hover{border-top-color:var(--terracota)}
+a.op .n{color:var(--terracota)}
+a.op h2{font-weight:300;font-size:1.75rem;margin:.9rem 0 .7rem}
+a.op p{color:rgba(20,20,20,.7);font-size:1.05rem;line-height:1.5}
+a.op .robo{margin-top:1.2rem;color:var(--azul);display:block}
+footer{max-width:44rem;margin:clamp(4rem,9vh,6rem) auto 0;text-align:center;
+  color:rgba(20,20,20,.6);font-size:1.05rem;line-height:1.55;
+  border-top:1px solid rgba(20,20,20,.14);padding-top:2rem}
+</style>
+</head>
+<body>
+
+<header>
+  <img src="../img/mesa10_lockup_vertical_color.svg" alt="Mesa 10 Studio">
+  <h1>Tres direcciones, la misma marca.</h1>
+  <p>Mismo logo, misma paleta, mismo contenido, mismos vídeos. Lo único que cambia
+  es la idea. Ábrelas y quédate con una — o con trozos de varias.</p>
+</header>
+
+<div class="tres">
+  <a class="op" href="a.html">
+    <span class="n ui">A</span>
+    <h2>El plano fijo</h2>
+    <p>Tu nombre ocupa toda la pantalla y el trabajo lo tapa. Las piezas flotan
+    en desorden, en gris, y se encienden al pasar por encima. No hay scroll:
+    todo cabe en una pantalla, como un cartel.</p>
+    <span class="robo ui">De Carles Faus · Valencia</span>
+  </a>
+
+  <a class="op" href="b.html">
+    <span class="n ui">B</span>
+    <h2>La mesa de montaje</h2>
+    <p>Se recorre en horizontal, como una línea de tiempo de edición, con código
+    de tiempo y marcas de corte abajo. Tu oficio convertido en navegación.
+    Fondo tinta, como una sala de montaje.</p>
+    <span class="robo ui">De tu propio oficio</span>
+  </a>
+
+  <a class="op" href="c.html">
+    <span class="n ui">C</span>
+    <h2>La cámara entra</h2>
+    <p>El scroll no baja la página: conduce el plano. Avanzas y la cámara recorre
+    el escenario mientras los rótulos entran y salen. Demuestra lo que vendes
+    antes de que nadie lea una palabra.</p>
+    <span class="robo ui">La técnica que Draftly cobra a 25 $/mes</span>
+  </a>
+</div>
+
+<footer>
+  Ninguna toca la web publicada. Están en <span class="ui">/pruebas/</span> y se
+  pueden borrar sin consecuencias.
+</footer>
+
+</body>
+</html>
