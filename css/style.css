@@ -452,9 +452,24 @@ a{color:inherit}
 }
 
 @media (max-width:640px){
-  .head__nav{display:none}
-  .head{gap:1rem;justify-content:space-between}
-  .lang{margin-left:auto}
+  /* El menú no se esconde: se reduce. De los cuatro enlaces sobrevive
+     Contacto, que es a lo único que alguien necesita llegar desde la
+     cabecera en una página que se recorre bajando. Una hamburguesa para
+     tres anclas es un clic de más y un menú que mantener. */
+  .head__nav{display:flex;margin-left:auto;gap:0}
+  .head__nav a:not(:last-child){display:none}
+  .head__nav a{
+    padding:.75rem .9rem;      /* área táctil, no solo texto */
+    margin:-.75rem 0;
+    color:var(--tinta);
+  }
+  .head__nav a::after{left:.9rem;right:.9rem;bottom:.6rem}
+
+  .head{gap:.75rem;justify-content:space-between}
+  .head__logo{opacity:1;transform:none;pointer-events:auto}  /* visible desde el principio */
+  .head__logo .head__name{display:none}                      /* solo el isotipo */
+  .lang{margin-left:0}
+
   .hero__cta{flex-direction:column;align-items:stretch;max-width:17rem;margin-inline:auto}
   .btn{text-align:center}
 }
