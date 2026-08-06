@@ -366,6 +366,19 @@ a{color:inherit}
   width:8px;height:1px;background:var(--azul);
 }
 
+/* Bloque de montaje dentro de Producción: es la otra mitad del servicio,
+   no un servicio aparte. Filete terracota para que se lea como continuación. */
+.card__extra{
+  margin-top:2.2rem;padding-top:1.5rem;
+  border-top:1px solid var(--terracota);
+}
+.card__extra h4{
+  font-family:var(--serif);font-weight:400;
+  font-size:calc(var(--body) * 1.12);
+  margin-bottom:.6rem;
+}
+.card__extra p{font-size:calc(var(--body) * .94)}
+
 /* ── Método: el reparto máquina / humano ───────────────────── */
 .reparto{
   display:grid;gap:clamp(2.5rem,5vw,4.5rem);

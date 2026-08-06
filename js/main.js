@@ -61,7 +61,7 @@
 
     'serv.eyebrow': 'What I do',
     'serv.title': 'Two things, and both of them properly.',
-    'serv.lead': 'Both of them with artificial intelligence from end to end.',
+    'serv.lead': 'Both of them with artificial intelligence from end to end. What doesn’t exist gets generated. What you already have gets cut.',
 
     'serv.video.title': 'Video production',
     'serv.video.body': 'Ads, reels and brand films generated end to end. There are three places to start from: a real person turned into a digital avatar, a character who does not exist and gets built from zero, or the world you already have — your product, your place — regenerated into sets nobody has to rent. Then comes the usual: script, edit, colour, music and titles.',
@@ -69,6 +69,8 @@
     'serv.video.l2': 'A character of your own, invented for your brand',
     'serv.video.l3': 'Your product in generated settings',
     'serv.video.l4': 'Short cuts for every platform',
+    'serv.video.edit.title': 'Already have the footage? We’ll cut it.',
+    'serv.video.edit.body': 'Generated clips you can’t work out how to join, or the videos piling up on your phone for months. Graded until they look like one shoot, ordered until they say something. What’s missing is hardly ever more footage: it’s deciding what stays out.',
 
     'serv.auto.title': 'Process automation',
     'serv.auto.body': 'Whatever you repeat every day, a machine can do. A receptionist that picks up the phone and books appointments, WhatsApp replies, quotes that fill themselves in, reports that arrive already written. The code and the plumbing are written by AI too; what has to be thought through is what steps your process has and where it breaks. Built on top of the tools you already use.',
