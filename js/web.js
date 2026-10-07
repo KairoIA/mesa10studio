@@ -13,6 +13,12 @@
      y el bloque de estilo.css. */
   var QUIETO = false;
 
+  /* Sin clic derecho ni "Guardar imagen/vídeo como" en fotos y vídeos propios (07-oct, Javi: que no se
+     descarguen fácil). No frena a quien use las herramientas de desarrollador, pero sí el menú normal. */
+  document.addEventListener('contextmenu', function (e) {
+    if (e.target.closest('img, video')) e.preventDefault();
+  });
+
   /* ── Textos en inglés (los de español están escritos en el HTML) ── */
   var EN = {
     'saltar': 'Skip to content',
@@ -1424,7 +1430,6 @@
     if (pausa) pausa.addEventListener('click', pararOSeguir);
     if (atras) atras.addEventListener('click', function () { irA(Math.max(0, pasoActual() - 1)); verMandos(); });
     if (alante) alante.addEventListener('click', function () { irA(Math.min(INI.length - 1, pasoActual() + 1)); verMandos(); });
-    v.addEventListener('click', pararOSeguir);                    // tocar la animación también la para o la sigue
     v.addEventListener('play', function () { if (!raf) raf = requestAnimationFrame(bucle); iconos(); });
     v.addEventListener('seeked', pintar);
     v.addEventListener('timeupdate', pintar);                     // por si el navegador frena los fotogramas (al volver al principio)
@@ -1445,6 +1450,39 @@
       var r = barra.getBoundingClientRect();
       irA(Math.max(0, Math.min(INI.length - 1, Math.floor((e.clientX - r.left) / r.width * INI.length))));
     });
+    /* Tocar la animación o su barra: igual que las stories (07-oct, Javi). MANTENER el dedo quieto la para
+       mientras se sostiene y, al soltar, sigue sola sin quedar parada (aunque antes del toque ya estuviera en
+       marcha). Si ya estaba parada a propósito (quieto === true de antes), mantener el dedo no hace nada
+       nuevo: sigue parada hasta que se suelte. Un toque CORTO en el vídeo para o sigue, como siempre
+       (pararOSeguir); un toque corto en la barra salta al paso tocado (su propio click, sin tocar esto). */
+    (function gestoStories() {
+      var MANTENER_MS = 180, enEspera = null, manteniendo = false, yaEstabaQuieta = false;
+      function empezar(e) {
+        if (e.pointerType === 'mouse') return;              // el ratón ya tiene su propio click en los mandos
+        yaEstabaQuieta = quieto;
+        clearTimeout(enEspera);
+        enEspera = setTimeout(function () {
+          manteniendo = true;
+          if (!yaEstabaQuieta) { quieto = true; seguir(); iconos(); verMandos(); }
+        }, MANTENER_MS);
+      }
+      function soltar(e, esVideo) {
+        if (e.pointerType === 'mouse') return;
+        clearTimeout(enEspera);
+        if (manteniendo) {
+          manteniendo = false;
+          if (!yaEstabaQuieta) { quieto = false; if (v.ended) irA(0); else seguir(); iconos(); verMandos(); }
+        } else if (esVideo && e.type === 'pointerup') pararOSeguir();   // toque corto en el vídeo: el de siempre
+      }
+      [[v, true], [barra, false]].forEach(function (par) {
+        var el = par[0], esVideo = par[1];
+        if (!el) return;
+        el.addEventListener('pointerdown', empezar);
+        el.addEventListener('pointerup', function (e) { soltar(e, esVideo); });
+        el.addEventListener('pointercancel', function (e) { soltar(e, esVideo); });
+        el.addEventListener('pointerleave', function (e) { soltar(e, esVideo); });
+      });
+    })();
     document.addEventListener('visibilitychange', seguir);
     if (lamina) encender(0, 0);                                  // entra posándose: con el primer paso, y arranca ahí
     else encender(INI.length - 1, 1);                            // antes de verse: la pieza entregada
