@@ -1,0 +1,6 @@
+# Si encuentras un fallo de seguridad en esta web, escríbenos. Gracias.
+# If you find a security issue on this site, please write to us. Thank you.
+Contact: mailto:javier@mesa10studio.com
+Expires: 2027-10-03T00:00:00.000Z
+Preferred-Languages: es, en
+Canonical: https://mesa10studio.com/.well-known/security.txt

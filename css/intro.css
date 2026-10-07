@@ -1,0 +1,65 @@
+/* La escena de la mesa (intro). Generado por _tools/copiar_intro.py desde el prototipo: no editar aquí. */
+/* will-change: el fundido de entrada lo hace la grafica, sin repintar la escena (sombras, filtros) en cada
+     fotograma: antes la mesa aparecia a tirones (03-oct) */
+  #escenario { position: absolute; left: 50%; top: 50%; will-change: opacity;
+               transform-origin: 50% 50%; opacity: 0; overflow: hidden; }   /* lo que espera fuera no se ve */
+  #escenario > img, .capa { position: absolute; display: block; }
+  .obj { position: absolute; }
+  .obj .giro, .obj img { width: 100%; height: 100%; display: block; }
+  .herr, .herrSombra { position: absolute; left: 0; top: 0; will-change: transform; }
+  .herr img, .herrSombra img { width: 100%; height: 100%; display: block; }
+  .carga { position: absolute; inset: 0; opacity: 0;
+           -webkit-mask-size: 100% 100%; mask-size: 100% 100%; -webkit-mask-composite: source-in; mask-composite: intersect; }
+  .sombras { position: absolute; pointer-events: none; }
+  #sombraMesa { overflow: hidden; border-radius: 8px; }
+  .rama { position: absolute; will-change: transform; }
+  #dibujo { position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+  #dibujo path.guia { fill: none; stroke: #3E4248; stroke-width: 1; stroke-linecap: round; }
+  /* SIN will-change (03-oct, tarde): en capa propia el texto de la tablet salía un 17 % menos nítido (medido). Al
+     escribir solo se repinta el trozo de la tablet, que es barato */
+  .pantalla { position: absolute; overflow: hidden; background: #050606; opacity: 0; }
+  /* la tablet: un editor de codigo de verdad (pestañas, numeros de linea, terminal). Pantalla en rojo de Thera
+     con letras en blanco y azul (03-oct, prueba de Javi; antes: negro, que no se leia; blanco, que chirriaba sobre
+     la mesa blanca; y azul oscuro). El marco sigue negro */
+  #codigo { position: absolute; inset: 0; background: #792911; color: #F6EEEA; overflow: hidden;
+            font-family: Consolas, "Cascadia Mono", "Courier New", monospace; box-sizing: border-box; }
+  #codigo .cab { display: flex; gap: 1.1em; color: rgba(255, 255, 255, .62); border-bottom: 1px solid rgba(255, 255, 255, .18); white-space: pre; }
+  #codigo .pest { padding-bottom: .35em; border-bottom: 2px solid transparent; margin-bottom: -1px; }
+  #codigo .pest.activa { color: #FFFFFF; font-weight: 700; border-bottom-color: #A9C8EA; }
+  #codigo .ventana { position: relative; overflow: hidden; }
+  /* el editor baja moviendo top (no transform): asi el texto se repinta nitido, tambien al pararse */
+  #lineas { position: relative; top: 0; white-space: pre; transition: top .28s ease; }
+  #codigo .num { color: rgba(255, 255, 255, .4); }
+  /* más azul que blanco (03-oct, noche, prueba de Javi): nombres y textos en azul, que son la mayoría (unas 7 de cada
+     10 letras); en blanco solo las palabras clave, las funciones y los comentarios. Antes los textos iban en un azul
+     casi blanco (#CFE0F2) y el resto en blanco: se leía todo blanco. Respaldo: intro_prototipo_antes_azul_tablet.html */
+  #codigo .c-com { color: rgba(255, 255, 255, .66); font-style: italic; }
+  #codigo .c-kw { color: #FFFFFF; font-weight: 700; }
+  #codigo .c-fn { color: #FFFFFF; font-weight: 700; }
+  #codigo .c-st { color: #8AB4E4; }
+  #codigo .c-cte { color: #B5D0EE; font-weight: 700; }
+  #codigo .c-tx { color: #A9C8EA; }
+  /* el cursor parpadea con visibility, no con opacity (03-oct, noche): con opacity el navegador lo ponía en capa
+     propia y, para recortarlo con las esquinas redondeadas y giradas de la pantalla, montaba cuatro superficies
+     aparte que se redibujaban en cada fotograma. En el móvil de Javi, la tablet se ponía negra al ampliar.
+     Nombre propio (parpadeoMesa): la web tiene otro "parpadeo" con opacity y, al cargar después, lo pisaba */
+  #codigo .cursor { display: inline-block; width: .55em; height: 1.05em; vertical-align: -0.16em; background: #FFFFFF;
+                    animation: parpadeoMesa 1.05s steps(1) infinite; }
+  @keyframes parpadeoMesa { 50% { visibility: hidden; } }
+  /* en móviles y tablets, la tablet (con su sombra difuminada) va en una capa y lo que se escribe en su pantalla en
+     otra: cada letra repintaba también la sombra, unas 30 veces por segundo, y al ampliar el móvil no llegaba. En el
+     ordenador no: allí el texto pierde un 5 % de nitidez (medido); en el móvil, nada */
+  @media (hover: none) and (pointer: coarse) { #tablet { will-change: opacity; } }
+  #terminal { position: absolute; left: 0; right: 0; bottom: var(--oculta); background: #5E1F0D; border-top: 1px solid rgba(255, 255, 255, .18);
+              white-space: pre; transition: bottom .3s ease; }
+  #terminal.visible { bottom: 0; }
+  #terminal .orden { color: rgba(255, 255, 255, .66); }
+  #terminal .salida { color: #FFFFFF; font-weight: 700; }
+  #pantallaMovil video { width: 100%; height: 100%; object-fit: cover; display: block; }
+  #pantallaMovil .isla { position: absolute; left: 35.6%; top: 1.6%; width: 28.8%; height: 3.4%;
+                         background: #000; border-radius: 999px; }
+  /* la luz (03-oct, tarde): quieta y solo sobre la mesa, justo encima del tablero. Antes respiraba con GSAP sobre
+     toda la escena, y con eso el móvil repintaba la escena entera en cada fotograma o necesitaba una capa más.
+     En el de Javi salían huecos negros al volver a la portada y al ampliar. El cambio de luz apenas se veía */
+  #luz { position: absolute; pointer-events: none; opacity: .8;
+         background: radial-gradient(ellipse at 18% 8%, rgba(255, 246, 228, .10), rgba(255, 246, 228, 0) 60%); }

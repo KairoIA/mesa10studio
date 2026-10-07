@@ -1,0 +1,1708 @@
+/* ============================================================
+   Mesa 10 Studio — la web
+   La página es la mesa: cal de fondo, tinta negra, un solo acento (azul egipcio), y lo
+   importante destaca por el aire que tiene alrededor (figuras rojas), no por cajas.
+   Tres gestos, siempre los mismos: TALLAR (los titulares y la inscripción se tallan en losas de
+   mármol), POSAR (las piezas bajan a la mesa y su sombra se cierra) y ESCRIBIR (código,
+   la llamada y el correo se teclean). Un trazo a lápiz, solo para dibujar la éntasis.
+   El mensaje (02-oct): el oficio de siempre, con las herramientas de ahora (../1_marca/MENSAJE.md).
+   ============================================================ */
+
+@font-face {
+  font-family: "Mesa Entasis";
+  src: url("../fonts/MesaEntasis.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {                       /* solo las letras de τέχνη: recorte de Gentium Book Plus (OFL), renombrado */
+  font-family: "Mesa Tekhne";
+  src: url("../fonts/MesaTekhne.woff2") format("woff2");
+  font-display: swap;
+}
+/* el texto: Ysabeau (Christian Thalmann, OFL), variable 1-1000; elegida por Javi el 03-oct */
+@font-face {
+  font-family: "Ysabeau";
+  src: url("../fonts/Ysabeau-latin.woff2") format("woff2");
+  font-weight: 1 1000;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Ysabeau";
+  src: url("../fonts/Ysabeau-latin-ext.woff2") format("woff2");
+  font-weight: 1 1000;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+:root {
+  --cal: #EAEAEB;
+  --tinta: #141414;
+  --tinta-2: #45484C;
+  --raya: rgba(20, 20, 20, .13);
+  --guia: rgba(62, 66, 72, .42);
+  --azul: #4D6C8E;
+  --azul-claro: #799BC1;
+  --noche: #101312;
+  --sobre-noche: #EAEAEB;
+  --sobre-noche-2: #A9ADB2;
+  --raya-noche: rgba(234, 234, 235, .14);
+  --rojo: #792911;
+  --rojo-claro: #AF4828;
+
+  /* las líneas y los guiones de la web van en rojo y azul (Javi, 03-oct): rojo todo el software, azul todo lo
+     audiovisual, y lo que es de las dos, la raya del logo: mitad roja a la izquierda, mitad azul a la derecha.
+     --l1/--l2: color de la línea a cada lado; --g1/--g2: el guion de las listas */
+  --l1: rgba(121, 41, 17, .5);
+  --l2: rgba(77, 108, 142, .55);
+  --g1: var(--rojo);
+  --g2: var(--azul);
+
+  --titular: "Mesa Entasis", "Ysabeau", sans-serif;
+  --texto: "Ysabeau", system-ui, sans-serif;
+  --mono: ui-monospace, "Cascadia Mono", Consolas, monospace;
+
+  --margen: clamp(20px, 5.5vw, 88px);
+  --ancho: 1240px;
+  --lado: max(var(--margen), calc((100% - var(--ancho)) / 2));
+  --curva: cubic-bezier(.16, 1, .3, 1);
+  --pulso: cubic-bezier(.65, 0, .35, 1);
+
+  /* la luz viene de arriba a la izquierda, como en la mesa de la portada */
+  --sombra-posada: 3px 6px 9px rgba(20, 22, 26, .17), 1px 2px 2px rgba(20, 22, 26, .12);
+  --sombra-alzada: 20px 32px 44px rgba(20, 22, 26, .11), 7px 12px 16px rgba(20, 22, 26, .06);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+.rama-soft { --l2: rgba(121, 41, 17, .5); --g2: #792911; }
+.rama-av { --l1: rgba(77, 108, 142, .55); --g1: #4D6C8E; }
+
+html {
+  background: var(--cal);
+  color: var(--tinta);
+  scrollbar-color: #9A9DA1 var(--cal);
+  scrollbar-width: thin;
+  -webkit-text-size-adjust: 100%;
+}
+html { scroll-behavior: smooth; }
+/* mientras se monta la mesa, la página no baja (web.js, bloquear). El hueco de la barra se reserva siempre para
+   que al soltar no salte el contenido de lado */
+html { scrollbar-gutter: stable; }
+html.mesa-montando, html.mesa-montando body { overflow: hidden; overscroll-behavior: none; }
+
+body {
+  margin: 0;
+  font-family: var(--texto);
+  font-size: 1.0625rem;
+  line-height: 1.62;
+  font-weight: 400;
+  font-variant-numeric: lining-nums;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection { background: var(--azul); color: var(--cal); }
+/* al tocar en el móvil, nada de recuadro azul (Javi, 03-oct: «es feo»). El contorno de :focus-visible se queda:
+   solo sale navegando con teclado */
+html { -webkit-tap-highlight-color: transparent; }
+:focus-visible { outline: 1.5px solid var(--azul); outline-offset: 4px; }
+img, video, svg { display: block; max-width: 100%; }
+main { overflow-x: clip; }                  /* lo posado se tuerce un poco: que no empuje la página de lado */
+p { margin: 0 0 1rem; }
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+
+.saltar {
+  position: fixed; left: 12px; top: -60px; z-index: 100;
+  background: var(--tinta); color: var(--cal); padding: .6rem .9rem; text-decoration: none;
+}
+.saltar:focus { top: 12px; }
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* ───────── titulares: la letra de la marca ───────── */
+.titulo {
+  font-family: var(--titular);
+  font-weight: 400;
+  font-size: clamp(2rem, 1.05rem + 3.7vw, 4.4rem);
+  line-height: 1.12;
+  margin: 0;
+  text-wrap: balance;
+  font-variation-settings: normal;
+}
+.subtitulo {
+  font-family: var(--titular);
+  font-weight: 400;
+  font-size: clamp(1.45rem, 1.1rem + 1.15vw, 2.1rem);
+  line-height: 1.16;
+  margin: 0 0 .9rem;
+  font-variation-settings: normal;
+}
+.entrada {
+  font-size: clamp(1.125rem, 1rem + .45vw, 1.375rem);
+  line-height: 1.5;
+  max-width: 34em;
+  color: var(--tinta-2);
+  font-weight: 380;
+  margin: 1.6rem 0 0;
+}
+
+/* ───────── cabecera (aparece al dejar atrás la mesa) ───────── */
+.barra {
+  position: fixed; inset: 0 0 auto 0; z-index: 50;
+  height: 64px;
+  display: flex; align-items: center; gap: 2rem;
+  padding-inline: var(--lado);
+  background: var(--cal);
+  border-bottom: 1px solid; border-image: linear-gradient(90deg, var(--l1) 0 50%, var(--l2) 50% 100%) 1;
+  transform: translateY(-101%);
+  transition: transform .55s var(--curva);
+}
+.barra.visible { transform: none; }
+.barra__marca img { height: 26px; width: auto; }
+.barra__nav { margin-left: auto; display: flex; gap: 2.2rem; }
+.barra__nav a, .pie a {
+  position: relative;
+  text-decoration: none;
+  font-size: .9375rem;
+  font-weight: 440;
+}
+.barra__nav a::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -3px; height: 1px;
+  background: currentColor; transform: scaleX(0); transform-origin: left;
+  transition: transform .45s var(--curva);
+}
+.barra__nav a:hover::after, .barra__nav a:focus-visible::after, .barra__nav a.activa::after { transform: scaleX(1); }
+
+.idioma { display: flex; gap: .15rem; }
+.idioma button {
+  background: none; border: 0; cursor: pointer;
+  font-size: .8125rem; font-weight: 520; letter-spacing: .07em; line-height: 1;
+  padding: .5rem .45rem;
+  opacity: .5;
+  transition: opacity .3s;
+}
+.idioma button:hover { opacity: .85; }
+.idioma button[aria-pressed="true"] { opacity: 1; text-decoration: underline 1px; text-underline-offset: 6px; }
+
+/* ───────── portada: la mesa ───────── */
+.portada {
+  position: relative;
+  height: 100vh; height: 100svh;
+  min-height: 520px;
+  overflow: hidden;
+  /* el tono medio del suelo: si el móvil aún no ha vuelto a pintar algo, se ve suelo y no negro (antes #141516) */
+  background: #3E3E3F;
+  color: var(--cal);
+  isolation: isolate;
+}
+/* fuera de la escena (pantallas de otra proporción), el mismo suelo desenfocado: sin franjas negras.
+   Ya a su tamaño desde el primer pintado (03-oct; antes lo ponía la intro con --escala al cargar y el suelo
+   saltaba). Es la misma cuenta que encaja() en intro.js: s = min(max(w, h), min(w, h) · 1,06), con w = ancho de
+   la portada / ancho de la escena y h = alto (100svh, mínimo 520px) / alto de la escena. El suelo mide 2720 px por
+   cada 1600 de escena (170 % del ancho, o 3,0222 veces el alto); de pie, 1530 por cada 900 (170 %, o 0,85 el alto) */
+.portada::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: url("../intro/assets/suelo_ext.jpg") center no-repeat;
+  background-size: min(max(170%, max(100vh, 520px) * 3.0222), min(170%, max(100vh, 520px) * 3.0222) * 1.06) auto;
+  background-size: min(max(170%, max(100svh, 520px) * 3.0222), min(170%, max(100svh, 520px) * 3.0222) * 1.06) auto;
+}
+@media (orientation: portrait) {
+  .portada::before {
+    background-image: url("../intro/assets_movil/suelo_ext.jpg");
+    background-size: min(max(170%, max(100vh, 520px) * .85), min(170%, max(100vh, 520px) * .85) * 1.06) auto;
+    background-size: min(max(170%, max(100svh, 520px) * .85), min(170%, max(100svh, 520px) * .85) * 1.06) auto;
+  }
+}
+.portada__mesa { position: absolute; inset: 0; }
+/* sobre la animación no se amplía con los dedos (03-oct, noche): en el móvil de Javi, ampliarla daba huecos negros y
+   tras varios arreglos seguía (en el VDS no se reproduce del todo). Se desplaza igual (pan-x pan-y) y el resto de la
+   web se amplía normal. Para quitarlo: borrar esta línea */
+.portada { touch-action: pan-x pan-y; }
+/* acabada la intro, el lápiz, el compás y el pincel ya no se mueven: se pintan con la mesa en vez de ir en capa
+   propia (03-oct, noche). En capa propia, su sombra difuminada la recalculaba la gráfica en cada fotograma, en tres
+   superficies aparte, y al ampliar en el móvil se ponía negro alrededor de la tablet. "Ver otra vez" les devuelve
+   la capa (quita .terminada) antes de moverlos */
+.portada.terminada .herr, .portada.terminada .herrSombra { will-change: auto; }
+.idioma--portada { position: absolute; top: 10px; right: 12px; z-index: 2; }
+.portada__otra, .portada__saltar {
+  position: absolute; right: 14px; bottom: 12px; z-index: 2;
+  display: flex; align-items: center; gap: .5rem;
+  font-size: .8125rem; font-weight: 500; line-height: 1;
+  background: rgba(16, 19, 18, .62); border: 0; border-radius: 2px;
+  padding: .55rem .85rem .55rem .65rem;
+  cursor: pointer;
+  opacity: 0; pointer-events: none;
+  transition: opacity .7s ease, background .3s;
+}
+.portada__otra svg, .portada__saltar svg { width: 18px; height: 18px; }
+.portada__otra:hover, .portada__saltar:hover { background: rgba(16, 19, 18, .9); }
+/* SALTAR Y BAJAR (06-oct, tarde, Javi: «coloca el saltar animación abajo de la regla, y cuando acabe desaparece y
+   llega la flecha indicando hacia abajo… hazlos más atractivos; el ver otra vez déjalo igual»). Los dos comparten
+   sitio, el ANCLA: en horizontal, centrado bajo la regla, en el hueco entre la regla y el canto de la mesa (lo mide
+   web.js, anclarPortada, y lo pasa en --ancla-x/--ancla-y); en vertical no cabe entre la regla y la tablet, así que
+   va abajo y en el centro, en el canto de la mesa. Mientras se monta la mesa está «Saltar animación», con una raya
+   que se llena con lo que lleva la intro (--avance); al acabar se apaga y en su sitio cae la flecha */
+.portada__saltar, .portada__bajar {
+  position: absolute; z-index: 2;
+  left: var(--ancla-x, 50%); top: var(--ancla-y, auto);
+  bottom: calc(clamp(26px, 5vh, 56px) + env(safe-area-inset-bottom));
+}
+.portada--ancla .portada__saltar, .portada--ancla .portada__bajar { bottom: auto; }
+.portada__saltar {
+  right: auto; translate: -50% 0; overflow: hidden;
+  min-height: 50px; gap: .7rem; padding: 0 1.35rem 0 .45rem;
+  font-size: .9375rem; font-weight: 500; letter-spacing: .02em;
+  border-radius: 999px; background: rgba(16, 19, 18, .8);
+  box-shadow: inset 0 0 0 1px rgba(234, 234, 235, .18), 0 10px 26px rgba(10, 12, 14, .28);
+  scale: .96; transition: opacity .45s ease, scale .6s var(--curva), background .3s;
+}
+.portada--ancla .portada__saltar { translate: -50% -50%; }
+.portada__saltar svg {
+  width: 38px; height: 38px; padding: 9px; border-radius: 50%;
+  background: rgba(234, 234, 235, .12); transition: background .3s, transform .3s ease;
+}
+.portada__saltar::after {                    /* lo que lleva la intro: una raya azul que se llena por abajo */
+  content: ""; position: absolute; left: 22px; right: 22px; bottom: 7px; height: 2px; border-radius: 1px;
+  background: var(--azul-claro); opacity: .85; transform-origin: left; transform: scaleX(var(--avance, 0));
+  transition: transform .12s linear;
+}
+.portada__saltar:hover { background: rgba(16, 19, 18, .94); }
+.portada__saltar:hover svg, .portada__saltar:focus-visible svg { background: rgba(234, 234, 235, .2); transform: translateX(2px); }
+html.mesa-montando .portada:not(.terminada) .portada__saltar { opacity: 1; scale: 1; pointer-events: auto; transition-delay: 1s; }
+.portada.terminada .portada__otra { opacity: 1; pointer-events: auto; }
+/* la flecha: un medallón oscuro con dos puntas que bajan una tras otra y un aro que se abre, como una onda */
+.portada__bajar {
+  width: 60px; height: 60px; margin-left: -30px; border-radius: 50%;
+  background: rgba(16, 19, 18, .8); color: var(--cal);
+  box-shadow: inset 0 0 0 1px rgba(234, 234, 235, .2), 0 10px 26px rgba(10, 12, 14, .3);
+  opacity: 0; transform: translateY(-14px) scale(.9); pointer-events: none;
+  transition: opacity .7s ease .35s, transform 1s var(--curva) .35s, background .3s;
+}
+.portada--ancla .portada__bajar { margin-top: -30px; }
+.portada__bajar:hover { background: rgba(16, 19, 18, .94); }
+.portada.terminada .portada__bajar { opacity: 1; transform: none; pointer-events: auto; }
+.portada__bajar span, .portada__bajar::after {
+  content: ""; position: absolute; left: 50%; width: 11px; height: 11px; margin-left: -5.5px;
+  border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; border-radius: 0 0 2px 0;
+  rotate: 45deg; animation: bajar-punta 1.8s ease-in-out infinite;
+}
+.portada__bajar span { top: 17px; }
+.portada__bajar::after { top: 26px; animation-delay: .22s; }
+.portada__bajar::before {
+  content: ""; position: absolute; inset: 0; border-radius: 50%; border: 1px solid rgba(234, 234, 235, .55);
+  opacity: 0; animation: bajar-onda 2.6s ease-out 1.4s infinite;
+}
+@keyframes bajar-punta {                     /* nombre propio: «punta» ya es el parpadeo del cursor al escribir */
+  0% { translate: 0 -4px; opacity: 0; }
+  35% { opacity: 1; }
+  70%, 100% { translate: 0 5px; opacity: 0; }
+}
+@keyframes bajar-onda {
+  0% { transform: scale(1); opacity: .7; }
+  70%, 100% { transform: scale(1.55); opacity: 0; }
+}
+
+/* La sombra del olivo sigue cayendo sobre la página, como en la mesa: la web se lee debajo del árbol.
+   Solo después de la portada (que ya tiene la suya) y muy tenue. Va DETRÁS del contenido (z-index -1): cae
+   solo sobre la cal; los vídeos, el mármol, las piezas y la parte negra la tapan (Javi, 03-oct) */
+.olivo {
+  position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden;
+  opacity: 0; visibility: hidden; transition: opacity 1.6s ease, visibility 0s linear 1.6s;
+}
+.olivo.visible { opacity: 1; visibility: visible; transition: opacity 1.6s ease, visibility 0s; }
+/* Sin mix-blend-mode: multiply (03-oct, noche). Las ramas son sombras casi negras y solo caen sobre la cal: con
+   multiply o sin él sale lo mismo (diferencia < 1/255, calculada), pero multiply obligaba a la gráfica a mezclar la
+   pantalla entera en cada fotograma. Y oculta del todo (visibility) mientras se ve la mesa: así nunca coinciden */
+.olivo { --u: max(1vw, 7px); }                /* las mismas ramas, en el mismo sitio y con el mismo giro que en la mesa */
+.olivo img { position: absolute; max-width: none; animation: mecer var(--t) ease-in-out infinite alternate; }
+.olivo__alta {
+  width: calc(53 * var(--u)); left: calc(100vw + 8.6 * var(--u)); top: calc(-31.6 * var(--u));
+  transform-origin: 2.6% 90.4%; --giro: -190deg; --vaiven: -1.7deg; --t: 5.6s; opacity: .17;
+}
+.olivo__baja {
+  width: calc(53.6 * var(--u)); left: calc(-10.75 * var(--u)); top: calc(100vh - 24.4 * var(--u));
+  transform-origin: 2.56% 90.5%; --giro: -4deg; --vaiven: 1.36deg; --t: 7.4s; opacity: .13;
+}
+@keyframes mecer { from { transform: rotate(var(--giro)); } to { transform: rotate(calc(var(--giro) + var(--vaiven))); } }
+/* En móviles y tablets estuvo quitada unas horas (03-oct, tarde) por los huecos negros; vuelve (Javi la quiere) con
+   la versión ligera de arriba, una vez arreglado lo que de verdad ahogaba la gráfica en la mesa */
+
+/* ───────── la inscripción: una losa de mármol con volutas, como un capitel jónico ─────────
+   Tres piezas: la voluta izquierda y la cara lisa (::before) y la voluta derecha (::after). Las volutas no
+   se deforman: su ancho lo calcula web.js por el alto (--ala-i / --ala-d). Al verse, la losa se DESENROLLA de
+   izquierda a derecha (la voluta derecha viaja y la cara se descubre detrás) y después la frase se escribe
+   como código, de izquierda a derecha (web.js, escribir). */
+.inscripcion { padding: clamp(80px, 10vw, 150px) var(--lado) clamp(40px, 5vw, 70px); text-align: center; }
+.estela {
+  margin: 0;
+  font-family: var(--titular);
+  font-weight: 400;
+  font-size: clamp(1.05rem, .7rem + 1.1vw, 1.85rem);   /* más pequeñas (Javi, 05-oct) */
+  line-height: 1.25;
+  font-variation-settings: normal;
+}
+h1.estela { font-size: clamp(1.15rem, .75rem + 1.35vw, 2.1rem); }
+.losa {
+  --ala-i: 3.6em; --ala-d: 3.5em; --rollo: 1.5s;
+  position: relative; isolation: isolate;
+  display: inline-block; max-width: 100%;
+  padding: .95em calc(var(--ala-d) + .3em) .8em calc(var(--ala-i) + .3em);
+  text-align: center;
+  filter: drop-shadow(5px 9px 11px rgba(20, 22, 26, .2)) drop-shadow(1px 2px 2px rgba(20, 22, 26, .14));
+}
+.losa::before, .losa::after { content: ""; position: absolute; z-index: -1; pointer-events: none; }
+.losa::before {
+  inset: 0;
+  background:
+    url("../img/losa_izq.webp") left top / var(--ala-i) 100% no-repeat,
+    url("../img/losa_centro.webp") calc(var(--ala-i) - 3px) top / calc(100% - var(--ala-i) - var(--ala-d) + 9px) 100% no-repeat;
+  clip-path: inset(0 calc(var(--ala-d) - 6px) 0 0);
+  /* 05-oct, losa jónica: la cara acaba justo bajo el canto izquierdo de la voluta derecha (6 px de solape); si
+     llegaba a su mitad, el junquillo de arriba asomaba por el hueco de la espiral como un saliente */
+  /* la cara empieza 3 px por debajo de la voluta izquierda (04-oct): pegadas canto con canto, al escalar las dos
+     imágenes el borde se suavizaba y asomaba el fondo como una raya vertical («una línea rara», Javi) */
+}
+.losa::after {
+  top: 0; bottom: 0; right: 0; width: var(--ala-d);
+  background: url("../img/losa_der.webp") center / 100% 100% no-repeat;
+}
+/* estrecha (móvil): volutas enteras pero más pequeñas, a media altura, sobre un bloque recto */
+.losa--estrecha::before {
+  background:
+    url("../img/losa_izq.webp") left center / var(--ala-i) auto no-repeat,
+    url("../img/losa_centro.webp") calc(var(--ala-i) * .5) top / calc(100% - var(--ala-i) * .5 - var(--ala-d) * .5 + 4px) 100% no-repeat;
+}
+.losa--estrecha::after { top: 50%; bottom: auto; height: calc(var(--ala-d) / .933); transform: translateY(-50%); }
+.losa__texto { display: block; }
+.losa__linea { display: block; white-space: nowrap; }
+.losa .p { white-space: nowrap; }                       /* las palabras no se parten */
+.losa .l {                                              /* letra tallada: el surco oscuro, con luz en el borde de abajo */
+  color: rgba(34, 35, 37, .88);
+  text-shadow: .02em .03em 0 rgba(255, 255, 255, .8), -.012em -.018em .01em rgba(0, 0, 0, .16);
+}
+/* DESENROLLAR: enrollada, las dos volutas están una JUNTO a la otra, como cerrada, y la derecha se abre hacia la
+   derecha (Javi, 03-oct noche; antes la derecha salía montada sobre la izquierda). La cara se descubre siempre justo
+   hasta el centro de la voluta derecha, que la tapa (su mitad izquierda es opaca) */
+.js .losa { opacity: 0; transition: opacity .35s ease; }
+.js .losa::before { clip-path: inset(0 calc(100% - var(--ala-i) - 6px) 0 0); transition: clip-path var(--rollo) var(--pulso) .3s; }
+.js .losa::after { right: calc(100% - var(--ala-i) - var(--ala-d)); transition: right var(--rollo) var(--pulso) .3s; }
+.js .estela.grabada .losa { opacity: 1; }
+.js .estela.grabada .losa::before { clip-path: inset(0 calc(var(--ala-d) - 6px) 0 0); }
+.js .estela.grabada .losa::after { right: 0; }
+/* ESCRIBIR: la frase asoma en sugerencia (azul tenue, como la que propone un editor con IA) y un cursor la
+   teclea: cada letra entra en azul y se queda tallada */
+.js .estela .losa .l { opacity: 0; }
+.js .estela.sugerida .losa .l { opacity: 1; color: rgba(77, 108, 142, .3); text-shadow: none; transition: opacity .5s ease; }
+.js .estela .losa .l.va, .js .estela.hecha .losa .l {
+  opacity: 1; color: rgba(34, 35, 37, .88);
+  text-shadow: .02em .03em 0 rgba(255, 255, 255, .8), -.012em -.018em .01em rgba(0, 0, 0, .16);
+  transition: color .7s ease, text-shadow .9s ease;
+}
+.js .estela .losa .l.va.tecla { color: var(--azul); text-shadow: none; transition: none; }
+.js .estela .losa .l.va.tecla.rojo { color: var(--rojo); }        /* una palabra azul, la siguiente roja: los del logo (Javi, 03-oct: nada de naranja) */
+.cursor-codigo {
+  position: absolute; width: .07em; background: var(--azul);
+  pointer-events: none; opacity: 0; transition: opacity .3s ease;
+}
+.cursor-codigo.activo { opacity: 1; animation: parpadeo .9s steps(1) infinite; }
+.cursor-codigo.activo.tecleando { animation: none; }              /* mientras se teclea, quieto, como en un editor */
+/* lo mismo en las líneas sueltas (correo, «tecnología», el papel); el cursor, una raya pegada a la última letra */
+.cl { transition: color .6s ease, opacity .45s ease; }
+.js .cl.sug { color: var(--azul); }
+.js .cl.tecla { color: var(--azul); transition: none; }
+.js .cl.tecla.rojo { color: var(--rojo); }
+.js .cl.punta { box-shadow: .07em 0 0 var(--azul); }
+.js .cl.punta.parpadea { animation: punta .9s steps(1) infinite; }
+@keyframes punta { 50% { box-shadow: none; } }
+
+.publico {
+  font-size: clamp(1.1rem, 1rem + .5vw, 1.4rem);
+  line-height: 1.45;
+  max-width: 40em;
+  margin: clamp(1.4rem, 2.6vw, 2.2rem) auto 0;
+  color: var(--tinta-2);
+  font-weight: 380;
+}
+
+/* el botón de contacto: un ánfora griega con los colores de la marca, que gira siempre (js/anfora.js). Al
+   pasar el cursor se acerca y debajo aparece «Haz clic»; en táctil, el rótulo se ve siempre (Javi, 03-oct) */
+.anfora {
+  position: relative; display: block; width: min(100%, 330px); margin: clamp(1.4rem, 3vw, 2.2rem) auto 0;
+  text-decoration: none; color: var(--azul); -webkit-tap-highlight-color: transparent;
+}
+.anfora__escena { position: relative; display: block; aspect-ratio: 6 / 7; }
+.anfora__escena > img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.anfora__escena > canvas { position: absolute; inset: -15%; width: 130%; height: 130%; display: block; pointer-events: none; }   /* holgura para acercarse (HOLGURA en anfora.js) */
+.anfora__foto { object-fit: contain; transition: opacity .5s ease, transform .7s var(--curva); }
+.anfora canvas { opacity: 0; transition: opacity .5s ease; }
+.anfora--viva canvas { opacity: 1; }
+.anfora--viva .anfora__foto { opacity: 0; }
+.anfora:not(.anfora--viva):hover .anfora__foto,
+.anfora:not(.anfora--viva):focus-visible .anfora__foto { transform: scale(1.08); }   /* sin WebGL también se acerca */
+.anfora__clic {
+  display: block; margin-top: -.3rem; text-align: center;
+  font-family: var(--texto); font-weight: 600; font-size: 1.14rem; letter-spacing: .16em;
+  font-variant-caps: all-small-caps; color: var(--azul);
+  opacity: 0; transform: translateY(8px);
+  transition: opacity .45s var(--curva), transform .7s var(--curva);
+}
+.anfora:hover .anfora__clic, .anfora:focus-visible .anfora__clic { opacity: 1; transform: none; }
+.anfora:focus-visible { outline: 2px solid var(--azul); outline-offset: 6px; border-radius: 2px; }
+@media (hover: none) { .anfora__clic { opacity: 1; transform: none; } }
+@media (max-width: 860px) { .anfora { width: min(100%, 262px); } }
+/* LA INSCRIPCIÓN EN ORDEN (04-oct, Javi), como las cabeceras: el mármol se desenrolla; luego el texto de debajo
+   aparece de 0 a 100. El ánfora (desde el 06-oct, debajo de la animación de «Cómo trabajamos») entra desde fuera, se posa (llega en 2,2 s y acaba de enderezarse en 3) y,
+   ya posada, web.js le dice a anfora.js que empiece a girar. Mientras, «Haz clic» no se ve y no se puede pulsar */
+.js .inscripcion .publico { opacity: 0; transition: opacity 1.4s ease; }
+.js .inscripcion.ins--texto .publico { opacity: 1; }
+.js .anfora { pointer-events: none; }
+.js .anfora .anfora__escena { opacity: 0; }
+.js .anfora:not(.asentada):not(:focus-visible) .anfora__clic { opacity: 0; transition: none; }
+.js .anfora.asentada, .js .anfora:focus-visible { pointer-events: auto; }
+.js .anfora.posada .anfora__escena, .js .anfora:focus-visible .anfora__escena { opacity: 1; }
+.js .anfora.posada .anfora__escena {
+  animation: anfora-llega 3s cubic-bezier(.25, .6, .25, 1) backwards, anfora-gira 4s linear backwards;
+}
+/* 04-oct, 2.ª (Javi: «parece que sale de la nada»): sale de fuera de la pantalla, por la derecha (--dx lo calcula
+   web.js hasta el borde), sin fundido, y llega despacio; se endereza mientras se posa y acaba ya quieta */
+@keyframes anfora-llega {
+  0% { translate: var(--dx, 600px) -50px; scale: 1.05; }
+  100% { translate: 0 0; scale: 1; }
+}
+@keyframes anfora-gira {
+  0%, 35% { rotate: var(--dgiro, 10deg); animation-timing-function: cubic-bezier(.42, 0, .22, 1); }
+  100% { rotate: 0deg; }
+}
+
+/* ───────── secciones ───────── */
+.seccion { padding: clamp(64px, 8vw, 120px) var(--lado) clamp(56px, 7vw, 110px); }
+.seccion__cab { max-width: 54rem; }
+#servicios { padding-top: clamp(40px, 5vw, 72px); }
+.plegable { padding-bottom: clamp(36px, 4.5vw, 64px); }               /* cerradas, una debajo de otra sin huecos */
+.plegable.abierta { padding-bottom: clamp(56px, 7vw, 110px); }
+.seccion--noche .seccion__cab, .seccion--contacto .seccion__cab { margin-bottom: clamp(64px, 9vw, 130px); }
+
+/* cabeceras: la losa a un lado y el texto al otro, centrados en el mismo renglón (el centro del texto a la
+   altura del centro de la losa) y el texto centrado, como en Word; la piedra, debajo del texto */
+.cab {
+  max-width: none; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-areas: "losa texto" ". piedra";
+  column-gap: clamp(32px, 5vw, 80px); row-gap: 0; align-items: center;
+}
+.cab__losa { grid-area: losa; text-align: center; }
+.cab__texto { display: contents; }
+.cab__losa .estela { display: inline-block; max-width: 100%; font-size: clamp(1.1rem, .75rem + 1.2vw, 2rem); }   /* a la altura del texto de al lado */
+.cab .entrada { grid-area: texto; justify-self: center; margin: 0; max-width: 30em; text-align: center; }
+.cab .piedra { grid-area: piedra; justify-self: center; }
+.seccion--noche .cab, .seccion--contacto .cab { margin-bottom: clamp(64px, 9vw, 120px); }
+
+/* desplegables: la piedra (el capitel de la mesa), debajo del texto. Al pulsarla, la sección se abre o se cierra
+   y la piedra no se cambia de sitio (Javi, 03-oct). Antes «Cerrar», más corto que «Ver qué hacemos», encogía el
+   botón y la piedra se corría de lado, y además se levantaba. Ahora los dos rótulos ocupan la misma celda: el botón
+   mide siempre lo del más largo. Al abrir, eso sí, gira sobre su centro, como algo que se abre; al cerrar vuelve */
+.piedra {
+  display: inline-grid; grid-template-columns: auto auto; align-items: center; column-gap: .8rem; margin-top: 1.4rem;
+  background: none; border: 0; padding: 0; cursor: pointer;
+  font-size: .9375rem; font-weight: 540; color: var(--azul);
+  -webkit-user-select: none; user-select: none; touch-action: manipulation;
+}
+.piedra img { grid-column: 1; grid-row: 1; }
+.piedra > span { grid-column: 2; grid-row: 1; justify-self: start; border-bottom: 1px solid transparent; transition: border-color .3s; }
+.piedra:focus-visible > span { border-bottom-color: currentColor; }
+.piedra img {
+  width: 74px; height: auto;
+  filter: drop-shadow(4px 7px 7px rgba(20, 22, 26, .3));
+  transition: transform .6s var(--curva), filter .6s var(--curva);
+}
+.piedra:focus-visible img { transform: translateY(-4px) rotate(-6deg); filter: drop-shadow(9px 15px 12px rgba(20, 22, 26, .24)); }
+@media (hover: hover) {                      /* con ratón; en el móvil el «hover» se queda pegado tras tocar */
+  .piedra:hover > span { border-bottom-color: currentColor; }
+  .piedra:hover img { transform: translateY(-4px) rotate(-6deg); filter: drop-shadow(9px 15px 12px rgba(20, 22, 26, .24)); }
+}
+/* abierta: girada, sin desplazarse (Javi, 03-oct: «si no, no tiene gracia»). Va después del hover para mandar */
+.piedra[aria-expanded="true"] img { transform: rotate(-24deg); filter: drop-shadow(9px 15px 12px rgba(20, 22, 26, .26)); }
+.piedra__cerrar, .piedra[aria-expanded="true"] .piedra__abrir { visibility: hidden; }
+.piedra[aria-expanded="true"] .piedra__cerrar { visibility: visible; }
+.sin-js .piedra { display: none; }
+/* CABECERAS EN ORDEN (04-oct, Javi): 1) se desenrolla el mármol; 2) al acabar, el texto de al lado se ilumina
+   despacio, de 0 a 100, y A LA VEZ la piedra entra desde fuera: cuando el texto acaba de iluminarse (2,4 s), la
+   piedra está llegando a su sitio (2,6 s, frenando) y acaba de girar ya apoyada (como POSAR, con propiedades sueltas
+   para no pisar el giro del hover ni el de «abierta»); 3) su rótulo se escribe como código. Lo encadena web.js
+   (cabecera); sin JS, todo está desde el principio */
+.js .cab .entrada { opacity: 0; transition: opacity 2.4s ease; }
+.js .cab.cab--texto .entrada { opacity: 1; }
+.js .cab .piedra { opacity: 0; pointer-events: none; }
+.js .cab .piedra.posada, .js .cab .piedra:focus-visible { opacity: 1; pointer-events: auto; }
+.js .cab .piedra.posada img {
+  animation: piedra-llega 2.6s cubic-bezier(.22, .61, .24, 1) backwards, piedra-gira 3.4s linear backwards;
+}
+.js .cab .piedra .piedra__abrir { opacity: 0; }
+.js .cab .piedra.rotulada .piedra__abrir, .js .cab .piedra:focus-visible .piedra__abrir { opacity: 1; }
+@keyframes piedra-llega {
+  0% { translate: var(--dx, 600px) -36px; scale: 1.12; filter: drop-shadow(14px 24px 18px rgba(20, 22, 26, .16)); }
+  100% { translate: 0 0; scale: 1; filter: drop-shadow(4px 7px 7px rgba(20, 22, 26, .3)); }
+}
+@keyframes piedra-gira {
+  0%, 30% { rotate: var(--dgiro, 14deg); animation-timing-function: cubic-bezier(.42, 0, .22, 1); }
+  100% { rotate: 0deg; }
+}
+.cab__losa .estela { cursor: default; }
+.plegable .cab__losa .estela { cursor: pointer; -webkit-user-select: none; user-select: none; touch-action: manipulation; }
+.pliegue__dentro::before { content: ""; display: block; height: clamp(64px, 9vw, 130px); }   /* dentro: al plegar no asoma */
+/* PERGAMINO (03-oct, noche): la sección se desenrolla como un rollo, sin verse el rollo. El borde de abajo baja a
+   ritmo parejo (curva suave, sin el arranque brusco de antes) y difumina lo que va apareciendo (.rodando: máscara
+   en degradado); al cerrar sube igual. Lo mueve web.js (desplegar), que solo hace rodar lo que se ve en pantalla:
+   lo de más abajo se abre o se recoge de golpe, fuera de la vista */
+.js .pliegue { height: 0; overflow: hidden; }
+.js .plegable.abierta .pliegue { height: auto; overflow: visible; }
+.js .plegable .pliegue.rodando {                     /* (con .plegable: tiene que pesar más que la de .abierta) */
+  overflow: hidden; overflow-anchor: none;
+  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 120px), transparent);
+          mask-image: linear-gradient(to bottom, #000 calc(100% - 120px), transparent);
+}
+.plegable { transition: padding-bottom 1s cubic-bezier(.45, .05, .2, 1); }
+
+.lista { list-style: none; padding: 0; margin: 1.8rem 0 0; }
+.lista li {
+  position: relative;
+  padding: .7rem 0 .7rem 1.9rem;
+  border-top: 1px solid; border-image: linear-gradient(90deg, var(--l1) 0 50%, var(--l2) 50% 100%) 1;
+}
+.lista li:last-child { border-bottom: 1px solid; }
+.lista li::before {                        /* un guion de color, no una viñeta: rojo, azul o la raya del logo */
+  content: ""; position: absolute; left: 0; top: 1.48em;
+  width: 1.05rem; height: 2px; background: linear-gradient(90deg, var(--g1) 0 50%, var(--g2) 50% 100%);
+}
+/* listas con titular (04-oct, Javi: «más elaborado»): la idea en una línea y, debajo, lo que quiere decir */
+.lista--dos li { padding-top: 1rem; padding-bottom: 1.1rem; }
+.lista--dos li::before { top: 1.66em; }
+.lista--dos strong { display: block; font-weight: 560; font-size: 1.0625rem; line-height: 1.35; color: var(--sobre-noche); }
+.lista--dos span { display: block; margin-top: .32rem; line-height: 1.52; color: var(--sobre-noche-2); }
+
+/* pliegos: texto a un lado, la mesa al otro */
+.pliego {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: clamp(40px, 7vw, 120px);
+  align-items: center;
+}
+.pliego + .pliego { margin-top: clamp(110px, 14vw, 210px); }
+.pliego--vuelta .pliego__texto { order: 2; }
+.pliego__texto > p { max-width: 36em; }
+.aparte { margin-top: 2.6rem; }
+.aparte h4 { font-size: 1.0625rem; font-weight: 560; margin: 0 0 .45rem; }
+.aparte p { color: var(--tinta-2); max-width: 34em; }
+
+/* POSAR (04-oct, Javi, 3.ª: «todo de fuera de la pantalla hacia dentro, suave, con flow: desde fuera se coge, se
+   lleva a la mesa, se pone y se gira solo un poco, como si hubiese caído en la mesa»). Dos movimientos solapados con
+   propiedades sueltas (translate, rotate, scale):
+   - LLEGA (2,8 s): sale de FUERA de la pantalla por el lado de su columna (--dx lo calcula web.js hasta el borde),
+     un poco alta y con la sombra lejos, y frena poco a poco hasta tocar la mesa; sin fundido;
+   - GIRA (3,6 s): viene algo torcida (--dgiro) y, ya apoyada, se asienta despacio en su giro (--giro), sin rebote.
+   Sin will-change fijo (las capas de más fueron el problema del zoom en el móvil). Relleno "backwards": al acabar
+   manda el estilo normal (.posado), igual que el último fotograma. .posable--libre: lo mismo, sin sombra de papel */
+.posable { rotate: var(--giro, 0deg); box-shadow: var(--sombra-posada); }
+.js .posable { opacity: 0; }
+.js .posable.posado {
+  opacity: 1; translate: 0 0; scale: 1; rotate: var(--giro, 0deg); box-shadow: var(--sombra-posada);
+  animation: posar-llega 2.8s cubic-bezier(.22, .61, .24, 1) var(--retraso, 0s) backwards,
+             posar-gira 3.6s linear var(--retraso, 0s) backwards;
+}
+@keyframes posar-llega {
+  0% { translate: var(--dx, 600px) -44px; scale: 1.06; box-shadow: var(--sombra-alzada); }
+  100% { translate: 0 0; scale: 1; box-shadow: var(--sombra-posada); }
+}
+@keyframes posar-gira {
+  0%, 30% { rotate: calc(var(--giro, 0deg) + var(--dgiro, 7deg)); animation-timing-function: cubic-bezier(.42, 0, .22, 1); }
+  100% { rotate: var(--giro, 0deg); }
+}
+.posable--libre, .js .posable--libre.posado { box-shadow: none !important; }
+/* PIES PEGADOS A SU VÍDEO (06-oct, noche, Javi): el pie de una pieza que se posa no espera quieto; llega con ella,
+   como si fueran una sola pieza: mismo camino, mismo ritmo y el mismo giro, sobre el centro del vídeo (web.js, posar,
+   le pasa --dx, --giro, --dgiro y el transform-origin). Sin sombra: la sombra es solo del vídeo */
+.js .posable + figcaption, .js .posable + .personaje__pie { opacity: 0; }
+.js .posable + .pie--posado {
+  opacity: 1; rotate: var(--giro, 0deg);
+  animation: posar-llega-pie 2.8s cubic-bezier(.22, .61, .24, 1) backwards, posar-gira 3.6s linear backwards;
+}
+@keyframes posar-llega-pie { 0% { translate: var(--dx, 600px) -44px; scale: 1.06; } 100% { translate: 0 0; scale: 1; } }
+
+.copias { position: relative; aspect-ratio: 1 / 1.02; }
+.copia {
+  position: absolute; margin: 0; width: 44%;
+  background: #F6F6F4; padding: 7px;
+}
+.copia img { width: 100%; height: auto; }
+/* el abanico se mueve (04-oct, Javi): tres bucles cortos y mudos (media/copia_*.mp4, 7 s, 360 px), sin sonido ni
+   mandos; solo se reproducen mientras se ven (web.js, data-bucle). Con su etiqueta, como todo lo generado */
+.copia video { display: block; width: 100%; height: auto; aspect-ratio: 9 / 16; object-fit: cover; background: #DADBDC; }
+.copia .pieza__ia { right: 13px; bottom: 13px; font-size: .5625rem; padding: .32rem .45rem; }
+.copia:nth-child(2) .pieza__ia { right: auto; left: 13px; }   /* la de la derecha le tapa esa esquina */
+.copia:nth-child(1) { left: 2%; top: 9%; }
+.copia:nth-child(2) { left: 29%; top: 0; --retraso: .16s; }
+.copia:nth-child(3) { left: 55%; top: 12%; --retraso: .32s; }
+
+/* la tablet posada en la mesa (03-oct): el marco negro, la pantalla clara con los colores de la marca —azul
+   egipcio para el lenguaje, rojo para lo que se dice, tinta para lo demás— para que se lea bien, también en el móvil */
+.editor {
+  position: relative; margin: 0; max-width: 100%;
+  background: #0E0F10;
+  padding: clamp(11px, 1.6vw, 18px);
+  border-radius: clamp(16px, 2.2vw, 26px);
+  font-family: var(--mono);
+  font-size: clamp(.74rem, .62rem + .38vw, .95rem);
+  line-height: 1.75;
+  font-variation-settings: normal;
+}
+.editor::before {                                       /* la cámara, en el marco */
+  content: ""; position: absolute; top: calc(clamp(11px, 1.6vw, 18px) / 2 - 2.5px); left: 50%;
+  width: 5px; height: 5px; border-radius: 50%; background: #26292C; transform: translateX(-50%);
+}
+.editor__pantalla {
+  background: #FDFDFC; color: var(--tinta);
+  border-radius: clamp(5px, .8vw, 9px);
+  overflow: hidden;
+}
+.editor__cab {
+  display: flex; gap: 1.6em;
+  padding: .85em 1.4em .55em;
+  border-bottom: 1px solid #E4E5E7;
+  color: #8D9298; font-size: .84em;
+}
+.editor__pest { color: var(--tinta); font-weight: 600; box-shadow: inset 0 -2px 0 var(--rojo); padding-bottom: .35em; margin-bottom: -.56em; }
+.editor__codigo { margin: 0; padding: 1.2em 1.4em 1.3em; white-space: pre; overflow-x: auto; min-height: 15.2em; font: inherit; }
+.editor__codigo code { font: inherit; }
+.editor__codigo .num { color: #B9BDC2; user-select: none; }
+.editor__codigo .c-com { color: #767B82; font-style: italic; }
+.editor__codigo .c-kw { color: var(--azul); font-weight: 600; }
+.editor__codigo .c-fn { color: var(--tinta); font-weight: 600; }
+.editor__codigo .c-st { color: var(--rojo); }
+.editor__codigo .c-cte { color: var(--rojo); font-weight: 600; }
+.editor__codigo .c-tx { color: #2E3135; }
+.editor__codigo .cursor {
+  display: inline-block; width: .55em; height: 1.1em; vertical-align: -.2em;
+  background: var(--tinta); animation: parpadeo 1.05s steps(1) infinite;
+}
+@keyframes parpadeo { 50% { opacity: 0; } }
+.editor__terminal {
+  display: grid; gap: .1em;
+  border-top: 1px solid #E4E5E7; background: #F1F1F0;
+  padding: .75em 1.4em .85em; font-size: .9em;
+}
+.editor__terminal .orden { color: #6D7278; }
+.editor__terminal .salida { color: var(--tinta); }
+.editor__terminal .salida--fin { color: var(--azul); font-weight: 600; }
+.editor__pie { margin: 0; padding: .7em 1.4em .8em; font-family: var(--texto); font-size: .8em; color: #6D7278; border-top: 1px solid #E4E5E7; background: #FDFDFC; }
+.js .editor__terminal { background: transparent; border-top-color: transparent; transition: background .4s ease, border-color .4s ease; }
+.js .editor.ejecutado .editor__terminal { background: #F1F1F0; border-top-color: #E4E5E7; }
+.js .editor__terminal > span { opacity: 0; transition: opacity .45s ease; }      /* se ejecuta: la orden y, línea a línea, la salida */
+.js .editor__terminal .salida { transition-delay: .5s; }
+.js .editor__terminal .salida--fin { transition-delay: 1.05s; }
+.js .editor.ejecutado .editor__terminal > span { opacity: 1; }
+
+/* ───────── trabajo ───────── */
+.caso {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: clamp(40px, 7vw, 120px);
+  align-items: center;
+}
+.caso + .caso { margin-top: clamp(110px, 14vw, 200px); }
+.caso--vuelta .caso__media { order: 2; }
+.caso--doble { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+.caso--doble.caso--vuelta { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }   /* moda: los dos vídeos a la derecha */
+.caso__media { display: flex; justify-content: center; }
+.caso__media--doble { gap: clamp(16px, 3vw, 40px); align-items: flex-start; }
+.caso__media--doble .toma:nth-child(2) { margin-top: clamp(40px, 7vw, 96px); }
+.toma { margin: 0; flex: 1 1 0; max-width: 320px; }
+.toma figcaption { margin-top: 1.1rem; font-size: .875rem; color: var(--tinta-2); font-weight: 420; }
+.caso__texto > p { max-width: 36em; }
+.caso__tipo { font-size: .9375rem; font-weight: 480; color: var(--tinta-2); margin: -.1rem 0 1.4rem; }
+
+.pieza {
+  position: relative;
+  width: 100%; max-width: 360px;
+  aspect-ratio: 9 / 16;
+  /* sin fondo (06-oct, Javi: «los marcos salen como recortados a tijera, tienen que ser lisos»): el fondo negro de
+     antes asomaba por el borde girado del vídeo y dejaba un filo oscuro desigual. El cartel (poster) tapa el hueco */
+  background: transparent;
+  overflow: hidden;
+  border-radius: 2px;
+}
+.pieza video { display: block; width: 100%; height: 100%; object-fit: cover; cursor: pointer; }
+.pieza__sonido {
+  position: absolute; left: 10px; bottom: 10px;
+  background: rgba(234, 234, 235, .92); color: var(--tinta);
+  border: 0; border-radius: 2px;
+  font-size: .75rem; font-weight: 540; letter-spacing: .04em; line-height: 1;
+  padding: .5rem .7rem; cursor: pointer;
+  transition: background .25s, color .25s;
+}
+.pieza__sonido[aria-pressed="true"] { background: var(--tinta); color: var(--cal); }
+/* aviso de contenido generado (AI Act, art. 50.4, desde el 2-ago-2026): discreto pero siempre visible.
+   Va con nuestra manera de trabajar: lo generado no se esconde, se dice */
+.pieza__ia {
+  position: absolute; right: 10px; bottom: 10px; pointer-events: none;
+  background: rgba(16, 19, 18, .62); color: var(--cal);
+  font-size: .6875rem; font-weight: 520; letter-spacing: .05em; line-height: 1;
+  padding: .42rem .6rem; border-radius: 2px;
+}
+
+.ficha { display: grid; grid-template-columns: repeat(3, minmax(0, max-content)); margin: 2rem 0 0; border-top: 1px solid; border-image: linear-gradient(90deg, var(--l1) 0 50%, var(--l2) 50% 100%) 1; }
+.ficha div { padding: .85rem 1.3rem .2rem 0; margin-right: 1.3rem; border-right: 1px solid var(--l2); }
+.ficha div:last-child { border-right: 0; margin-right: 0; }
+.ficha dt { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 540; color: var(--tinta-2); }
+.ficha dd { margin: .2rem 0 0; font-variant-numeric: tabular-nums; font-weight: 420; }
+.ficha .ninguno { color: var(--azul); font-weight: 560; }
+
+/* papeles posados en la mesa: la llamada de la clínica y la ficha de la copistería */
+.llamada, .hoja {
+  margin: 0; width: 100%; max-width: 420px;
+  background: #F6F6F4; padding: 1.3rem 1.5rem 1.1rem;
+}
+.llamada__cab, .hoja__cab {
+  display: flex; justify-content: space-between; margin: 0 0 .9rem; padding-bottom: .7rem;
+  border-bottom: 1px solid var(--raya);
+  font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 540; color: var(--tinta-2);
+  font-variant-numeric: tabular-nums;
+}
+.hoja { background: #FAFAF8; }
+.hoja__filas { margin: 0; }
+.hoja__filas div {
+  display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 1rem; align-items: baseline;
+  padding: .55rem 0; border-bottom: 1px dashed var(--raya);
+}
+.hoja__filas dt { font-size: .9rem; font-weight: 460; white-space: nowrap; }   /* el archivo entero; lo que se parte es el detalle */
+.hoja__filas dd { margin: 0; font-size: .9rem; color: var(--tinta-2); text-align: right; font-variant-numeric: tabular-nums; text-wrap: balance; }
+.hoja__filas .hoja__mano { color: var(--azul); font-weight: 580; }
+.hoja__pie { margin-top: 1rem; font-size: .8rem; color: var(--tinta-2); }
+
+/* LA CADENA DE IRIS COPY (04-oct, Javi: «una cadena viva, una infografía chula, con sus dibujos propios, sin papel y
+   sin bola que se vaya del encuadre»). De toda España a toda España: los pedidos salen de las ciudades del mapa, pasan
+   por la web, el agente, la impresora y el empaquetado (dentro de cada máquina cambian: pedido → hojas → caja) y la
+   caja sale de la tienda de Sevilla hacia otra ciudad; de vez en cuando uno va a «Revisión» con su aviso. El dibujo
+   lo genera _tools/cadena_svg.py (horizontal y vertical) y lo mueve web.js (prepararCadena). Entra desde fuera como
+   las demás piezas y, al posarse, se traza */
+.cadena { margin: 0; width: 100%; max-width: 600px; }
+.cadena__svg { display: block; width: 100%; height: auto; overflow: hidden; }
+.cadena__svg--v { display: none; }
+@media (max-width: 860px) { .cadena__svg--h { display: none; } .cadena__svg--v { display: block; } .cadena { max-width: 430px; } }
+.cadena__pie { margin-top: .4rem; font-size: .8rem; color: var(--tinta-2); text-align: center; }
+.cadena .c-pieza { fill: #FAFAF8; stroke: var(--tinta); stroke-width: 1.4; stroke-linejoin: round; }
+.cadena .c-linea { fill: none; stroke: var(--tinta); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.cadena .c-tenue { fill: rgba(20, 20, 20, .14); }
+.cadena .c-punto { fill: var(--tinta-2); }
+.cadena .c-azul { fill: var(--azul); }
+.cadena .c-check { fill: none; stroke: #FFF; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.cadena .c-pantalla { fill: #1B2027; }
+.cadena .c-cod1 { fill: #799BC1; }
+.cadena .c-cod2 { fill: rgba(234, 234, 235, .55); }
+.cadena .c-cod3 { fill: #B5D0EE; }
+.cadena .c-papel { fill: #FFF; stroke: var(--tinta-2); stroke-width: 1.1; }
+.cadena .c-caja { fill: #E8DCC8; stroke: var(--tinta); stroke-width: 1.3; stroke-linejoin: round; }
+.cadena .c-rojo { fill: var(--rojo); }
+.cadena .c-blanco { fill: none; stroke: #FFF; stroke-width: 2; stroke-linecap: round; }
+.cadena .c-mapa { fill: #F4F3F0; stroke: var(--tinta-2); stroke-width: 1.1; stroke-linejoin: round; }
+.cadena .c-ciudad { fill: var(--tinta-2); }
+.cadena .c-onda { fill: none; stroke: var(--azul); stroke-width: 1.3; opacity: 0; transform-box: fill-box; transform-origin: center; }
+.cadena__ciudad.activa .c-onda { animation: cadena-onda 1.2s ease-out; }
+@keyframes cadena-onda { 0% { opacity: .9; transform: scale(1); } 100% { opacity: 0; transform: scale(4.5); } }
+.cadena .c-tienda { fill: var(--azul); }
+.cadena .c-tienda-aro { fill: none; stroke: var(--azul); stroke-width: 1.2; transform-box: fill-box; transform-origin: center; }
+.cadena__est--tienda.activa .c-tienda-aro { animation: cadena-latido 1s ease-out; }
+@keyframes cadena-latido { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(2.3); opacity: 0; } }
+.cadena__pista { fill: none; stroke: rgba(20, 20, 20, .16); stroke-width: 1.6; stroke-linecap: round; }
+.cadena__flujo { fill: none; stroke: var(--azul-claro); stroke-width: 1.6; stroke-linecap: round; stroke-dasharray: .006 .016; animation: cadena-fluye 3s linear infinite; }
+@keyframes cadena-fluye { to { stroke-dashoffset: -.044; } }
+.cadena__rot { font-family: var(--texto); font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; fill: var(--tinta-2); }
+.cadena__rot--peque { font-size: 9.5px; letter-spacing: .1em; }
+.cadena__svg--h .cadena__rot { font-size: 12.5px; }
+.cadena__svg--h .cadena__rot--peque { font-size: 10.5px; }
+.cadena__item > g { display: none; }
+.cadena__item[data-e="doc"] .cadena__doc, .cadena__item[data-e="hojas"] .cadena__hojas,
+.cadena__item[data-e="caja"] .cadena__caja, .cadena__item[data-e="aviso"] .cadena__aviso { display: inline; }
+.cadena .c-pedido { fill: var(--rojo); }
+.cadena .c-pliegue { fill: none; stroke: rgba(255, 255, 255, .75); stroke-width: 1; }
+.cadena .c-hoja { fill: #FFF; stroke: var(--tinta-2); stroke-width: .9; }
+.cadena .c-cinta-item, .cadena__cinta { fill: none; stroke: var(--azul); stroke-width: 1.6; }
+.cadena .c-rojo-aro { fill: none; stroke: var(--rojo); stroke-width: 1.4; }
+.cadena__ok { opacity: 0; transform-box: fill-box; transform-origin: center; }
+.cadena__est--web.activa .cadena__ok { animation: cadena-ok 1.2s ease-out; }
+@keyframes cadena-ok { 0% { opacity: 0; transform: scale(.4); } 22% { opacity: 1; transform: scale(1.15); } 36% { transform: scale(1); } 75% { opacity: 1; } 100% { opacity: 0; } }
+.cadena__codigo { animation: cadena-teclea 6s steps(20) infinite; }
+@keyframes cadena-teclea { to { transform: translateY(-70px); } }
+.cadena__visto { fill: none; stroke: #CFE3F7; stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; opacity: 0; }
+.cadena__est--agente.activa .cadena__visto { animation: cadena-visto 1.1s ease-out; }
+@keyframes cadena-visto { 0% { stroke-dashoffset: 1; opacity: 1; } 45% { stroke-dashoffset: 0; opacity: 1; } 80% { opacity: 1; } 100% { stroke-dashoffset: 0; opacity: 0; } }
+.cadena__alerta { transform-box: fill-box; transform-origin: center; opacity: .35; }
+.cadena__est--revision.activa .cadena__alerta { animation: cadena-alerta 1.4s ease-out; }
+@keyframes cadena-alerta { 0%, 100% { opacity: .35; transform: scale(1); } 15%, 45% { opacity: 1; transform: scale(1.25); } 30%, 60% { opacity: 1; transform: scale(1); } }
+.cadena__luz { fill: var(--azul-claro); opacity: .45; }
+.cadena__est--impresora.activa .cadena__luz { animation: cadena-luz .3s steps(2) 3; }
+@keyframes cadena-luz { 50% { opacity: 1; fill: var(--azul); } }
+.cadena__hoja { fill: #FFF; stroke: var(--tinta-2); stroke-width: 1; transform: translateY(-24px); }
+.cadena__est--impresora.activa .cadena__hoja { animation: cadena-hoja 1s ease-out; }
+@keyframes cadena-hoja { 0% { transform: translateY(-24px); } 55% { transform: translateY(2px); } 85% { opacity: 1; transform: translateY(2px); } 100% { opacity: 0; transform: translateY(4px); } }
+.cadena__solapa { transform-box: fill-box; transform-origin: center bottom; }
+.cadena__est--empaquetado.activa .cadena__solapa { animation: cadena-solapa .9s ease-in-out; }
+@keyframes cadena-solapa { 0%, 100% { transform: scaleY(1); } 40%, 70% { transform: scaleY(.12); } }
+.cadena__cinta { stroke-dasharray: 1; stroke-dashoffset: 1; }
+.cadena__est--empaquetado.activa .cadena__cinta { animation: cadena-cinta .9s ease-out; }
+@keyframes cadena-cinta { 0%, 35% { stroke-dashoffset: 1; } 70% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 0; opacity: 0; } }
+.js .cadena .c-mapa { stroke-dasharray: 1; stroke-dashoffset: 1; fill-opacity: 0; transition: stroke-dashoffset 2s ease, fill-opacity 1s ease 1.2s; }
+.js .cadena .cadena__pista { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.8s ease .4s; }
+.js .cadena .cadena__flujo { opacity: 0; transition: opacity .8s ease 1.8s; }
+.js .cadena .cadena__est, .js .cadena .cadena__ciudad, .js .cadena .cadena__rot--mapa { opacity: 0; transition: opacity .6s ease calc(.3s + var(--i, 0) * .16s); }
+.js .cadena--trazada .c-mapa, .js .cadena--trazada .cadena__pista { stroke-dashoffset: 0; }
+.js .cadena--trazada .c-mapa { fill-opacity: 1; }
+.js .cadena--trazada .cadena__flujo, .js .cadena--trazada .cadena__est, .js .cadena--trazada .cadena__ciudad,
+.js .cadena--trazada .cadena__rot--mapa { opacity: 1; }
+.cadena:not(.cadena--viva) * { animation-play-state: paused !important; }
+
+/* LA CADENA DE FISIOBOOST (04-oct, Javi: «algo como lo de Iris Copy, una cadena ilustrativa de sucesos»): el mismo
+   dibujo que la cadena de la copistería (comparte sus clases c-* y cadena__*). La conversación es HTML encima del hueco
+   que deja cada dibujo, para que se lea y se traduzca. La genera _tools/recep_svg.py y la mueve web.js (prepararRecep);
+   los estados en-* los pone el guion, en la figura */
+.recep { margin: 0; width: 100%; max-width: 600px; }
+.recep__lamina { position: relative; }
+.recep__svg { display: block; width: 100%; height: auto; overflow: visible; }
+.recep__svg--v { display: none; }
+.recep__charla { position: absolute; left: 4%; top: 38.3%; width: 70%; height: 59.6%; display: flex; flex-direction: column; overflow: hidden;
+  background: #FAFAF8; border: 1px solid rgba(20, 20, 20, .12); border-radius: 10px; box-shadow: 0 14px 30px rgba(20, 20, 20, .08); }
+@media (max-width: 860px) {
+  .recep { max-width: 430px; }
+  .recep__svg--h { display: none; }
+  .recep__svg--v { display: block; }
+  .recep__charla { left: 3.3%; top: 18.9%; width: 89.4%; height: 63.8%; }
+}
+.recep__cab { display: flex; justify-content: space-between; margin: 0; padding: .55rem .8rem; border-bottom: 1px solid rgba(20, 20, 20, .1);
+  font-size: .6875rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--tinta-2); }
+.recep__ventana { position: relative; flex: 1; overflow: hidden; }
+.recep__ventana::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 16px; z-index: 1; background: linear-gradient(#FAFAF8, rgba(250, 250, 248, 0)); }
+.recep__lineas { list-style: none; margin: 0; padding: .7rem .75rem; display: flex; flex-direction: column; gap: .45rem; transition: transform .45s ease; }
+.recep__lineas li { max-width: 84%; padding: .4rem .65rem .45rem; border-radius: 12px; font-size: .8125rem; line-height: 1.38; color: var(--tinta); }
+.recep__lineas b { display: block; margin-bottom: .1rem; font-size: .625rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--tinta-2); }
+.recep__lineas .rc-p { align-self: flex-start; background: #EDEDEB; border-bottom-left-radius: 3px; }
+.recep__lineas .rc-ia { align-self: flex-end; background: rgba(77, 108, 142, .13); border-bottom-right-radius: 3px; }
+.recep__lineas .rc-ia b { color: var(--azul); }
+.recep__lineas .rc-wa { align-self: stretch; max-width: none; background: #FFF; border: 1px solid rgba(20, 20, 20, .12); border-left: 3px solid var(--rojo); border-radius: 6px; }
+.recep__lineas .rc-wa b { color: var(--rojo); }
+.recep__lineas .rc-sis { align-self: center; max-width: none; padding: .05rem .5rem; background: none; font-size: .6875rem; font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--tinta-2); }
+.recep__lineas .rc-sis:nth-child(2) { color: var(--rojo); }
+.recep__lineas .rc-sis:nth-child(3) { color: var(--azul); }
+.rc-visto { float: right; width: 18px; height: 10px; margin: .15rem 0 0 .5rem; }
+.rc-visto path, .rc-ticks { fill: none; stroke: var(--tinta-2); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; transition: stroke .4s ease; }
+.js .recep__lineas li { display: none; }
+.js .recep__lineas li.dicho { display: block; animation: rcEntra .35s ease both; }
+@keyframes rcEntra { from { opacity: 0; transform: translateY(6px); } }
+.recep.en-fin .recep__lineas { opacity: 0; transition: opacity .6s ease; }
+/* el dibujo: los colores de la cadena de Iris Copy (allí van dentro de .cadena) */
+.recep .c-pieza { fill: #FAFAF8; stroke: var(--tinta); stroke-width: 1.4; stroke-linejoin: round; }
+.recep .c-linea { fill: none; stroke: var(--tinta); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.recep .c-azul { fill: var(--azul); }
+.recep .c-rojo { fill: var(--rojo); }
+.recep .c-blanco { fill: none; stroke: #FFF; stroke-width: 2; stroke-linecap: round; }
+.recep .c-pelo { fill: var(--tinta); }
+.recep .c-movil { fill: #2A2F36; stroke: var(--tinta); stroke-width: 1.2; transition: fill .4s ease; }
+.recep .c-oscuro { fill: #2A2F36; transition: fill .2s ease; }
+.recep .c-cruz { fill: var(--azul); }
+.recep .c-luna { fill: var(--azul-claro); }
+.recep .c-glifo { fill: #FFF; }
+.recep .c-dolor { fill: none; stroke: var(--rojo); stroke-width: 2.2; stroke-linecap: round; opacity: .25; }
+.recep .c-dolor-halo { fill: var(--rojo); opacity: .12; }
+.recep.en-dolor .c-dolor-halo { animation: rcHalo .8s ease-in-out infinite alternate; }
+@keyframes rcHalo { to { opacity: .4; } }
+.recep .c-brazo { fill: none; stroke: var(--tinta); stroke-width: 6.6; stroke-linecap: round; stroke-linejoin: round; }
+.recep .c-brazo-in { fill: none; stroke: #FAFAF8; stroke-width: 3.8; stroke-linecap: round; stroke-linejoin: round; }
+.recep .c-fina { stroke-width: 1.1; }
+.recep .c-sudor { fill: var(--azul-claro); }
+.recep.en-dolor .c-dolor { animation: rcDolor .8s ease-in-out infinite alternate; }
+@keyframes rcDolor { to { opacity: 1; } }
+.rc-movil { opacity: 0; transition: opacity .3s ease; }
+.recep.en-dolor .rc-movil { opacity: 1; }
+.rc-ring path { fill: none; stroke: var(--azul); stroke-width: 1.8; stroke-linecap: round; opacity: 0; }
+.recep.en-suena .rc-ring path { animation: rcRing .82s ease-out 3; }
+@keyframes rcRing { 0% { opacity: 0; } 25% { opacity: 1; } 100% { opacity: 0; } }
+.recep.en-suena .rc-ventana { animation: rcVentana .82s steps(2) 3; }
+@keyframes rcVentana { 50% { fill: var(--azul-claro); } }
+.rc-nadie { opacity: 0; transform-box: fill-box; transform-origin: center; transform: scale(.3); transition: opacity .3s ease, transform .45s cubic-bezier(.3, 1.6, .5, 1); }
+.recep.en-nadie .rc-nadie { opacity: 1; transform: none; }
+.rc-aro { fill: none; stroke: var(--rojo); stroke-width: 2.4; stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset .7s ease; }
+.recep.en-ia .rc-aro { stroke-dashoffset: 0; }
+.rc-onda rect { fill: var(--rojo); transform-box: fill-box; transform-origin: center; transform: scaleY(.3); transition: transform .3s ease; }
+.recep.en-habla .rc-onda rect { animation: rcOnda .46s ease-in-out infinite alternate; animation-delay: calc(var(--k) * -.17s); }
+@keyframes rcOnda { from { transform: scaleY(.25); } to { transform: scaleY(1); } }
+.recep .rc-flujo { opacity: 0; transition: opacity .4s ease; }
+.recep.en-habla .rc-flujo--1, .recep.en-habla .rc-flujo--2, .recep.en-manda .rc-flujo--3 { opacity: 1; }
+.rc-item { opacity: 0; transition: opacity .2s ease; }
+.rc-item.en-marcha { opacity: 1; }
+.recep.en-aviso .rc-pantalla { fill: var(--azul-claro); }
+.rc-aviso { opacity: 0; transform-box: fill-box; transform-origin: 20% 100%; transform: scale(.3); transition: opacity .3s ease, transform .45s cubic-bezier(.3, 1.6, .5, 1); }
+.recep.en-aviso .rc-aviso { opacity: 1; transform: none; }
+.recep.en-visto .rc-ticks, .recep.en-visto .rc-visto path { stroke: var(--azul); }
+/* lo demás que hay en la mesa: filas, sin tarjetas. Cada trabajo con su foto posada a un lado (alternando)
+   y su texto al otro; la foto se ve en grande al pulsarla (Javi, 03-oct) */
+.filas { margin-top: clamp(110px, 14vw, 200px); }
+.filas__titulo, .pasos h3 {
+  font-family: var(--titular); font-weight: 400; margin: 0;
+  font-variation-settings: normal;
+}
+.filas__titulo { font-size: clamp(1.3rem, 1.05rem + .8vw, 1.75rem); margin-bottom: 1.4rem; }
+/* los avatares de la casa (06-oct, noche): antes una sección propia; su entrada va bajo el título, como en las raíces */
+.filas__entrada { margin: -.4rem 0 clamp(36px, 5vw, 64px); max-width: 40em; color: var(--tinta-2); font-size: clamp(1.0625rem, 1rem + .3vw, 1.25rem); line-height: 1.55; }
+.filas dl { margin: 0; border-top: 1px solid; border-image: linear-gradient(90deg, var(--l1) 0 50%, var(--l2) 50% 100%) 1; }
+.filas dl div, .pasos li {
+  display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+  gap: clamp(20px, 5vw, 80px); align-items: baseline;
+  border-bottom: 1px solid; border-image: linear-gradient(90deg, var(--l1) 0 50%, var(--l2) 50% 100%) 1;
+}
+.filas dl div { padding: 1.15rem 0; }
+.filas dt { font-weight: 520; }
+.filas dd { margin: 0; color: var(--tinta-2); max-width: 40em; }
+.obras { list-style: none; margin: 0; padding: 0; border-top: 1px solid; border-image: linear-gradient(90deg, var(--l1) 0 50%, var(--l2) 50% 100%) 1; }
+.obra {
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(28px, 5vw, 84px); align-items: center;
+  padding: clamp(40px, 5.5vw, 76px) 0;
+  border-bottom: 1px solid; border-image: linear-gradient(90deg, var(--l1) 0 50%, var(--l2) 50% 100%) 1;
+}
+.obra:nth-child(even) { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); }
+.obra:nth-child(even) .obra__foto { order: 2; }
+.obra__foto {
+  position: relative; display: block; width: 100%; padding: 0; border: 0; border-radius: 3px;
+  background: #D9DADB; cursor: zoom-in; overflow: hidden;
+}
+.obra__foto img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; }
+.obra__foto:focus-visible { outline: 2px solid var(--azul); outline-offset: 6px; }
+.obra__rec {                         /* honestidad: no son las pantallas reales del cliente, sino recreaciones */
+  position: absolute; right: 10px; bottom: 10px; pointer-events: none;
+  background: rgba(16, 19, 18, .62); color: var(--cal);
+  font-size: .6875rem; font-weight: 520; letter-spacing: .05em; line-height: 1; padding: .42rem .6rem; border-radius: 2px;
+}
+.obra h4 { margin: 0 0 .7rem; font-weight: 560; font-size: clamp(1.0625rem, 1rem + .3vw, 1.2rem); }
+.obra p { margin: 0; color: var(--tinta-2); max-width: 36em; }
+/* el visor: la foto en grande sobre la noche */
+.visor { padding: 0; border: 0; background: transparent; max-width: 94vw; max-height: 94vh; overflow: visible; }
+.visor::backdrop { background: rgba(16, 19, 18, .88); }
+.visor__img { display: block; width: auto; height: auto; max-width: min(1600px, 94vw); max-height: 84vh; border-radius: 3px; box-shadow: 0 30px 80px rgba(0, 0, 0, .5); }
+.visor__cerrar {
+  position: absolute; right: 0; top: -46px; padding: .5rem .2rem; background: none; border: 0; cursor: pointer;
+  font-family: var(--texto); font-weight: 600; font-size: 1.06rem; letter-spacing: .16em; font-variant-caps: all-small-caps; color: var(--cal);
+}
+.visor__cerrar:focus-visible { outline: 1.5px solid var(--azul-claro); outline-offset: 4px; }
+
+/* cómo trabajamos: cuatro tiempos, en orden */
+.pasos { list-style: none; margin: 0; padding: 0; border-top: 1px solid; border-image: linear-gradient(90deg, var(--l1) 0 50%, var(--l2) 50% 100%) 1; }
+.pasos li { padding: clamp(24px, 3vw, 38px) 0; }
+.pasos h3 { font-size: clamp(1.7rem, 1.1rem + 1.9vw, 2.8rem); line-height: 1.1; }
+.pasos p { margin: 0; max-width: 36em; color: var(--tinta-2); font-size: clamp(1.0625rem, 1rem + .3vw, 1.25rem); line-height: 1.55; }
+.coda { margin: clamp(56px, 7vw, 96px) 0 0; max-width: 34em; font-size: clamp(1.2rem, 1rem + .9vw, 1.7rem); line-height: 1.45; font-weight: 360; }
+
+/* tres lecciones griegas: tékhne, éntasis y el olivo. Cada una con su figura a un lado */
+.griegos { margin-top: clamp(100px, 12vw, 170px); padding-top: clamp(64px, 8vw, 110px); border-top: 1px solid; border-image: linear-gradient(90deg, var(--l1) 0 50%, var(--l2) 50% 100%) 1; }
+.griego {
+  display: grid; grid-template-columns: minmax(0, 250px) minmax(0, 1fr);
+  gap: clamp(36px, 7vw, 120px); align-items: center;
+  margin-top: clamp(56px, 7vw, 100px);
+}
+.griegos__intro { margin: 1rem 0 0; max-width: 40em; color: var(--sobre-noche-2); font-size: clamp(1.0625rem, 1rem + .3vw, 1.25rem); line-height: 1.55; }
+.griego__figura { margin: 0; display: flex; flex-direction: column; align-items: center; }
+.griego__texto h4 {
+  font-family: var(--titular); font-weight: 400; font-variation-settings: normal;
+  font-size: clamp(1.3rem, 1.05rem + .8vw, 1.75rem); margin: 0;
+}
+.griego__texto p { margin: 1rem 0 0; max-width: 34em; font-size: clamp(1.125rem, 1rem + .45vw, 1.375rem); line-height: 1.55; font-weight: 360; }
+.tekhne { font-family: "Mesa Tekhne", serif; font-size: clamp(3.2rem, 2.2rem + 3vw, 5rem); line-height: 1; color: var(--sobre-noche); }
+.tekhne__flecha { margin-top: .9rem; color: var(--azul-claro); font-size: 1rem; letter-spacing: .02em; }
+.tekhne__par { display: flex; align-items: baseline; gap: .7rem; margin-bottom: 1rem; font-size: 1.0625rem; letter-spacing: .03em; color: var(--sobre-noche); }
+.tekhne__de { padding-bottom: .22rem; border-bottom: 2px solid var(--azul-claro); }
+.tekhne__de--oficio { border-bottom: 3px solid var(--rojo); }
+.tekhne__mas { color: var(--sobre-noche-2); }
+.js [data-tekhne] .tekhne__de, .js [data-tekhne] .tekhne__mas { opacity: 0; transition: opacity .8s ease, transform 1.1s var(--curva); }
+.js [data-tekhne] .tekhne__de--arte { transform: translateX(-.9em); }
+.js [data-tekhne] .tekhne__de--oficio { transform: translateX(.9em); }
+.js [data-tekhne].trazado .tekhne__de, .js [data-tekhne].trazado .tekhne__mas { opacity: 1; transform: none; }
+.tekhne .tk { display: inline-block; }
+.js [data-tekhne] .tk { opacity: 0; transform: translateY(.22em); filter: blur(5px); transition: opacity .9s ease, transform 1.1s var(--curva), filter 1.1s ease; transition-delay: calc(.7s + var(--k) * .3s); }
+.js [data-tekhne].trazado .tk { opacity: 1; transform: none; filter: none; }
+/* FLOTA (04-oct, Javi: «parece que vibra; que flote fluidamente»): la palabra entera sube y baja muy despacio y cada
+   letra deriva un poco a su ritmo; en su propia capa (translate3d + will-change) para que no salte de píxel en píxel */
+[data-tekhne].vivo .tekhne { animation: flota 8s cubic-bezier(.45, 0, .55, 1) infinite; will-change: transform; }
+@keyframes flota { 0%, 100% { transform: translate3d(0, 0, 0); } 50% { transform: translate3d(0, -.1em, 0); } }
+[data-tekhne].vivo .tk { animation: deriva 6.5s cubic-bezier(.45, 0, .55, 1) infinite; animation-delay: calc(var(--k) * .55s); will-change: transform; }
+@keyframes deriva { 0%, 100% { transform: translate3d(0, 0, 0); } 50% { transform: translate3d(0, -.05em, 0); } }
+.js [data-tekhne] .tekhne__flecha { opacity: 0; transition: opacity .6s ease 2.5s; }
+.js [data-tekhne].trazado .tekhne__flecha { opacity: 1; }
+.tekhne__flecha .flecha { display: inline-block; }
+[data-tekhne].vivo .flecha { animation: empuje 2.6s ease-in-out infinite; }
+@keyframes empuje { 50% { transform: translateX(.3em); } }
+.olivo-dibujo svg { width: 100%; max-width: 220px; height: auto; overflow: visible; }
+.olivo-dibujo__fruto { fill: rgba(121, 155, 193, .35); stroke: var(--azul-claro); stroke-width: 1.6; }
+/* dos ramas, dos colores (04-oct, Javi): la izquierda, el software (rojo); la derecha, lo audiovisual (azul) */
+.olivo-dibujo__rama--i .entasis__trazo, .olivo-dibujo__rama--i .entasis__curva { stroke: var(--rojo); stroke-width: 2.2; }
+.olivo-dibujo__rama--i .olivo-dibujo__fruto { stroke: var(--rojo); fill: rgba(121, 41, 17, .6); stroke-width: 2; }
+.olivo-dibujo__rama--d .entasis__trazo { stroke: var(--azul-claro); }
+.js .olivo-dibujo__fruto { opacity: 0; transition: opacity .8s ease 3s; }
+.js .olivo-dibujo.trazado .olivo-dibujo__fruto { opacity: 1; }
+/* el olivo se dibuja en orden: el tronco, las dos ramas a la vez, y luego las hojas, una a una, que se
+   rellenan; al acabar (vivo) cada rama se mece desde la horquilla y cada hoja desde su base, como las sombras */
+.js .olivo-dibujo[data-trazo] svg > .entasis__trazo:first-child { transition-delay: 0s; transition-duration: .8s; }
+.js .olivo-dibujo[data-trazo] .entasis__curva { transition-delay: .7s; transition-duration: 1.3s; }
+.js .olivo-dibujo[data-trazo] .olivo-dibujo__hoja {
+  transition: stroke-dashoffset .7s var(--pulso), fill .9s ease;
+  transition-delay: calc(1.7s + var(--h) * .12s), calc(2.6s + var(--h) * .08s);
+}
+.olivo-dibujo__hoja { stroke-width: 1.2; fill: rgba(234, 234, 235, 0); }
+.olivo-dibujo.trazado .olivo-dibujo__hoja { fill: rgba(121, 155, 193, .16); }
+.olivo-dibujo.trazado .olivo-dibujo__rama--i .olivo-dibujo__hoja { fill: rgba(121, 41, 17, .5); }
+.olivo-dibujo__rama { transform-box: view-box; transform-origin: 120px 188px; }
+.olivo-dibujo.vivo .olivo-dibujo__rama--i { animation: rama-i 6.4s ease-in-out infinite; }
+.olivo-dibujo.vivo .olivo-dibujo__rama--d { animation: rama-d 7.2s ease-in-out infinite; }
+@keyframes rama-i { 50% { transform: rotate(-2.4deg); } }
+@keyframes rama-d { 50% { transform: rotate(2deg); } }
+.entasis__dibujo { margin: 0; }
+.entasis__dibujo svg { width: 100%; height: auto; overflow: visible; }
+.entasis__recta { fill: none; stroke: var(--rojo); stroke-width: 2; stroke-dasharray: 5 6; }   /* la regla (la herramienta), en rojo */
+.entasis__trazo { fill: none; stroke: var(--sobre-noche); stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; }
+.entasis__curva { stroke: var(--azul-claro); stroke-width: 2.2; }
+.entasis__dibujo figcaption {
+  display: grid; justify-content: center; gap: .4rem;              /* leyenda: una debajo de otra, alineadas */
+  margin-top: 1.1rem; font-size: .8125rem; color: var(--sobre-noche-2);
+}
+.entasis__ley::before {
+  content: ""; display: inline-block; width: 1.4rem; margin-right: .5rem; vertical-align: middle;
+  border-top: 2px solid var(--azul-claro);
+}
+.entasis__ley--recta::before { border-top: 2px dashed var(--rojo); }
+/* TRAZAR (solo aquí): la piedra se dibuja, luego la curva; la recta aparece de guía */
+.js [data-trazo] .entasis__trazo { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.2s var(--pulso); }
+.js [data-trazo] .entasis__recta { opacity: 0; transition: opacity .8s ease .9s; }
+.js [data-trazo] .entasis__curva { transition-duration: 1.6s; transition-delay: 1.3s; }
+.js .entasis__dibujo[data-trazo] .entasis__trazo:nth-child(3) { transition-delay: .35s; }
+.js .entasis__dibujo[data-trazo] .entasis__trazo:nth-child(6) { transition-delay: .2s; }
+/* vivo: ya dibujada, la recta de guía avanza despacio (la curva respira con su <animate>) */
+.entasis__dibujo.vivo .entasis__recta { animation: guia 4s linear infinite; }
+@keyframes guia { to { stroke-dashoffset: -20; } }
+.js [data-trazo].trazado .entasis__trazo { stroke-dashoffset: 0; }
+.js [data-trazo].trazado .entasis__recta { opacity: 1; }
+
+.noes { margin-top: clamp(100px, 12vw, 170px); max-width: 44rem; }
+.llamada__lineas { list-style: none; margin: 0; padding: 0; display: grid; gap: .85rem; }
+.llamada__lineas li { display: grid; gap: .1rem; min-height: 2.9em; }
+.llamada__lineas b { font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; font-weight: 560; color: var(--tinta-2); }
+.llamada__lineas li:nth-child(even) b { color: var(--azul); }
+.llamada__lineas span { font-size: 1rem; line-height: 1.45; }
+.llamada__pie { margin-top: 1rem; font-size: .8rem; color: var(--tinta-2); }
+/* lo que le llega a la clínica al colgar (04-oct) */
+.llamada__lineas .llamada__wa { padding-top: .75rem; border-top: 1px dashed var(--raya); }
+.llamada__lineas .llamada__wa b { color: var(--rojo); }
+.llamada__lineas .llamada__wa span { font-size: .9rem; color: var(--tinta-2); }
+
+/* ───────── el reparto: copias en fila para elegir y, al lado del vídeo, la ficha del personaje ───────── */
+.reparto-sel { display: flex; flex-wrap: wrap; justify-content: center; gap: clamp(14px, 2.4vw, 30px); margin-bottom: clamp(48px, 7vw, 90px); }
+.reparto-sel__b {
+  display: grid; justify-items: center; gap: .6rem;
+  background: none; border: 0; padding: 0; cursor: pointer;
+  font-size: .9375rem; font-weight: 500; color: var(--tinta-2);
+}
+.reparto-sel__b img {
+  width: 66px; height: 98px; object-fit: cover; object-position: 50% 18%;
+  background: #F6F6F4; padding: 4px;
+  box-shadow: var(--sombra-posada); transform: rotate(var(--g, 0deg));
+  transition: transform .55s var(--curva), box-shadow .55s var(--curva);
+}
+.reparto-sel__b span { border-bottom: 1px solid transparent; padding-bottom: 1px; transition: color .3s, border-color .3s; }
+.reparto-sel__b:hover img, .reparto-sel__b:focus-visible img { transform: translateY(-4px) rotate(var(--g, 0deg)); }
+.reparto-sel__b[aria-selected="true"] img { transform: translateY(-8px) rotate(0deg); box-shadow: var(--sombra-alzada); }
+.reparto-sel__b[aria-selected="true"] span { color: var(--tinta); border-bottom-color: var(--azul); }
+.personaje { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(40px, 7vw, 120px); align-items: center; }
+.personaje[hidden] { display: none; }
+.personaje__media { display: flex; flex-direction: column; align-items: center; }
+.personaje__media .pieza { max-width: 340px; }
+.personaje__media .pieza img { width: 100%; height: 100%; object-fit: cover; }
+.pieza__estado {
+  position: absolute; left: 10px; bottom: 10px;
+  background: rgba(234, 234, 235, .92); color: var(--tinta);
+  font-size: .75rem; font-weight: 540; letter-spacing: .04em; padding: .5rem .7rem; border-radius: 2px;
+}
+.personaje__pie { margin: 1.1rem 0 0; font-size: .875rem; color: var(--tinta-2); font-weight: 420; text-align: center; }
+.personaje__ficha > p { max-width: 36em; }
+.personaje__datos { margin: 1.8rem 0 0; border-top: 1px solid; border-image: linear-gradient(90deg, var(--l1) 0 50%, var(--l2) 50% 100%) 1; }
+.personaje__datos div { display: grid; grid-template-columns: minmax(0, 9.5rem) minmax(0, 1fr); gap: 1rem; padding: .7rem 0; border-bottom: 1px solid; border-image: linear-gradient(90deg, var(--l1) 0 50%, var(--l2) 50% 100%) 1; }
+.personaje__datos dt { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 540; color: var(--tinta-2); padding-top: .2em; }
+.personaje__datos dd { margin: 0; }
+.personaje__aviso { margin: 1.2rem 0 0; font-size: .8125rem; color: var(--tinta-2); }
+
+/* ───────── criterio (de noche) ───────── */
+.seccion--noche {
+  background: var(--noche); color: var(--sobre-noche); --guia: rgba(234, 234, 235, .34); --raya: var(--raya-noche);
+  --l1: #792911; --l2: rgba(121, 155, 193, .6); --g1: #792911; --g2: #799BC1;   /* el rojo, siempre el de Thera (Javi, 03-oct) */
+}
+.seccion--noche .entrada { color: var(--sobre-noche-2); }
+.seccion--noche ::selection { background: var(--azul-claro); color: var(--noche); }
+.reparto { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 100px); }
+/* LAS DOS COLUMNAS A LA PAR (04-oct, Javi: «que las líneas de colores estén paralelas, al mismo nivel»): en el
+   ordenador, los dos títulos comparten fila y cada pareja de renglones, la suya (subgrid), así que las rayas van
+   siempre a la misma altura aunque un renglón ocupe una línea más que su pareja */
+@media (min-width: 861px) {
+  .reparto { row-gap: 0; }
+  .reparto__col { display: grid; grid-row: span 5; grid-template-rows: subgrid; }
+  .reparto__col .lista { display: grid; grid-row: span 4; grid-template-rows: subgrid; }
+}
+.reparto__quien { font-family: var(--titular); font-weight: 400; font-size: clamp(1.3rem, 1.05rem + .8vw, 1.75rem); margin: 0; font-variation-settings: normal; }
+.reparto__col .lista { color: var(--sobre-noche-2); }
+.reparto__col--yo .lista { color: var(--sobre-noche); }
+
+/* EL ÁNFORA (04-oct, Javi eligió el storyboard): la escena en su lámina de cal, más pequeña que la sección para que
+   los seis pasos se lean al lado mientras pasan (en el móvil, el paso que toca, debajo). Azul la mano y lo que traza,
+   rojo la máquina (el torno girando), y la firma en la raya de los dos */
+.taller { display: grid; grid-template-columns: minmax(0, 1.75fr) minmax(240px, 1fr); gap: clamp(28px, 4vw, 64px); align-items: center;
+  width: 100%; max-width: 1180px; margin: clamp(90px, 11vw, 150px) auto clamp(40px, 5vw, 64px); }
+.taller__lienzo { aspect-ratio: 3 / 2; border-radius: 14px; overflow: hidden; background: #EAEAEB; box-shadow: 0 30px 60px rgba(0, 0, 0, .35); }
+.taller__svg { display: block; width: 100%; height: 100%; }
+/* en vídeo (05-oct): los fotogramas son 16:9 */
+.taller__lienzo--cine { aspect-ratio: 16 / 9; position: relative; }
+.taller__video { display: block; width: 100%; height: 100%; object-fit: cover; background: #EAEAEB; cursor: pointer; }
+/* MANDOS (06-oct, Javi: «que se pueda parar para leer»): una píldora oscura, como «Saltar animación», en la esquina.
+   Con ratón se ve siempre; en táctil sale al tocar la animación (web.js añade .mandos-vistos) y va abajo, centrada */
+.cine__mandos {
+  position: absolute; right: 12px; bottom: 12px; z-index: 1;
+  display: flex; gap: 2px; padding: 3px; border-radius: 999px;
+  background: rgba(16, 19, 18, .66); color: var(--sobre-noche);
+  box-shadow: inset 0 0 0 1px rgba(234, 234, 235, .16), 0 6px 18px rgba(10, 12, 14, .22);
+  transition: opacity .35s ease, background .3s;
+}
+.cine__mandos:hover { background: rgba(16, 19, 18, .88); }
+.cine__b {
+  all: unset; box-sizing: border-box; width: 32px; height: 32px; display: grid; place-items: center;
+  border-radius: 50%; cursor: pointer; transition: background .25s, opacity .25s; -webkit-tap-highlight-color: transparent;
+}
+.cine__b svg { width: 16px; height: 16px; }
+.cine__b:hover, .cine__b:focus-visible { background: rgba(234, 234, 235, .16); }
+.cine__b:focus-visible { outline: 2px solid var(--azul-claro); outline-offset: 1px; }
+.cine__b:disabled { opacity: .3; cursor: default; background: none; }
+.cine__seguir, .cine__b--pausa.quieto .cine__pausa { display: none; }
+.cine__b--pausa.quieto .cine__seguir { display: block; }
+@media (hover: none) {
+  .cine__mandos { right: auto; left: 50%; bottom: 10px; translate: -50% 0; opacity: 0; pointer-events: none; gap: 6px; padding: 4px; }
+  .mandos-vistos .cine__mandos { opacity: 1; pointer-events: auto; }
+  .cine__b { width: 42px; height: 42px; }
+  .cine__b svg { width: 20px; height: 20px; }
+}
+.af-pompa { fill: #EAEAEB; stroke: var(--azul); stroke-width: 3; }
+.af-hilo { fill: none; stroke: var(--azul); stroke-width: 2.6; stroke-linecap: round; opacity: .8; }
+.af-boceto { fill: none; stroke: var(--azul); stroke-width: 4; stroke-linejoin: round; stroke-linecap: round; }
+.af-boceto--raya { stroke-width: 3; stroke-dasharray: 12 10; }
+.af-guia { fill: none; stroke: #8E9297; stroke-width: 1.6; }
+.af-guia--azul { stroke: var(--azul); stroke-width: 3; opacity: .85; stroke-linecap: round; }
+.af-perfil { fill: none; stroke: var(--azul); stroke-width: 4.5; stroke-linecap: round; stroke-linejoin: round; }
+.af-perfil--fino { stroke-width: 3.5; }
+.af-perfil--ok { stroke-width: 9; }
+.af-perfil--mide { stroke-width: 6; }
+.af-zona { fill: none; stroke: var(--azul); stroke-width: 2; opacity: .7; }
+.af-nada { fill: none; stroke: none; }
+.af-mascara { fill: none; stroke: #fff; stroke-linecap: round; stroke-linejoin: round; }
+.af-giro { fill: none; stroke: var(--rojo); stroke-width: 6; stroke-linecap: round; stroke-dasharray: 80 420; opacity: 0; transition: opacity .3s ease; }
+.gira .af-giro { opacity: .9; animation: afGira .5s linear infinite; }
+.gira .af-giro--b { animation-duration: .62s; stroke-dasharray: 60 300; }
+.gira .af-giro--c { animation-duration: .74s; stroke-dasharray: 120 520; opacity: .6; }
+@keyframes afGira { to { stroke-dashoffset: -500; } }
+.af-brillo { mix-blend-mode: screen; animation: afArde 1.8s ease-in-out infinite alternate; }
+@keyframes afArde { from { opacity: .45; } to { opacity: .9; } }
+.af-grieta { fill: none; stroke: #141414; stroke-width: 3.5; stroke-linejoin: round; }
+.af-mancha { fill: #141414; }
+.af-letra { fill: none; stroke: var(--azul-claro); stroke-width: .12; stroke-linecap: round; stroke-linejoin: round; }
+.af-letra--uno { stroke: var(--rojo); }
+.taller__pasos { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.taller__pasos li { position: relative; padding-left: 1.15rem; border-left: 2px solid rgba(234, 234, 235, .14); --color: var(--azul-claro); }
+.taller__pasos li::before { content: ''; position: absolute; left: -2px; top: 0; width: 2px; height: calc(var(--av, 0) * 100%); background: var(--color); }
+.taller__pasos li.hecha::before { height: 100%; opacity: .35; }
+.taller__pasos li[data-p="0"] { --color: var(--sobre-noche); }
+.taller__pasos li[data-p="2"] { --color: var(--rojo); }
+.taller__pasos li[data-p="5"] { --color: linear-gradient(180deg, var(--rojo) 0 50%, var(--azul-claro) 50% 100%); }
+.taller__pasos button { all: unset; box-sizing: border-box; display: block; width: 100%; padding: .6rem 0; cursor: pointer; }
+.taller__pasos button:focus-visible { outline: 2px solid var(--azul-claro); outline-offset: 4px; }
+.taller__pasos b { display: block; font-size: .8125rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--sobre-noche); }
+.taller__pasos b::before { margin-right: .75em; font-weight: 400; letter-spacing: .04em; color: var(--sobre-noche-2); }
+/* números fijos: en el móvil los pasos que no tocan están ocultos y un contador CSS no los contaría */
+.taller__pasos li[data-p="0"] b::before { content: "01"; }
+.taller__pasos li[data-p="1"] b::before { content: "02"; }
+.taller__pasos li[data-p="2"] b::before { content: "03"; }
+.taller__pasos li[data-p="3"] b::before { content: "04"; }
+.taller__pasos li[data-p="4"] b::before { content: "05"; }
+.taller__pasos li[data-p="5"] b::before { content: "06"; }
+.taller__pasos span { display: block; margin-top: .3rem; font-size: .9375rem; line-height: 1.45; color: var(--sobre-noche-2); }
+.js .taller__pasos li { opacity: .48; transition: opacity .45s ease; }
+.js .taller__pasos li:hover { opacity: .8; }
+.js .taller__pasos li.activa { opacity: 1; }
+.js .taller__pasos span { max-height: 0; overflow: hidden; opacity: 0; margin-top: 0; transition: max-height .55s ease, opacity .45s ease, margin .55s ease; }
+.js .taller__pasos li.activa span { max-height: 9em; opacity: 1; margin-top: .4rem; }
+.taller__hilo { display: none; }
+@media (max-width: 860px) {
+  .taller { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+  .taller__hilo { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; }
+  .taller__hilo i { position: relative; height: 3px; border-radius: 2px; overflow: hidden; background: rgba(234, 234, 235, .16); --color: var(--azul-claro); }
+  .taller__hilo i::after { content: ''; position: absolute; inset: 0; transform-origin: left; transform: scaleX(var(--av, 0)); background: var(--color); }
+  .taller__hilo i:nth-child(1) { --color: var(--sobre-noche); }
+  .taller__hilo i:nth-child(3) { --color: var(--rojo); }
+  .taller__hilo i:nth-child(6) { --color: linear-gradient(90deg, var(--rojo) 0 50%, var(--azul-claro) 50% 100%); }
+  .taller__pasos li { border-left: 0; padding-left: 0; }
+  .taller__pasos li::before { display: none; }
+  /* todos los pasos en la misma celda, solo se ve el que toca: el bloque mide lo que el más largo y nada salta al
+     cambiar de escena (05-oct, Javi: «parecen glitches») */
+  .js .taller__pasos li { grid-area: 1 / 1; visibility: hidden; opacity: 0; transition: opacity .2s ease, visibility 0s linear .2s; }
+  .js .taller__pasos li.activa { visibility: visible; opacity: 1; transition: opacity .4s ease .15s; }
+  .js .taller__pasos li span { max-height: none; opacity: 1; margin-top: .4rem; }
+  .js .taller__pasos li.activa span { max-height: none; }
+  .taller__pasos button { cursor: default; padding-top: 0; pointer-events: none; }
+  /* la barra lleva a cada escena (web.js, prepararCine): zona de toque más alta que la raya */
+  .taller__hilo { padding: 16px 0; margin: -16px 0; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+}
+/* SOBRE BLANCO, EN LA INSCRIPCIÓN (05-oct, propuesta de Javi; página ejemplo.html): el ánfora va entre «Software a
+   medida…» y el ánfora de «Cuéntanos tu idea», para que se entienda qué hacemos antes de que te lo pidan. Mismos
+   colores, pasados a tinta sobre cal */
+.taller--claro { margin: clamp(56px, 7vw, 100px) auto clamp(8px, 1.5vw, 20px); text-align: left; }
+.taller--claro .taller__lienzo { box-shadow: 0 24px 50px rgba(20, 20, 20, .16), 0 2px 6px rgba(20, 20, 20, .06); }
+.taller--claro .taller__pasos li { border-left-color: rgba(20, 20, 20, .12); --color: var(--azul); }
+.taller--claro .taller__pasos li[data-p="0"] { --color: var(--tinta); }
+.taller--claro .taller__pasos li[data-p="2"] { --color: var(--rojo); }
+.taller--claro .taller__pasos li[data-p="5"] { --color: linear-gradient(180deg, var(--rojo) 0 50%, var(--azul) 50% 100%); }
+.taller--claro .taller__pasos button:focus-visible { outline-color: var(--azul); }
+.taller--claro .taller__pasos b { color: var(--tinta); }
+.taller--claro .taller__pasos b::before { color: var(--tinta-2); }
+.taller--claro .taller__pasos span { color: var(--tinta-2); }
+.js .taller--claro .taller__pasos li { opacity: .55; }
+.js .taller--claro .taller__pasos li:hover { opacity: .85; }
+.js .taller--claro .taller__pasos li.activa { opacity: 1; }
+/* y aparece como todo lo demás (Javi): la lámina se posa (.posable, la mueve inscripcion() en web.js) y a la vez los
+   pasos se iluminan de 0 a 100, como el texto de las cabeceras */
+.js .inscripcion .taller__pasos, .js .inscripcion .taller__hilo { opacity: 0; pointer-events: none; transition: opacity 2.4s ease; }
+.js .inscripcion .taller--visto .taller__pasos, .js .inscripcion .taller--visto .taller__hilo { opacity: 1; pointer-events: auto; }
+@media (max-width: 860px) {
+  .taller--claro .taller__hilo i { background: rgba(20, 20, 20, .1); --color: var(--azul); }
+  .taller--claro .taller__hilo i:nth-child(1) { --color: var(--tinta); }
+  .taller--claro .taller__hilo i:nth-child(3) { --color: var(--rojo); }
+  .taller--claro .taller__hilo i:nth-child(6) { --color: linear-gradient(90deg, var(--rojo) 0 50%, var(--azul) 50% 100%); }
+  .js .taller--claro .taller__pasos li:not(.activa) { opacity: 0; }   /* el que se va funde del todo, sin solaparse */
+}
+.remate { font-size: clamp(1.2rem, 1rem + .9vw, 1.7rem); line-height: 1.48; max-width: 37em; font-weight: 360; color: var(--sobre-noche); margin: 0; }
+
+/* ───────── contacto ───────── */
+.correo {
+  position: relative; display: block; width: fit-content; max-width: 100%; margin: 0 auto;
+  font-size: clamp(1.5rem, .95rem + 2.6vw, 3.2rem);
+  font-weight: 360; line-height: 1.2; color: var(--tinta); text-decoration: none;
+  padding-bottom: .32em;
+  overflow-wrap: anywhere; text-align: center;
+}
+.correo .uno { color: var(--rojo); }
+.correo .cero { color: var(--azul); }
+.js .correo .cl { opacity: 0; }
+.correo::after {                          /* la raya del logo: más corta que el nombre, roja y azul, en el centro */
+  content: ""; position: absolute; left: 50%; bottom: 0; width: 62%; height: 2px;
+  background: linear-gradient(90deg, var(--rojo) 0 50%, var(--azul) 50% 100%);
+  transform: translateX(-50%) scaleX(1); transition: transform .9s var(--curva), width .5s var(--curva);
+}
+.js .correo:not(.escrito)::after { transform: translateX(-50%) scaleX(0); }
+.correo:hover::after, .correo:focus-visible::after { width: 78%; }
+.eslogan { margin: clamp(56px, 7vw, 110px) 0 0; font-size: clamp(1.4rem, .9rem + 1.9vw, 2.6rem); text-align: center; }   /* más cerca del papel (Javi, 05-oct) */
+
+/* lo que solo es para lectores de pantalla */
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.correo { scroll-margin-top: 104px; }
+
+/* con qué escribir: se despliega bajo el correo, en el ordenador (en el móvil, el correo abre su app) */
+.correo-con {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: .2em 0;
+  max-height: 0; overflow: hidden; opacity: 0; transform: translateY(-6px);
+  transition: max-height .5s var(--curva), opacity .35s ease, transform .5s var(--curva), margin .5s var(--curva);
+}
+.correo-con.abierto { max-height: 6em; opacity: 1; transform: none; margin-top: 14px; }
+.correo-con__op {
+  position: relative; padding: .45em 1.1em; background: none; border: 0; cursor: pointer;
+  font-family: var(--texto); font-weight: 600; font-size: 1rem; letter-spacing: .14em; font-variant-caps: all-small-caps;
+  color: var(--azul); text-decoration: none;
+}
+.correo-con__op + .correo-con__op::before {          /* separador: una raya corta, como la del logo */
+  content: ""; position: absolute; left: 0; top: 50%; width: 1px; height: .9em; background: var(--raya); transform: translateY(-50%);
+}
+.correo-con__op span, .correo-con a.correo-con__op { background: linear-gradient(currentColor, currentColor) left bottom / 0 1px no-repeat; transition: background-size .45s var(--curva); padding-bottom: .12em; }
+.correo-con__op:hover span, .correo-con a.correo-con__op:hover, .correo-con__op:focus-visible span { background-size: 100% 1px; }
+.correo-con__op.hecho { color: var(--tinta); }
+
+/* teléfono y WhatsApp (Javi, 03-oct): solo los símbolos, sin el número. Aparecen al acabar de escribirse el correo */
+.telefono {
+  display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: .5em 2.2em;
+  margin: clamp(22px, 2.8vw, 32px) auto 0;
+}
+.telefono__op {
+  display: inline-flex; align-items: center; gap: .55em; padding: .35em .2em;
+  color: var(--azul); text-decoration: none;
+  font-weight: 600; font-size: 1.06rem; letter-spacing: .14em; font-variant-caps: all-small-caps;
+}
+.telefono__op span { padding-bottom: .12em; background: linear-gradient(currentColor, currentColor) left bottom / 0 1px no-repeat; transition: background-size .45s var(--curva); }
+.telefono__op:hover span, .telefono__op:focus-visible span { background-size: 100% 1px; }
+.telefono__op svg { width: 1.5em; height: 1.5em; flex: none; margin-top: -.1em; }
+.telefono__op path { fill: none; stroke: currentColor; stroke-width: 1.35; stroke-linejoin: round; }
+.telefono__op path.relleno { fill: currentColor; stroke: none; }
+.js .telefono__op { opacity: 0; transform: translateY(6px); transition: opacity .6s ease, transform .8s var(--curva); }
+.js .telefono.escrito .telefono__op { opacity: 1; transform: none; }
+.js .telefono.escrito .telefono__op + .telefono__op { transition-delay: .15s; }
+
+/* EL BUZÓN (Javi, 03-oct): enrollado es un rollo de papel; el ánfora o el rótulo lo desenrollan hacia abajo
+   (el rodillo de abajo baja mientras la hoja se descubre) y se escribe en él. Al enviarlo se vuelve a
+   enrollar y debajo queda el acuse, escrito como código. Hoja blanca sobre la cal, la luz de arriba a la
+   izquierda, como en la mesa */
+.buzon {
+  --rodillo: 16px; --rollo-b: 34px; --hoja: #F8F8F6;   /* abajo va enrollada la hoja: más gordo */
+  display: flex; flex-direction: column; align-items: center;
+  width: min(100%, 680px); margin: clamp(64px, 8vw, 104px) auto 0;
+}
+html:not(.js) .buzon { display: none; }
+.buzon__papel {
+  order: 1; position: relative; width: 100%;
+  transition: transform .4s var(--curva);
+  scroll-margin-top: 96px;
+}
+.buzon__papel::before, .buzon__papel::after {   /* los rodillos: cilindros de papel */
+  content: ""; position: absolute; z-index: 1; left: -14px; right: -14px; height: var(--rodillo);
+  border-radius: calc(var(--rodillo) / 2);
+  transition: height 1.35s var(--pulso), bottom 1.35s var(--pulso);
+  background:
+    radial-gradient(ellipse 7px 50% at 7px 50%, rgba(20, 22, 26, .16), transparent 70%),
+    radial-gradient(ellipse 7px 50% at calc(100% - 7px) 50%, rgba(20, 22, 26, .16), transparent 70%),
+    linear-gradient(180deg, #FFFFFF 0%, #F3F3F1 32%, #D8D9DA 72%, #BDBFC2 100%);
+  box-shadow: 3px 6px 9px rgba(20, 22, 26, .17), 1px 2px 2px rgba(20, 22, 26, .12);
+}
+.buzon__papel::before { top: calc(var(--rodillo) / -2); }
+.buzon__papel::after { height: var(--rollo-b); bottom: calc(var(--rollo-b) / -2); border-radius: calc(var(--rollo-b) / 2); }
+.buzon.abierto .buzon__papel::after { --rollo-b: 24px; }          /* al soltar papel, el rollo adelgaza */
+.buzon:not(.abierto) .buzon__papel { cursor: pointer; }
+.buzon:not(.abierto):not(.enviado) .buzon__papel:hover { transform: translateY(-2px); }
+.buzon__hoja {
+  height: 0; overflow: hidden;            /* web.js la lleva de 0 a su alto (y a auto al acabar) */
+  transition: height 1.35s var(--pulso);
+  background:
+    linear-gradient(90deg, rgba(20, 20, 20, .035), transparent 7%, transparent 93%, rgba(20, 20, 20, .035)),
+    var(--hoja);
+  box-shadow: var(--sombra-alzada);
+}
+.buzon__abrir {
+  order: 2; margin-top: 26px; padding: 6px 10px;
+  background: none; border: 0; cursor: pointer;
+  font-family: var(--texto); font-weight: 600; font-size: 1.14rem; letter-spacing: .16em;
+  font-variant-caps: all-small-caps; color: var(--azul);
+}
+.buzon__abrir span {
+  padding-bottom: .2em;
+  background: linear-gradient(90deg, var(--rojo) 0 50%, var(--azul) 50% 100%) center bottom / 0 2px no-repeat;
+  transition: background-size .5s var(--curva);
+}
+.buzon__abrir:hover span, .buzon__abrir:focus-visible span { background-size: 100% 2px; }
+.buzon.abierto .buzon__abrir, .buzon.enviado .buzon__abrir { display: none; }
+
+.buzon__form {
+  display: grid; gap: clamp(22px, 3vw, 30px);
+  padding: clamp(40px, 5.5vw, 60px) clamp(22px, 5.5vw, 60px) clamp(30px, 4.5vw, 46px);
+}
+.buzon__titulo {
+  position: relative; margin: 0 0 4px; padding-bottom: .5em; text-align: center;
+  font-family: var(--titular); font-weight: 400; font-variation-settings: normal;
+  font-size: clamp(1.35rem, 1rem + 1.2vw, 2rem); line-height: 1.2; color: var(--tinta);
+}
+.buzon__titulo::after {
+  content: ""; position: absolute; left: 50%; bottom: 0; width: 30%; height: 2px;
+  background: linear-gradient(90deg, var(--rojo) 0 50%, var(--azul) 50% 100%);
+  transform: translateX(-50%) scaleX(0); transition: transform .9s var(--curva);
+}
+.buzon__titulo.escrito::after { transform: translateX(-50%) scaleX(1); }
+.buzon__campo { display: grid; gap: 4px; }
+.buzon__etiqueta {
+  font-weight: 600; font-size: 1rem; letter-spacing: .12em; font-variant-caps: all-small-caps;
+  color: var(--tinta-2); transition: color .3s ease;
+}
+.buzon__campo:focus-within .buzon__etiqueta { color: var(--azul); }
+.buzon input, .buzon textarea, .pluma__eco {
+  display: block; width: 100%; margin: 0; border: 0; border-radius: 0; outline: none;
+  background: transparent; color: var(--tinta); caret-color: var(--azul);
+  font-family: var(--texto); font-weight: 420; font-size: 1.0625rem;   /* 17px: el iPhone no hace zoom */
+  font-kerning: none; font-variant-ligatures: none;      /* el eco y el campo, letra a letra iguales */
+  letter-spacing: normal; word-spacing: normal; text-transform: none;
+}
+.buzon input {
+  padding: .35em 0 .3em; line-height: 1.4;
+  border-bottom: 1px solid rgba(20, 20, 20, .3);
+  transition: border-color .3s ease, box-shadow .3s ease;
+}
+.buzon input:focus { border-bottom-color: var(--azul); box-shadow: 0 1px 0 var(--azul); }
+.buzon textarea {     /* papel pautado: los renglones bajan con el texto */
+  --renglon: 1.75em; --pauta: rgba(20, 20, 20, .17);
+  padding: 0; line-height: var(--renglon); min-height: calc(var(--renglon) * 5); resize: none; overflow: hidden;
+  field-sizing: content;                                   /* el papel se alarga con lo que se escribe */
+  background: repeating-linear-gradient(180deg, transparent 0 calc(var(--renglon) - 1px), var(--pauta) calc(var(--renglon) - 1px) var(--renglon));
+  background-attachment: local;
+}
+.buzon textarea:focus { --pauta: rgba(77, 108, 142, .42); }
+.buzon input::placeholder, .buzon textarea::placeholder { color: #676B70; opacity: 1; }
+.buzon [aria-invalid="true"] { border-bottom-color: var(--rojo); }
+.buzon textarea[aria-invalid="true"] { --pauta: rgba(121, 41, 17, .45); }
+.buzon ::selection { background: var(--azul); color: var(--hoja); }
+/* LA PLUMA: el eco pinta encima lo que hay en el campo; el campo, con la letra transparente, pone el cursor,
+   la selección y el autocorrector. Mismas medidas que el campo (padding, interlínea, cortes de línea) */
+.pluma { position: relative; display: block; }
+.pluma__eco { position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; width: auto; }
+.pluma:not(.pluma--area) .pluma__eco { padding: .35em 0 .3em; line-height: 1.4; white-space: pre; border-bottom: 1px solid transparent; }
+.pluma--area .pluma__eco { line-height: 1.75em; white-space: pre-wrap; overflow-wrap: break-word; tab-size: 8; }
+.pluma.con-eco input, .pluma.con-eco textarea { color: transparent; -webkit-text-fill-color: transparent; }
+.pluma.con-eco input::placeholder, .pluma.con-eco textarea::placeholder { color: #676B70; -webkit-text-fill-color: #676B70; }
+.pluma.con-eco input::selection, .pluma.con-eco textarea::selection { background: rgba(77, 108, 142, .26); color: transparent; -webkit-text-fill-color: transparent; }
+.buzon input:-webkit-autofill { -webkit-text-fill-color: transparent; box-shadow: 0 0 0 60px var(--hoja) inset; }
+.buzon input:-webkit-autofill:focus { box-shadow: 0 0 0 60px var(--hoja) inset, 0 1px 0 var(--azul); }
+.pluma__eco .p-espera { color: transparent; }
+.pluma__eco .p-tinta { color: color-mix(in srgb, var(--tinta) calc(var(--k) * 100%), var(--azul)); }   /* tinta fresca que se seca: */
+.pluma__eco .p-tinta.p-rojo { color: color-mix(in srgb, var(--tinta) calc(var(--k) * 100%), var(--rojo)); }   /* una palabra azul, otra roja */
+.buzon__fila { display: grid; grid-template-columns: 1.3fr 1fr; gap: 22px 30px; }
+.buzon__trampa { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.buzon__pie { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 18px 32px; margin-top: 4px; }
+.buzon__aviso { flex: 1 1 18em; margin: 0; max-width: 34em; font-size: .8125rem; line-height: 1.5; color: var(--tinta-2); }
+.buzon__enviar {
+  flex: none; padding: .78em 1.9em .82em; cursor: pointer;
+  background: var(--tinta); color: var(--hoja); border: 0; border-radius: 2px;
+  border-bottom: 2px solid; border-image: linear-gradient(90deg, var(--rojo) 0 50%, var(--azul) 50% 100%) 1;
+  font-family: var(--texto); font-weight: 600; font-size: 1.06rem; letter-spacing: .16em; font-variant-caps: all-small-caps;
+  box-shadow: var(--sombra-posada);
+  transition: background-color .3s ease, transform .3s var(--curva), box-shadow .3s ease;
+}
+.buzon__enviar:hover { background: #262A2E; transform: translateY(-1px); box-shadow: var(--sombra-alzada); }
+.buzon__enviar:active { transform: translateY(1px); box-shadow: none; }
+.buzon__enviar:disabled { cursor: progress; opacity: .62; transform: none; }
+.buzon__estado { margin: -8px 0 0; min-height: 1.5em; font-size: .9375rem; line-height: 1.5; color: var(--rojo); }
+.buzon__estado:empty { min-height: 0; margin: 0; }
+.buzon__hecho { order: 3; margin: 30px 0 0; max-width: 100%; text-align: center; font-size: clamp(1.05rem, .95rem + .5vw, 1.3rem); line-height: 1.45; overflow-wrap: anywhere; }
+.buzon__hecho:empty { display: none; }
+@media (max-width: 860px) {
+  .buzon { --rodillo: 14px; --rollo-b: 30px; }
+  .buzon textarea { resize: none; }
+  .buzon__papel::before, .buzon__papel::after { left: -8px; right: -8px; }
+  .buzon__fila { grid-template-columns: 1fr; }
+  .buzon__enviar { width: 100%; }
+}
+
+/* ───────── pie ───────── */
+.pie {
+  background: var(--noche); color: var(--sobre-noche-2);
+  padding: 56px var(--lado) 48px;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 22px 48px;
+}
+.pie__marca { height: 34px; width: auto; margin-right: auto; }
+.pie p { margin: 0; font-size: .875rem; }
+.pie__enlaces { display: flex; flex-wrap: wrap; gap: .4rem 1.6rem; }        /* aviso legal, privacidad, cookies (04-oct) */
+.pie__enlaces a { font-size: .875rem; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: .25em; transition: text-decoration-color .3s; }
+.pie__enlaces a:hover, .pie__enlaces a:focus-visible { text-decoration-color: currentColor; }
+.buzon__aviso a { white-space: nowrap; }
+
+/* ───────── móvil ───────── */
+@media (max-width: 860px) {
+  /* LAS SECCIONES, EN UNA FILA (06-oct, Javi: «que salgan arriba las secciones para ir rápido; no dentro de un
+     menú»): arriba la marca y el idioma; debajo, las secciones (cuatro desde que el reparto pasó a Audiovisual). Si no caben, la fila se desliza con el dedo y
+     web.js la lleva sola a la sección en la que estás (marcarSeccion) */
+  .barra { flex-wrap: wrap; gap: 0 1rem; height: auto; }
+  .barra__marca { display: flex; align-items: center; height: 52px; }
+  .barra__marca img { height: 22px; }
+  .barra .idioma { margin-left: auto; }
+  .barra__nav {
+    order: 3; flex: 0 0 calc(100% + 2 * var(--lado)); margin: 0 calc(-1 * var(--lado));
+    height: 40px; padding: 0 var(--lado); gap: .6rem; justify-content: space-between; align-items: center;
+    border-top: 1px solid var(--raya);
+    overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none; white-space: nowrap;
+  }
+  .barra__nav::-webkit-scrollbar { display: none; }
+  .barra__nav a { flex: none; font-size: .875rem; padding: .55rem 0; color: var(--tinta-2); -webkit-tap-highlight-color: transparent; }
+  .barra__nav a.activa { color: var(--tinta); }
+  .barra__nav a::after { bottom: 5px; }
+  /* al saltar a una sección, su título no queda bajo la cabecera, que ahora mide dos filas (~92 px) */
+  main > section[id] { scroll-margin-top: 40px; }
+
+  .pliego, .caso, .caso--doble, .caso--doble.caso--vuelta { grid-template-columns: minmax(0, 1fr); }
+  /* las dos ramas (04-oct, Javi), como los trabajos: el título, la entrada, luego la tablet o los vídeos y después
+     la lista y el aparte. Antes iba todo el texto y el ejemplo quedaba al final */
+  .pliego { row-gap: 0; }
+  .pliego__texto { display: contents; }
+  .pliego .subtitulo { order: 1; }
+  .pliego__texto > p { order: 2; }
+  .pliego__mesa, .pliego--vuelta .pliego__mesa { order: 3; margin: 1.6rem 0 2.2rem; }
+  .pliego .lista { order: 4; margin-top: 0; }
+  .pliego .aparte { order: 5; }
+  /* trabajos (04-oct, Javi): en el móvil, el título (con su línea), luego el vídeo o la animación y después la
+     explicación; antes iba todo el texto y el vídeo quedaba al final. En el ordenador, igual que siempre */
+  .caso { row-gap: 0; }
+  .caso__texto { display: contents; }
+  .caso .subtitulo { order: 1; }
+  .caso .caso__tipo { order: 2; }
+  .caso__media, .caso--vuelta .caso__media { order: 3; margin-bottom: 2.2rem; }
+  /* dos vídeos en paralelo: la tarjeta es estrecha y «Sonido» tapaba la etiqueta; la etiqueta sube a la esquina libre */
+  .caso__media--doble .pieza__ia { top: 10px; bottom: auto; right: auto; left: 10px; font-size: .5625rem; padding: .32rem .45rem; }
+  .caso__texto > :not(.subtitulo):not(.caso__tipo) { order: 4; }
+  /* y el título entra a la vez que su vídeo o su animación, cuando ya se ve la mitad de arriba (web.js) */
+  .casos-sincro .caso .subtitulo, .casos-sincro .caso .caso__tipo { opacity: 0; transition: opacity 1.2s ease; }
+  .casos-sincro .caso.caso--visto .subtitulo, .casos-sincro .caso.caso--visto .caso__tipo { opacity: 1; }
+  .pieza { max-width: 300px; }
+  .toma { max-width: none; }
+  .reparto { grid-template-columns: 1fr; }
+  .personaje { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
+  .personaje__datos div { grid-template-columns: minmax(0, 1fr); gap: .15rem; }
+  .reparto-sel { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px 8px; justify-items: center; }
+  .reparto-sel__b { font-size: .8125rem; }
+  .reparto-sel__b img { width: 62px; height: 92px; padding: 3px; }
+  .cab { grid-template-columns: minmax(0, 1fr); grid-template-areas: "losa" "texto" "piedra"; row-gap: 1.6rem; }
+  .filas dl div, .pasos li { grid-template-columns: minmax(0, 1fr); gap: .45rem; }
+  .obra, .obra:nth-child(even) { grid-template-columns: minmax(0, 1fr); gap: 1.6rem; }
+  .obra:nth-child(even) .obra__foto { order: 0; }
+  .visor__cerrar { top: auto; bottom: -46px; }
+  .griego { grid-template-columns: minmax(0, 1fr); gap: 1.6rem; }
+  .griego__figura { max-width: 220px; }
+  .entasis__dibujo svg { max-width: 150px; }
+  .ficha { display: flex; flex-wrap: wrap; }                 /* en el móvil, la ficha baja de línea entera */
+  .ficha div { border-right: 0; margin-right: 0; padding-right: 1.6rem; }
+}
+
+/* ───────── RECORTE (06-oct, Javi: «hay demasiadas cosas… que no parezca que no acaba nunca») ───────── */
+/* trabajos: uno a la vista; encima, los nombres para elegir, como el reparto. El punto, del color de su rama */
+.trabajo-sel { display: flex; flex-wrap: wrap; justify-content: center; gap: .3rem clamp(1.1rem, 2.6vw, 2.4rem); margin: 0 auto clamp(48px, 6vw, 84px); }
+.trabajo-sel__b {
+  display: inline-flex; align-items: center; gap: .55rem; padding: .55rem .1rem; background: none; border: 0; cursor: pointer;
+  font: inherit; font-size: clamp(.9375rem, .9rem + .2vw, 1.0625rem); font-weight: 480; color: var(--tinta-2);
+  -webkit-tap-highlight-color: transparent;
+}
+.trabajo-sel__b::before { content: ''; flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--azul); opacity: .5; transition: opacity .3s; }
+.trabajo-sel__b.rama-soft::before { background: var(--rojo); }
+.trabajo-sel__b span { border-bottom: 1px solid transparent; padding-bottom: 2px; transition: color .3s, border-color .3s; }
+.trabajo-sel__b:hover span { color: var(--tinta); }
+.trabajo-sel__b[aria-selected="true"] span { color: var(--tinta); border-bottom-color: currentColor; }
+.trabajo-sel__b[aria-selected="true"]::before { opacity: 1; }
+.trabajo-sel__b:focus-visible { outline: 2px solid var(--azul); outline-offset: 4px; border-radius: 2px; }
+.caso[hidden] { display: none; }
+.trabajo-sel ~ .caso { margin-top: 0; }
+/* también en la mesa: tarjetas en rejilla (antes, filas a todo lo ancho una debajo de otra) */
+.filas { margin-top: clamp(80px, 10vw, 150px); }
+.obras { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(30px, 3.2vw, 48px) clamp(18px, 2.2vw, 32px); border-top: 0; }
+.obra, .obra:nth-child(even) { display: flex; flex-direction: column; gap: 1rem; padding: 0; border-bottom: 0; }
+.obra:nth-child(even) .obra__foto { order: 0; }
+.obra h4 { font-size: 1rem; margin-bottom: .45rem; }
+.obra p { font-size: .9375rem; line-height: 1.5; }
+@media (max-width: 1100px) { .obras { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+/* cómo trabajamos: la animación, sobre blanco, y debajo «Cuéntanos tu idea» */
+.seccion--taller .seccion__cab { margin-bottom: clamp(40px, 5vw, 72px); }
+.seccion--taller .taller--claro { margin-top: 0; }
+.seccion--taller .anfora { margin-top: clamp(48px, 6vw, 88px); }
+/* las raíces: una línea por idea; la historia entera, al pulsar «Leer más» */
+.griegos { margin-top: clamp(72px, 9vw, 130px); }
+.griegos .griego { margin-top: clamp(44px, 5.5vw, 80px); }
+.griego__texto .griego__corto { margin-top: .8rem; }
+.griego__mas { margin-top: 1rem; }
+.griego__mas summary {
+  display: inline-flex; align-items: center; gap: .5rem; cursor: pointer; list-style: none;
+  font-size: .8125rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--azul-claro);
+}
+.griego__mas summary::-webkit-details-marker { display: none; }
+.griego__mas summary::after { content: '+'; font-size: 1.15rem; line-height: 1; transition: transform .3s var(--curva); }
+.griego__mas[open] summary::after { transform: rotate(45deg); }
+.griego__mas summary:focus-visible { outline: 2px solid var(--azul-claro); outline-offset: 4px; border-radius: 2px; }
+.griego__texto .griego__mas p { margin-top: .9rem; font-size: clamp(1rem, .95rem + .25vw, 1.125rem); color: var(--sobre-noche-2); }
+@media (max-width: 860px) {
+  .trabajo-sel { justify-content: flex-start; gap: .1rem 1.3rem; }
+  /* en el móvil, en fila para deslizar: se ve una y asoma la siguiente */
+  .obras {
+    grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 80%; gap: 16px;
+    overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain;
+    margin: 0 calc(-1 * var(--margen)); padding: 0 var(--margen) 14px; scroll-padding-inline: var(--margen);
+  }
+  .obra { scroll-snap-align: start; }
+}
+
+/* ───────── LAS DOS RAMAS (06-oct, tarde, Javi: «divide los trabajos en dos: Software / Audiovisual… ocupando lo
+   menos posible sin perder calidad ni mensaje») ───────── */
+/* arriba, la rama, en la letra de los títulos y con la raya de su color (rojo el software, azul lo audiovisual);
+   debajo, el tipo de trabajo (.trabajo-sel), y se ve uno */
+.ramas-sel {
+  display: flex; justify-content: center; gap: clamp(36px, 7vw, 110px);
+  margin: 0 auto clamp(26px, 3.4vw, 44px);
+  border-bottom: 1px solid; border-image: linear-gradient(90deg, transparent, rgba(20, 20, 20, .14) 18% 82%, transparent) 1;
+}
+.ramas-sel__b {
+  position: relative; padding: .25rem .3rem 1.05rem; background: none; border: 0; cursor: pointer;
+  font-family: var(--titular); font-weight: 400; font-size: clamp(1.7rem, 1.15rem + 2.2vw, 3.1rem); line-height: 1;
+  color: var(--tinta); opacity: .3; transition: opacity .45s var(--curva);
+  -webkit-tap-highlight-color: transparent;
+}
+.ramas-sel__b::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 3px; border-radius: 2px;
+  background: var(--azul); transform: scaleX(0); transition: transform .7s var(--curva);
+}
+.ramas-sel__b.rama-soft::after { background: var(--rojo); }
+.ramas-sel__b:hover { opacity: .62; }
+.ramas-sel__b[aria-selected="true"] { opacity: 1; }
+.ramas-sel__b[aria-selected="true"]::after { transform: scaleX(1); }
+.ramas-sel__b:focus-visible { outline: 2px solid var(--azul); outline-offset: 6px; border-radius: 2px; }
+.rama-panel[hidden] { display: none; }
+.rama-panel:not([hidden]) > .trabajo-sel { animation: rama-entra .6s var(--curva) both; }
+@keyframes rama-entra { from { opacity: 0; translate: 0 8px; } to { opacity: 1; translate: 0 0; } }
+.rama-panel .trabajo-sel { margin-bottom: clamp(40px, 5vw, 72px); }
+.rama-panel .filas { margin-top: clamp(72px, 9vw, 130px); }
+
+/* LAS ANIMACIONES DE LAS RAMAS (06-oct, noche, Javi): al alto de las letras, a la izquierda del Software (rojo: un
+   portátil en el que se teclea y le sale código por detrás) y a la derecha de lo Audiovisual (azul: una cámara que rueda
+   y manda cada toma a la línea de montaje, donde pasa el cabezal). Solo CSS; las unidades en px son las del dibujo.
+   .ramas-sel--quieta (web.js) las para mientras no se ven */
+.ramas-sel__b { display: inline-flex; align-items: center; justify-content: center; gap: .3em; }
+.rama-ico { flex: none; height: 1.08em; width: auto; overflow: visible; margin-top: -.12em; }
+.rama-ico--soft { color: var(--rojo); }
+.rama-ico--av { color: var(--azul); }
+.ramas-sel--quieta .rama-ico * { animation-play-state: paused !important; }
+/* el portátil */
+.ri-pantalla { fill: var(--cal); stroke: currentColor; stroke-width: 1.8; }
+.ri-base { fill: currentColor; }
+.ri-tecla { fill: var(--cal); opacity: .35; animation: ri-pulsa .48s steps(1) infinite; }
+.ri-tecla--2 { animation-delay: -.16s; } .ri-tecla--3 { animation-delay: -.32s; }
+@keyframes ri-pulsa { 50% { opacity: 1; } }
+.ri-l { fill: currentColor; transform-box: fill-box; transform-origin: left center; scale: 0 1; animation: 5s steps(6) infinite; }
+.ri-l2, .ri-l4 { opacity: .5; }
+.ri-l1 { animation-name: ri-l1; } .ri-l2 { animation-name: ri-l2; } .ri-l3 { animation-name: ri-l3; } .ri-l4 { animation-name: ri-l4; }
+@keyframes ri-l1 { 0% { scale: 0 1; } 16%, 88% { scale: 1 1; } 94%, 100% { scale: 0 1; } }
+@keyframes ri-l2 { 0%, 18% { scale: 0 1; } 32%, 88% { scale: 1 1; } 94%, 100% { scale: 0 1; } }
+@keyframes ri-l3 { 0%, 34% { scale: 0 1; } 54%, 88% { scale: 1 1; } 94%, 100% { scale: 0 1; } }
+@keyframes ri-l4 { 0%, 56% { scale: 0 1; } 66%, 88% { scale: 1 1; } 94%, 100% { scale: 0 1; } }
+.ri-chispa { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; opacity: 0;
+  animation: ri-chispa-1 3.6s cubic-bezier(.25, .6, .35, 1) infinite; }
+.ri-chispa--2 { animation-name: ri-chispa-2; animation-delay: 1.2s; }
+.ri-chispa--3 { animation-name: ri-chispa-3; animation-delay: 2.4s; }
+/* el código sale de detrás de la pantalla (que lo tapa al empezar), sube y se desvanece */
+@keyframes ri-chispa-1 { 0% { translate: 0 0; opacity: 0; } 8%, 50% { opacity: 1; } 75%, 100% { translate: -5px -15px; opacity: 0; } }
+@keyframes ri-chispa-2 { 0% { translate: 0 0; opacity: 0; } 8%, 50% { opacity: 1; } 75%, 100% { translate: 0 -16px; opacity: 0; } }
+@keyframes ri-chispa-3 { 0% { translate: 0 0; opacity: 0; } 8%, 50% { opacity: 1; } 75%, 100% { translate: 5px -15px; opacity: 0; } }
+/* la cámara: rueda (bobinas, REC, la luz) y cada toma vuela a la línea de montaje; después pasa el cabezal */
+.ri-cuerpo, .ri-objetivo { fill: currentColor; }
+.ri-patas { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; }
+.ri-bobina { fill: var(--cal); stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; transform-box: fill-box; transform-origin: center;
+  animation: ri-bobina 6s linear infinite; }
+@keyframes ri-bobina { 0% { rotate: 0deg; } 50%, 100% { rotate: 960deg; } }
+.ri-rec { fill: var(--cal); animation: ri-rec 6s steps(1) infinite; }
+@keyframes ri-rec { 0%, 16%, 32% { opacity: 1; } 8%, 24%, 40% { opacity: .15; } 48%, 100% { opacity: 0; } }
+.ri-haz { fill: currentColor; opacity: 0; animation: ri-haz 6s ease-in-out infinite; }
+@keyframes ri-haz { 0%, 44% { opacity: .16; } 52%, 94% { opacity: 0; } 100% { opacity: .16; } }
+.ri-pista { fill: none; stroke: currentColor; stroke-width: 1; opacity: .4; }
+.ri-clip { fill: currentColor; opacity: 0; animation: 6s cubic-bezier(.3, .7, .3, 1) infinite; }
+.ri-clip--1 { animation-name: ri-clip-1; } .ri-clip--2 { animation-name: ri-clip-2; } .ri-clip--3 { animation-name: ri-clip-3; }
+@keyframes ri-clip-1 { 0%, 4% { translate: -8px -4px; scale: .35; opacity: 0; } 7% { opacity: .75; } 18%, 86% { translate: 0 0; scale: 1; opacity: .75; } 94%, 100% { translate: 0 0; opacity: 0; } }
+@keyframes ri-clip-2 { 0%, 18% { translate: -15px -4px; scale: .35; opacity: 0; } 21% { opacity: .5; } 32%, 86% { translate: 0 0; scale: 1; opacity: .5; } 94%, 100% { translate: 0 0; opacity: 0; } }
+@keyframes ri-clip-3 { 0%, 32% { translate: -23px -4px; scale: .35; opacity: 0; } 35% { opacity: .75; } 46%, 86% { translate: 0 0; scale: 1; opacity: .75; } 94%, 100% { translate: 0 0; opacity: 0; } }
+.ri-clip { transform-box: fill-box; transform-origin: center; }
+.ri-cabezal { fill: none; stroke: currentColor; stroke-width: 1.3; stroke-linecap: round; opacity: 0; animation: ri-cabezal 6s linear infinite; }
+@keyframes ri-cabezal { 0%, 50% { translate: 0 0; opacity: 0; } 53% { opacity: 1; } 82% { translate: 22px 0; opacity: 1; } 86%, 100% { translate: 22px 0; opacity: 0; } }
+@media (max-width: 860px) {
+  .ramas-sel { gap: 0; }
+  /* un poco más pequeñas que antes (1,2-1,75 rem) y cada una con el ancho que pide, para que quepa la animación */
+  .ramas-sel__b { flex: 1 1 auto; padding-bottom: .9rem; font-size: clamp(1.05rem, .62rem + 2.6vw, 1.6rem); gap: .25em; }
+}
+
+/* Sin bloque de "reducir movimiento": la web se anima siempre (Javi, 02-oct; ver web.js). Si se recupera:
+   .losa y .l visibles sin transición, .posable ya posado, .editor__terminal visible, olivos y flecha quietos. */

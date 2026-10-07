@@ -2,9 +2,20 @@
 # trabajo. Se quedan en local; el repo es público y lo van a ver clientes.
 _tools/
 LEEME.md
+# contexto de diseño (Impeccable): estrategia interna, no se publica
+PRODUCT.md
+DESIGN.md
+.impeccable/
 
 # Windows
 Thumbs.db
 desktop.ini
 .DS_Store
 media/_sin_cierre/
+
+# Seguridad (03-oct): la procedencia de las imágenes (prompts) es saber hacer del estudio: se queda en local.
+# OJO: las imágenes de esta carpeta la llevan también DENTRO (metadatos). Lo que se publique tiene que salir de
+# la copia limpia (_tools/copia_publica.py), que se la quita; nunca subir esta carpeta tal cual.
+*.json
+SEGURIDAD.md
+__pycache__/

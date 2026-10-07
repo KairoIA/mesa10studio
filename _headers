@@ -1,0 +1,36 @@
+# Cabeceras de seguridad de Mesa 10 Studio (03-oct-2026). Formato de Cloudflare Pages / Netlify: este fichero no
+# se sirve, se aplica. La CSP es la misma que la del <meta>
+# de index.html, más frame-ancestors (que en <meta> no vale): nadie puede meter la web dentro de otra.
+# HSTS sin "preload" hasta tener el dominio y confirmar que todo va por HTTPS.
+
+/*
+  Content-Security-Policy: default-src 'none'; script-src 'self'; style-src 'self'; style-src-attr 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self'; font-src 'self'; connect-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'; frame-ancestors 'none'; upgrade-insecure-requests
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: accelerometer=(), camera=(), display-capture=(), geolocation=(), gyroscope=(), hid=(), magnetometer=(), microphone=(), midi=(), payment=(), serial=(), usb=(), xr-spatial-tracking=(), browsing-topics=()
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Resource-Policy: same-origin
+  X-Permitted-Cross-Domain-Policies: none
+
+/
+  Cache-Control: no-cache
+/index.html
+  Cache-Control: no-cache
+/legal.html
+  Cache-Control: no-cache
+  X-Robots-Tag: noindex
+
+/media/*
+  Cache-Control: public, max-age=604800
+/img/*
+  Cache-Control: public, max-age=604800
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# logo de la firma de correo: otros sitios (los correos de Gmail, Outlook...) tienen que poder cargarlo
+/firma/*
+  ! Cross-Origin-Resource-Policy
+  Cross-Origin-Resource-Policy: cross-origin
+  Cache-Control: public, max-age=86400
