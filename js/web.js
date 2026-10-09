@@ -1456,10 +1456,13 @@
        nuevo: sigue parada hasta que se suelte. Un toque CORTO en el vídeo para o sigue, como siempre
        (pararOSeguir); un toque corto en la barra salta al paso tocado (su propio click, sin tocar esto). */
     (function gestoStories() {
-      var MANTENER_MS = 180, enEspera = null, manteniendo = false, yaEstabaQuieta = false;
+      // 09-oct: el toque se resuelve UNA vez (pointerup, pointercancel o pointerleave: el primero que llegue).
+      // En móvil, al levantar el dedo, pointerup y pointerleave pueden llegar los dos seguidos; sin "resuelto"
+      // el segundo volvía a disparar pararOSeguir() y la animación se quedaba pausada sin querer (Javi, 09-oct).
+      var MANTENER_MS = 180, enEspera = null, manteniendo = false, yaEstabaQuieta = false, resuelto = true;
       function empezar(e) {
         if (e.pointerType === 'mouse') return;              // el ratón ya tiene su propio click en los mandos
-        yaEstabaQuieta = quieto;
+        yaEstabaQuieta = quieto; manteniendo = false; resuelto = false;
         clearTimeout(enEspera);
         enEspera = setTimeout(function () {
           manteniendo = true;
@@ -1467,10 +1470,10 @@
         }, MANTENER_MS);
       }
       function soltar(e, esVideo) {
-        if (e.pointerType === 'mouse') return;
+        if (e.pointerType === 'mouse' || resuelto) return;
+        resuelto = true;
         clearTimeout(enEspera);
         if (manteniendo) {
-          manteniendo = false;
           if (!yaEstabaQuieta) { quieto = false; if (v.ended) irA(0); else seguir(); iconos(); verMandos(); }
         } else if (esVideo && e.type === 'pointerup') pararOSeguir();   // toque corto en el vídeo: el de siempre
       }
