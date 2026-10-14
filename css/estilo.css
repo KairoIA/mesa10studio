@@ -87,7 +87,7 @@ html { scroll-behavior: smooth; }
 /* mientras se monta la mesa, la página no baja (web.js, bloquear). El hueco de la barra se reserva siempre para
    que al soltar no salte el contenido de lado */
 html { scrollbar-gutter: stable; }
-html.mesa-montando, html.mesa-montando body { overflow: hidden; overscroll-behavior: none; }
+html.mesa-quieta, html.mesa-quieta body { overflow: hidden; overscroll-behavior: none; }
 
 body {
   margin: 0;
@@ -530,13 +530,13 @@ h1.estela { font-size: clamp(1.15rem, .75rem + 1.35vw, 2.1rem); }
    (cabecera); sin JS, todo está desde el principio */
 .js .cab .entrada { opacity: 0; transition: opacity 2.4s ease; }
 .js .cab.cab--texto .entrada { opacity: 1; }
-.js .cab .piedra { opacity: 0; pointer-events: none; }
-.js .cab .piedra.posada, .js .cab .piedra:focus-visible { opacity: 1; pointer-events: auto; }
-.js .cab .piedra.posada img {
+.js .piedra { opacity: 0; pointer-events: none; }
+.js .piedra.posada, .js .piedra:focus-visible { opacity: 1; pointer-events: auto; }
+.js .piedra.posada img {
   animation: piedra-llega 2.6s cubic-bezier(.22, .61, .24, 1) backwards, piedra-gira 3.4s linear backwards;
 }
-.js .cab .piedra .piedra__abrir { opacity: 0; }
-.js .cab .piedra.rotulada .piedra__abrir, .js .cab .piedra:focus-visible .piedra__abrir { opacity: 1; }
+.js .piedra .piedra__abrir { opacity: 0; }
+.js .piedra.rotulada .piedra__abrir, .js .piedra:focus-visible .piedra__abrir { opacity: 1; }
 @keyframes piedra-llega {
   0% { translate: var(--dx, 600px) -36px; scale: 1.12; filter: drop-shadow(14px 24px 18px rgba(20, 22, 26, .16)); }
   100% { translate: 0 0; scale: 1; filter: drop-shadow(4px 7px 7px rgba(20, 22, 26, .3)); }
@@ -555,9 +555,15 @@ h1.estela { font-size: clamp(1.15rem, .75rem + 1.35vw, 2.1rem); }
 .js .pliegue { height: 0; overflow: hidden; }
 .js .plegable.abierta .pliegue { height: auto; overflow: visible; }
 .js .plegable .pliegue.rodando {                     /* (con .plegable: tiene que pesar más que la de .abierta) */
-  overflow: hidden; overflow-anchor: none;
-  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 120px), transparent);
-          mask-image: linear-gradient(to bottom, #000 calc(100% - 120px), transparent);
+  overflow: hidden; overflow-anchor: none; position: relative;
+}
+/* FLUIDEZ (15-oct, Javi: «a veces va a tirones»): el difuminado del borde era una máscara (mask-image) sobre el
+   pliegue, que cambia de alto en cada fotograma: el navegador tenía que repintar entero lo que hay dentro (vídeos,
+   fotos, texto) en cada uno. Ahora es una franja en degradado del color de la cal, pegada al borde: se ve igual y no
+   obliga a repintar nada */
+.js .plegable .pliegue.rodando::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 120px; pointer-events: none;
+  background: linear-gradient(to bottom, rgba(234, 234, 235, 0), var(--cal));
 }
 .plegable { transition: padding-bottom 1s cubic-bezier(.45, .05, .2, 1); }
 
@@ -575,6 +581,100 @@ h1.estela { font-size: clamp(1.15rem, .75rem + 1.35vw, 2.1rem); }
 /* listas con titular (04-oct, Javi: «más elaborado»): la idea en una línea y, debajo, lo que quiere decir */
 .lista--dos li { padding-top: 1rem; padding-bottom: 1.1rem; }
 .lista--dos li::before { top: 1.66em; }
+
+/* APERITIVO (13-oct, Javi: «dar un poquito para que la gente vea algo; si no, no se animan a desplegar»): con la
+   sección cerrada se ve una muestra de lo que hay dentro, en movimiento, y debajo la piedra («Ver todo…»). Al abrir,
+   la piedra vuelve a su sitio de antes, junto al texto, y todo queda como siempre (14-oct, Javi).
+   - Qué hacemos (.plegable--muestra): no hay copia de nada; son las mismas piezas en otro sitio (abajo).
+   - Sobre la mesa: los seis trabajos en pequeño; al desplegar se recogen (web.js) y queda todo como estaba.
+   Sin JS las secciones salen abiertas, así que la muestra de trabajos tampoco hace falta */
+.aperitivo { margin-top: clamp(30px, 4vw, 52px); }
+.sin-js .aperitivo--trab, .aperitivo[hidden] { display: none; }
+.seccion__pie { display: flex; justify-content: center; margin-top: clamp(26px, 3.4vw, 48px); }
+.plegable.abierta .seccion__pie { display: none; }
+/* QUÉ HACEMOS, UNA MESA QUE SE RECOLOCA (14-oct, Javi: «una vez se despliega, que se recomponga todo para verse como
+   hasta ahora… como que se reorganizan las cosas en la mesa»). Los títulos, la tablet y los vídeos son los de siempre:
+   cerrada, cada rama en su columna, con su título y su pieza; abierta, como siempre (el texto a un lado y la pieza al
+   otro). Las piezas miden lo mismo en los dos sitios, como objetos de verdad que se cambian de sitio en la mesa: la
+   tablet y el abanico van en proporción al ancho de la sección (cqi) y no al de su columna; web.js (recomponer) solo
+   las lleva de un sitio a otro. Cerradas, la tablet y el abanico empiezan a la misma altura */
+.plegable--muestra .pliegue__dentro { container-type: inline-size; }
+.plegable--muestra .editor { --ancho: max(30cqi, 300px); width: var(--ancho); margin-inline: auto; font-size: calc(var(--ancho) / 31); }
+.plegable--muestra .copias { width: min(46cqi, 100%); margin-inline: auto; }   /* con la cadena bajo la tablet, las dos columnas acaban igual */
+.js .plegable--muestra:not(.abierta) .pliegue { height: auto; overflow: visible; }
+.plegable--muestra:not(.abierta) .pliego__texto > :not(.subtitulo) { display: none; }
+/* LOS TÍTULOS DE LA MUESTRA (15-oct, Javi: «las letras de esos títulos tienen que aparecer como todos los textos;
+   ahora ya están fijos»): se iluminan de 0 a 100, como el texto de las cabeceras, a la vez que llegan sus piezas
+   (web.js, vigiaMuestra). Abierta, siempre se ven */
+.muestra-sincro .plegable--muestra:not(.abierta) .pliego:not(.pliego--visto) .subtitulo { opacity: 0; }
+.muestra-sincro .plegable--muestra .pliego--visto .subtitulo { transition: opacity 2.4s ease; }   /* al cargar se oculta sin fundido */
+@media (min-width: 861px) {
+  .plegable--muestra:not(.abierta) .pliegue__dentro {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: auto auto auto;
+    column-gap: clamp(40px, 7vw, 120px);
+  }
+  .plegable--muestra:not(.abierta) .pliegue__dentro::before { grid-column: 1 / -1; height: clamp(30px, 4vw, 52px); }
+  .plegable--muestra:not(.abierta) .pliego {
+    grid-row: span 2; display: grid; grid-template-rows: subgrid; grid-template-columns: minmax(0, 1fr); gap: 0; align-items: start;
+  }
+  .plegable--muestra:not(.abierta) .pliego + .pliego { margin-top: 0; }
+  .plegable--muestra:not(.abierta) .pliego__texto { grid-row: 1; }
+  .plegable--muestra:not(.abierta) .pliego__mesa { grid-row: 2; margin-top: clamp(26px, 3.4vw, 44px); }
+}
+/* mientras se recoloca, el pliegue crece o encoge con las piezas y deja ver lo de fuera de sus bordes (sombras, giros) */
+.js .plegable--muestra .pliegue.rodando { overflow: hidden; overflow: clip; overflow-clip-margin: 48px; }
+.js .plegable--muestra .pliegue.rodando::after { content: none; }
+/* las piezas que se recolocan van en su propia capa SOLO mientras se recoloca (y justo antes, al ir a pulsar la piedra:
+   web.js, .preparando): así el navegador no las prepara de golpe en el primer fotograma (era el parón del principio).
+   14-oct: antes la capa era fija; en el móvil es memoria gráfica de más todo el rato y resta algo de nitidez */
+.js .plegable--muestra.preparando .editor, .js .plegable--muestra.preparando .maq-caja,
+.js .plegable--muestra.preparando .copias { will-change: translate; }
+/* LOS EJEMPLOS, MÁS DESPACIO (14-oct, Javi: «el desplazamiento más lento y fluido, más suave»): llegan en 3,8 s en vez de
+   2,8, arrancando suave (sin el empujón del principio) y frenando largo; el giro se alarga a la par */
+.js .plegable--muestra .posable.posado {
+  animation-duration: 3.8s, 4.6s;
+  animation-timing-function: cubic-bezier(.4, .12, .2, 1), linear;
+}
+.aperitivo--trab { display: grid; }
+.ap-fichas { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: clamp(14px, 1.8vw, 26px); }
+.ap-ficha { margin: 0; display: grid; gap: .75rem; align-content: start; }
+.ap-ficha__foto { all: unset; box-sizing: border-box; display: block; position: relative; cursor: pointer; background: #F6F6F4; padding: 6px; }
+.ap-ficha__foto img, .ap-ficha__foto video { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; background: #DADBDC; }
+.ap-ficha__foto .pieza__ia { right: 11px; bottom: 11px; font-size: .5625rem; padding: .3rem .42rem; }
+/* BORDES LIMPIOS (13-oct, Javi: «que no se queden como cortadas a mordiscos»): el navegador no suaviza el canto de un
+   vídeo girado y por abajo asoman escalones de un píxel sobre el papel. Recortar el vídeo (clip-path, con 1 px de
+   redondeo) hace que lo suavice; comprobado a 2x frente a otras tres salidas (posicionarlo, outline, un filete encima) */
+.ap-ficha__foto video, .ap-ficha__foto img, .copia video, .copia img { clip-path: inset(0 round 1px); }
+.ap-ficha__foto:focus-visible { outline: 2px solid var(--azul); outline-offset: 4px; }
+.js .ap-ficha__foto.posado { transition: translate .35s var(--curva); }
+@media (hover: hover) { .js .ap-ficha__foto.asentado:hover { translate: 0 -5px; } }
+.ap-ficha__pie {
+  position: relative; padding-left: 1.3rem;
+  font-size: .75rem; font-weight: 600; letter-spacing: .08em; line-height: 1.35; text-transform: uppercase; color: var(--tinta-2);
+}
+.ap-ficha__pie::before { content: ""; position: absolute; left: 0; top: .6em; width: .85rem; height: 2px; background: var(--g1); }
+.ap-ficha .ap-ficha__pie.pie--posado { animation-delay: var(--retraso, 0s), var(--retraso, 0s); }   /* llega con su ficha */
+.ramas-sel, .trabajo-sel, .reparto-sel { scroll-margin-top: 96px; }   /* al deslizar en el móvil se sube a ellas */
+/* entre el móvil y el ordenador grande (tablet, el Fold abierto) seis no caben con su nombre: tres y tres */
+@media (min-width: 861px) and (max-width: 1100px) {
+  .ap-fichas { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: clamp(26px, 3.4vw, 40px); }
+}
+@media (max-width: 860px) {
+  .plegable--muestra .editor { --ancho: min(90cqi, 420px); }
+  .plegable--muestra .maq-caja { width: min(90cqi, 420px); }
+  .plegable--muestra .copias { width: min(100cqi, 470px); }
+  .js .plegable--muestra:not(.abierta) .pliegue__dentro::before { height: 30px; }
+  .plegable--muestra:not(.abierta) .pliego + .pliego { margin-top: 56px; }
+  .plegable--muestra:not(.abierta) .pliego__mesa { margin-bottom: 0; }
+  /* en el móvil, dos filas de tres (15-oct, Javi: «a primera vista solo se ven dos de software y la del chef»): una
+     de software y dos de vídeo en cada fila, todo a la vista sin deslizar */
+  .ap-fichas { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px 12px; }
+  .ap-ficha { gap: .5rem; }
+  .ap-ficha__foto { padding: 4px; }
+  .ap-ficha__foto .pieza__ia { right: 7px; bottom: 7px; font-size: .5rem; padding: .22rem .3rem; letter-spacing: .04em; }
+  .ap-ficha__pie { padding-left: .95rem; font-size: .625rem; letter-spacing: .05em; hyphens: auto; overflow-wrap: anywhere; }
+  .ap-ficha__pie::before { width: .6rem; top: .55em; }
+}
 .lista--dos strong { display: block; font-weight: 560; font-size: 1.0625rem; line-height: 1.35; color: var(--sobre-noche); }
 .lista--dos span { display: block; margin-top: .32rem; line-height: 1.52; color: var(--sobre-noche-2); }
 
@@ -640,6 +740,18 @@ h1.estela { font-size: clamp(1.15rem, .75rem + 1.35vw, 2.1rem); }
 .copia:nth-child(1) { left: 2%; top: 9%; }
 .copia:nth-child(2) { left: 29%; top: 0; --retraso: .16s; }
 .copia:nth-child(3) { left: 55%; top: 12%; --retraso: .32s; }
+/* LA LEYENDA DEL ABANICO (15-oct, Javi: «en tres palabras, lo que se ha hecho con esas tres cartas»): abajo, en el
+   hueco que deja el abanico, con la misma letra que los rótulos de la cadena de la tablet (Llega · Agente · Listo) */
+.copias__ley {
+  position: absolute; left: 0; right: 0; bottom: 0; margin: 0;
+  display: flex; justify-content: center; gap: 1.1em;
+  font-family: var(--texto); font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--tinta-2);
+  font-size: calc(max(30cqi, 300px) * 11 / 360);          /* la misma letra que los rótulos de la cadena (11 de 360) */
+}
+@media (max-width: 860px) { .copias__ley { font-size: calc(min(90cqi, 420px) * 11 / 360); } }
+.copias__ley span + span::before { content: "·"; margin-right: 1.1em; color: var(--guia); }
+.js .copias__ley { opacity: 0; transition: opacity .8s ease .9s; }
+.js .copias:has(.copia.posado) .copias__ley { opacity: 1; }
 
 /* la tablet posada en la mesa (03-oct): el marco negro, la pantalla clara con los colores de la marca —azul
    egipcio para el lenguaje, rojo para lo que se dice, tinta para lo demás— para que se lea bien, también en el móvil */
@@ -857,6 +969,42 @@ h1.estela { font-size: clamp(1.15rem, .75rem + 1.35vw, 2.1rem); }
 .js .cadena--trazada .cadena__flujo, .js .cadena--trazada .cadena__est, .js .cadena--trazada .cadena__ciudad,
 .js .cadena--trazada .cadena__rot--mapa { opacity: 1; }
 .cadena:not(.cadena--viva) * { animation-play-state: paused !important; }
+
+/* LA CADENA DE LA TABLET (14-oct, Javi: «la tablet haciendo código y otra cosa más, como una cadena de producción»):
+   debajo de la tablet, lo que llega (una llamada, una factura, un pedido) entra en el agente y sale hecho (una cita,
+   la factura registrada, el pedido en su caja). El dibujo de la cadena de Iris Copy (clases c-*); aquí todo es CSS:
+   cada cosa da la vuelta en 6 s y las tres van separadas 2 s; el agente da el visto cada 2 s, cuando entra una.
+   Se mueve solo mientras se ve (web.js le pone .cadena--viva). Ancho: el de la tablet */
+.maq-caja { width: max(30cqi, 300px); margin: clamp(4px, .6vw, 8px) auto 0; }
+.cadena.maq { margin: 0; width: 100%; max-width: none; }
+.maq__svg { display: block; width: 100%; height: auto; overflow: visible; }
+.maq__pista { fill: none; stroke: rgba(20, 20, 20, .16); stroke-width: 1.6; stroke-linecap: round; }
+.maq__flujo { fill: none; stroke: var(--azul-claro); stroke-width: 1.6; stroke-linecap: round; stroke-dasharray: 2.5 9.5; animation: maq-fluye .2s linear infinite; }
+@keyframes maq-fluye { to { stroke-dashoffset: -12; } }
+.maq__it { opacity: 0; animation: 6s linear var(--d, 0s) infinite; }
+.maq__in { animation-name: maq-entra; }
+.maq__out { animation-name: maq-sale; }
+@keyframes maq-entra {                                  /* de la izquierda hasta quedar tapada por el agente */
+  0% { transform: translateX(28px); opacity: 0; }
+  6% { opacity: 1; }
+  42% { transform: translateX(180px); opacity: 1; }
+  42.1%, 100% { transform: translateX(180px); opacity: 0; }
+}
+@keyframes maq-sale {                                   /* sale de detrás del agente ya hecha */
+  0%, 50% { transform: translateX(180px); opacity: 0; }
+  50.1% { opacity: 1; }
+  90% { transform: translateX(324px); opacity: 1; }
+  100% { transform: translateX(360px); opacity: 0; }
+}
+.maq__visto { fill: none; stroke: #CFE3F7; stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; opacity: 0; animation: maq-visto 2s linear .52s infinite; }
+@keyframes maq-visto { 0% { stroke-dashoffset: 1; opacity: 1; } 20% { stroke-dashoffset: 0; } 45% { opacity: 1; } 60%, 100% { stroke-dashoffset: 0; opacity: 0; } }
+.maq__tel, .maq__cal { fill: var(--azul); }
+.maq__dia { font: 700 9.5px var(--texto); fill: var(--tinta); }
+.maq__papel { fill: #FFF; stroke: var(--tinta-2); stroke-width: 1.1; stroke-linejoin: round; }
+.maq__pliegue { fill: none; stroke: var(--tinta-2); stroke-width: 1.1; stroke-linejoin: round; }
+.maq__euro { font: 700 10px var(--texto); fill: var(--rojo); }
+.maq__hecho { fill: var(--azul-claro); }
+.maq__blanca { fill: none; stroke: rgba(255, 255, 255, .8); stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; }
 
 /* LA CADENA DE FISIOBOOST (04-oct, Javi: «algo como lo de Iris Copy, una cadena ilustrativa de sucesos»): el mismo
    dibujo que la cadena de la copistería (comparte sus clases c-* y cadena__*). La conversación es HTML encima del hueco
@@ -1236,6 +1384,12 @@ h1.estela { font-size: clamp(1.15rem, .75rem + 1.35vw, 2.1rem); }
 .js .taller__pasos li.activa { opacity: 1; }
 .js .taller__pasos span { max-height: 0; overflow: hidden; opacity: 0; margin-top: 0; transition: max-height .55s ease, opacity .45s ease, margin .55s ease; }
 .js .taller__pasos li.activa span { max-height: 9em; opacity: 1; margin-top: .4rem; }
+/* LOS PASOS ENTRAN (15-oct, Javi: «el 1, 2, 3… ya está ahí puesto; tiene que entrar desplazándose suavemente, como
+   todo lo demás»): esperan escondidos y, al verse, llegan uno detrás de otro desde fuera (web.js, pasosLlegan) */
+.js .taller__pasos:not(.llegan), .js .taller__hilo:not(.llegan) { visibility: hidden; }
+/* en el móvil la animación se desliza con el dedo, de escena en escena: el gesto de lado es nuestro, el de arriba
+   y abajo sigue siendo el scroll */
+.taller__lienzo--cine, .taller__hilo { touch-action: pan-y; }
 .taller__hilo { display: none; }
 @media (max-width: 860px) {
   .taller { grid-template-columns: minmax(0, 1fr); gap: 18px; }
@@ -1517,6 +1671,10 @@ html:not(.js) .buzon { display: none; }
   }
   .barra__nav::-webkit-scrollbar { display: none; }
   .barra__nav a { flex: none; font-size: .875rem; padding: .55rem 0; color: var(--tinta-2); -webkit-tap-highlight-color: transparent; }
+  /* cinco secciones desde «Preguntas» (14-oct): la letra y el hueco se ajustan al ancho para que quepan enteras, sin
+     deslizar, desde 360 px (a 412 px o más, como antes: 14 px) */
+  .barra__nav { gap: clamp(5px, 1.2vw, .6rem); }
+  .barra__nav a { font-size: clamp(11.75px, 3.27vw, .875rem); }
   .barra__nav a.activa { color: var(--tinta); }
   .barra__nav a::after { bottom: 5px; }
   /* al saltar a una sección, su título no queda bajo la cabecera, que ahora mide dos filas (~92 px) */
@@ -1631,23 +1789,41 @@ html:not(.js) .buzon { display: none; }
 .ramas-sel__b {
   position: relative; padding: .25rem .3rem 1.05rem; background: none; border: 0; cursor: pointer;
   font-family: var(--titular); font-weight: 400; font-size: clamp(1.7rem, 1.15rem + 2.2vw, 3.1rem); line-height: 1;
-  color: var(--tinta); opacity: .3; transition: opacity .45s var(--curva);
+  color: var(--tinta);
   -webkit-tap-highlight-color: transparent;
 }
+/* lo apagado es el nombre y su dibujo, no el botón: así la raya de debajo se ve con su color (13-oct) */
+.ramas-sel__b > * { opacity: .3; transition: opacity .45s var(--curva); }
 .ramas-sel__b::after {
   content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 3px; border-radius: 2px;
   background: var(--azul); transform: scaleX(0); transition: transform .7s var(--curva);
 }
 .ramas-sel__b.rama-soft::after { background: var(--rojo); }
-.ramas-sel__b:hover { opacity: .62; }
-.ramas-sel__b[aria-selected="true"] { opacity: 1; }
+.ramas-sel__b:hover > * { opacity: .62; }
+.ramas-sel__b[aria-selected="true"] > * { opacity: 1; }
 .ramas-sel__b[aria-selected="true"]::after { transform: scaleX(1); }
+/* INVITAR A PULSAR (13-oct, Javi: «parece que ya está todo cliqueado… que invite a seguir cliqueando»): bajo lo que
+   no está elegido, una raya fina de su color que se dibuja de izquierda a derecha, se queda un momento y se va, una y
+   otra vez. Lo elegido conserva su raya entera y quieta */
+.ramas-sel__b[aria-selected="false"]::after { height: 2px; transform-origin: left; animation: invita 3.4s var(--curva) infinite; }
+.trabajo-sel__b span { position: relative; }
+.trabajo-sel__b[aria-selected="false"] span::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1.5px; border-radius: 1px;
+  background: var(--azul); transform-origin: left; transform: scaleX(0); animation: invita 3.4s var(--curva) infinite;
+}
+.trabajo-sel__b.rama-soft[aria-selected="false"] span::after { background: var(--rojo); }
+/* más suave que la raya de lo elegido (que es entera y quieta): se lee como una pista que se mueve, no como elegido */
+@keyframes invita {
+  0% { transform: scaleX(0); opacity: .55; }
+  42%, 62% { transform: scaleX(1); opacity: .55; }
+  100% { transform: scaleX(1); opacity: 0; }
+}
 .ramas-sel__b:focus-visible { outline: 2px solid var(--azul); outline-offset: 6px; border-radius: 2px; }
 .rama-panel[hidden] { display: none; }
 .rama-panel:not([hidden]) > .trabajo-sel { animation: rama-entra .6s var(--curva) both; }
 @keyframes rama-entra { from { opacity: 0; translate: 0 8px; } to { opacity: 1; translate: 0 0; } }
 .rama-panel .trabajo-sel { margin-bottom: clamp(40px, 5vw, 72px); }
-.rama-panel .filas { margin-top: clamp(72px, 9vw, 130px); }
+.rama-panel .filas { margin-top: 0; }   /* desde el 15-oct son una pestaña más («Otras creaciones», «Avatares») */
 
 /* LAS ANIMACIONES DE LAS RAMAS (06-oct, noche, Javi): al alto de las letras, a la izquierda del Software (rojo: un
    portátil en el que se teclea y le sale código por detrás) y a la derecha de lo Audiovisual (azul: una cámara que rueda

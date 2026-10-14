@@ -2,7 +2,7 @@
 <html lang="es" class="sin-js">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Seguridad (03-oct): solo se carga lo nuestro, de nuestro dominio. Ningún script en línea ni de fuera, nada
      de formularios ni marcos. La misma política, más completa (frame-ancestors, HSTS...), va en _headers como
      cabecera HTTP; esta copia en <meta> protege también donde no se pueden poner cabeceras (GitHub Pages). -->
@@ -28,7 +28,7 @@
 <link rel="apple-touch-icon" href="img/favicon_180px.png">
 
 <link rel="stylesheet" href="css/intro.css?v=2610041801">
-<link rel="stylesheet" href="css/estilo.css?v=80">
+<link rel="stylesheet" href="css/estilo.css?v=90">
 <script src="js/arranque.js"></script>
 
 <script type="application/ld+json">
@@ -55,8 +55,9 @@
   </a>
   <nav class="barra__nav" id="menu" aria-label="Principal">
     <a href="#servicios" data-i18n="nav.servicios">Qué hacemos</a>
-    <a href="#trabajo" data-i18n="nav.trabajo">Trabajo</a>
+    <a href="#trabajo" data-i18n="nav.trabajo">Trabajos</a>
     <a href="#metodo" data-i18n="nav.metodo">Cómo trabajamos</a>
+    <a href="faq.html" data-i18n="nav.faq">Preguntas</a>
     <a href="#contacto" data-i18n="nav.contacto">Contacto</a>
   </nav>
   <div class="idioma" role="group" aria-label="Idioma">
@@ -103,16 +104,11 @@
   </section>
 
   <!-- ───────── QUÉ HACEMOS: las dos ramas (se despliega levantando la piedra) ───────── -->
-  <section class="seccion plegable" id="servicios">
+  <section class="seccion plegable plegable--muestra" id="servicios">
     <header class="seccion__cab cab">
       <div class="cab__losa"><h2 class="titulo estela" data-estela data-i18n="serv.titulo">Dos ramas, una mesa.</h2></div>
       <div class="cab__texto">
-        <p class="entrada" data-i18n="serv.entrada">Hacemos software que te ahorra trabajo y vídeos que hacen que te vean. No partimos de una herramienta, sino de tu caso: primero entendemos qué necesitas; después elegimos cómo hacerlo.</p>
-        <button class="piedra" type="button" aria-expanded="false" aria-controls="serv-pliegue">
-          <img src="intro/assets/capitel.webp" alt="" width="344" height="295">
-          <span class="piedra__abrir" data-i18n="serv.abrir">Ver qué hacemos</span>
-          <span class="piedra__cerrar" data-i18n="pliegue.cerrar">Cerrar</span>
-        </button>
+        <p class="entrada" data-i18n="serv.entrada">Creamos software que te ahorra tiempo y trabajo, y vídeos que ponen tu marca a la altura de las grandes. No partimos de una herramienta, sino de tu caso: primero entendemos qué necesitas; después elegimos cómo hacerlo.</p>
       </div>
     </header>
 
@@ -125,30 +121,33 @@
           <li data-i18n="serv.soft.l1">Automatización de tareas y procesos: facturas que se registran solas, consultas que llegan a quien debe resolverlas y una producción que avanza sin trabajo manual</li>
           <li data-i18n="serv.soft.l2">Asistentes de voz y de WhatsApp que atienden por ti, dan citas y gestionan tu agenda</li>
           <li data-i18n="serv.soft.l3">Programas a medida —gestión (ERP), clientes (CRM) y herramientas internas— conectados con lo que ya usas, para que nadie tenga que copiar datos a mano</li>
-          <li data-i18n="serv.soft.l4">Webs y aplicaciones para móvil: diseño, desarrollo y mantenimiento</li>
+          <li data-i18n="serv.soft.l4">Webs y aplicaciones para móvil: diseño, desarrollo y mantenimiento, con nuestra sala de revisión, para contarnos tus cambios sobre la propia web de forma fácil y clara</li>
           <li data-i18n="serv.soft.l6">Búsqueda de datos a gran escala: lo que llevaría semanas encontrar en internet, verificado y ordenado en una herramienta sencilla</li>
         </ul>
       </div>
 
       <div class="pliego__mesa">
-        <figure class="editor posable" style="--giro:1.2deg" aria-label="Ejemplo de código: cómo hacemos una herramienta a medida" data-i18n-aria="serv.soft.editor">
+        <figure class="editor posable" style="--giro:1.2deg" aria-label="Lo que hacemos en software, escrito como código" data-i18n-aria="ap.editor">
           <div class="editor__pantalla">
           <div class="editor__cab" aria-hidden="true"><span class="editor__pest" data-i18n="serv.soft.pest">a_medida.py</span><span data-i18n="serv.soft.pest2">notas.md</span></div>
-<pre class="editor__codigo" data-escribir data-en="# sketch: a made-to-measure tool&#10;from mesa10 import studio, ai&#10;&#10;def made_to_measure(business):&#10;    process = studio.understand(business)&#10;    for task in process.repetitive():&#10;        task.automate(using=ai)&#10;    app = studio.build(process)&#10;    app.connect(business.tools)&#10;    app.test(real_data=True)&#10;    return app.deliver()"><code># boceto: una herramienta a medida
-from mesa10 import estudio, ia
+<pre class="editor__codigo" data-escribir data-en="# what we build in software&#10;from mesa10 import studio&#10;&#10;services = [&#10;    &quot;voice and WhatsApp assistants&quot;,&#10;    &quot;automated tasks and processes&quot;,&#10;    &quot;custom ERP and CRM software&quot;,&#10;    &quot;websites and mobile apps&quot;,&#10;    &quot;large-scale data search&quot;,&#10;]&#10;studio.make(services)"><code># lo que hacemos en software
+from mesa10 import estudio
 
-def a_medida(negocio):
-    proceso = estudio.entender(negocio)
-    for tarea in proceso.repetitivas():
-        tarea.automatizar(con=ia)
-    app = estudio.construir(proceso)
-    app.conectar(negocio.herramientas)
-    app.probar(datos_reales=True)
-    return app.entregar()</code></pre>
+servicios = [
+    "asistentes de voz y WhatsApp",
+    "automatizar tareas y procesos",
+    "programas a medida: ERP y CRM",
+    "webs y apps para móvil",
+    "búsqueda masiva de datos",
+]
+estudio.hacer(servicios)</code></pre>
           <div class="editor__terminal" aria-hidden="true"><span class="orden" data-i18n="serv.soft.orden">$ python a_medida.py</span><span class="salida" data-i18n="serv.soft.sal1">entendido · construido · probado</span><span class="salida salida--fin" data-i18n="serv.soft.sal2">listo: funciona con lo que ya usas</span></div>
           <p class="editor__pie" data-i18n="serv.soft.pie">Un boceto de cómo trabajamos, no el código de un cliente.</p>
           </div>
         </figure>
+        <!-- la cadena (14-oct, Javi: «la tablet haciendo código y otra cosa más, como una cadena de producción»): lo que
+             llega (una llamada, una factura, un pedido) entra en el agente y sale hecho. Mismo dibujo que la de Iris Copy -->
+        <div class="maq-caja"><figure class="cadena maq posable posable--libre" style="--giro:0deg" role="img" data-i18n-aria="maq.aria" aria-label="Ejemplo de automatización: una llamada, una factura y un pedido entran en el agente y salen hechos: una cita en el calendario, la factura registrada y el pedido empaquetado."><svg class="maq__svg" viewBox="0 0 360 116" aria-hidden="true" focusable="false"><defs><clipPath id="maq-pantalla"><rect x="-37" y="-25" width="74" height="42" rx="2.5"/></clipPath></defs><path class="maq__pista" d="M180 0V32"/><path class="maq__flujo" d="M180 0V32"/><path class="maq__pista" d="M16 61H136"/><path class="maq__flujo" d="M16 61H136"/><path class="maq__pista" d="M224 61H344"/><path class="maq__flujo" d="M224 61H344"/><g transform="translate(0 61)"><g class="maq__it maq__in" style="--d:-4s"><g transform="scale(1.2)"><circle class="c-pieza" r="12.5"/><path class="maq__tel" transform="translate(-9.5 -7.8) scale(.86)" d="M6.3 2.9 8.6 2.5l1.5 3.6-1.8 1.3a9.3 9.3 0 0 0 4.3 4.3l1.3-1.8 3.6 1.5-.4 2.3a1.8 1.8 0 0 1-1.9 1.5A13.6 13.6 0 0 1 4.8 4.8a1.8 1.8 0 0 1 1.5-1.9Z"/></g></g><g class="maq__it maq__out" style="--d:-4s"><g transform="scale(1.2)"><rect class="c-pieza" x="-11.5" y="-11" width="23" height="23" rx="2.5"/><path class="maq__cal" d="M-11.5 -4.5h23v-4a2.5 2.5 0 0 0-2.5-2.5h-18a2.5 2.5 0 0 0-2.5 2.5z"/><path class="c-linea" d="M-5.5 -14v5M5.5 -14v5"/><text class="maq__dia" x="0" y="8.6" text-anchor="middle">17</text><g transform="translate(11.5 -11)"><circle class="c-azul" r="5.5"/><path class="c-check" d="M-2.6 0l1.8 1.8 3.2-3.6"/></g></g></g><g class="maq__it maq__in" style="--d:-2s"><g transform="scale(1.2)"><path class="maq__papel" d="M-10 -13h14l6 6v20h-20z"/><path class="maq__pliegue" d="M4 -13v6h6"/><rect class="c-tenue" x="-6" y="-6" width="9" height="2.4" rx="1"/><rect class="c-tenue" x="-6" y="-1" width="12" height="2.4" rx="1"/><text class="maq__euro" x="3" y="10.5" text-anchor="middle">€</text></g></g><g class="maq__it maq__out" style="--d:-2s"><g transform="scale(1.2)"><path class="maq__papel" d="M-10 -13h14l6 6v20h-20z"/><path class="maq__pliegue" d="M4 -13v6h6"/><rect class="maq__hecho" x="-6" y="-6" width="9" height="2.4" rx="1"/><rect class="maq__hecho" x="-6" y="-1" width="12" height="2.4" rx="1"/><rect class="maq__hecho" x="-6" y="4" width="7" height="2.4" rx="1"/><g transform="translate(10 -13)"><circle class="c-azul" r="5.5"/><path class="c-check" d="M-2.6 0l1.8 1.8 3.2-3.6"/></g></g></g><g class="maq__it maq__in" style="--d:0s"><g transform="scale(1.2)"><path class="c-pedido" d="M-9.5 -13.3h13.3l5.7 5.7v20.9h-19z"/><path class="maq__blanca" d="M3.8 -13.3v5.7h5.7"/><path class="maq__blanca" d="M-5.5 -1h10M-5.5 4h7"/></g></g><g class="maq__it maq__out" style="--d:0s"><g transform="scale(1.2)"><rect class="c-caja" x="-13" y="-10" width="26" height="20" rx="1.5"/><path class="c-cinta-item" d="M0 -10v20M-13 -3.5h26"/></g></g></g><g transform="translate(180 64)"><path class="c-pieza" d="M-10 24h20l5 10h-30z"/><rect class="c-pieza" x="-44" y="-32" width="88" height="58" rx="5"/><rect class="c-pantalla" x="-37" y="-25" width="74" height="42" rx="2.5"/><g clip-path="url(#maq-pantalla)"><g class="cadena__codigo"><rect class="c-cod1" x="-31" y="-21" width="44" height="3.2" rx="1.4"/><rect class="c-cod2" x="-23" y="-14" width="30" height="3.2" rx="1.4"/><rect class="c-cod3" x="-15" y="-7" width="46" height="3.2" rx="1.4"/><rect class="c-cod1" x="-31" y="0" width="22" height="3.2" rx="1.4"/><rect class="c-cod2" x="-23" y="7" width="38" height="3.2" rx="1.4"/><rect class="c-cod3" x="-15" y="14" width="46" height="3.2" rx="1.4"/><rect class="c-cod1" x="-31" y="21" width="26" height="3.2" rx="1.4"/><rect class="c-cod2" x="-23" y="28" width="40" height="3.2" rx="1.4"/><rect class="c-cod3" x="-15" y="35" width="34" height="3.2" rx="1.4"/><rect class="c-cod1" x="-31" y="42" width="50" height="3.2" rx="1.4"/><rect class="c-cod1" x="-31" y="49" width="44" height="3.2" rx="1.4"/><rect class="c-cod2" x="-23" y="56" width="30" height="3.2" rx="1.4"/><rect class="c-cod3" x="-15" y="63" width="46" height="3.2" rx="1.4"/><rect class="c-cod1" x="-31" y="70" width="22" height="3.2" rx="1.4"/><rect class="c-cod2" x="-23" y="77" width="38" height="3.2" rx="1.4"/><rect class="c-cod3" x="-15" y="84" width="46" height="3.2" rx="1.4"/><rect class="c-cod1" x="-31" y="91" width="26" height="3.2" rx="1.4"/><rect class="c-cod2" x="-23" y="98" width="40" height="3.2" rx="1.4"/><rect class="c-cod3" x="-15" y="105" width="34" height="3.2" rx="1.4"/><rect class="c-cod1" x="-31" y="112" width="50" height="3.2" rx="1.4"/></g></g><path class="maq__visto" pathLength="1" d="M-12 -4l8 8 16-17"/></g><text class="cadena__rot" x="76" y="110" text-anchor="middle" data-i18n="maq.llega">Llega</text><text class="cadena__rot" x="180" y="110" text-anchor="middle" data-i18n="maq.agente">Agente</text><text class="cadena__rot" x="284" y="110" text-anchor="middle" data-i18n="maq.listo">Listo</text></svg></figure></div>
       </div>
     </article>
 
@@ -161,17 +160,29 @@ def a_medida(negocio):
           <li data-i18n="serv.av.l3">Avatares: tu cara en digital o un personaje propio, con personalidad, voz e historia; lo creamos y lo gestionamos</li>
           <li data-i18n="serv.av.l5">Tu producto y tu local, en producciones de acabado cinematográfico, sin rodaje ni decorados</li>
           <li data-i18n="serv.av.l4">¿Ya tienes material? Lo montamos: directos, grabaciones o los vídeos que guardas en el móvil, convertidos en piezas que cuentan una historia, adaptadas a cada red y a cada idioma</li>
+          <li data-i18n="serv.av.l8">Sala de revisión propia: nos comunicas tus cambios sobre el propio vídeo, de forma más rápida y clara</li>
           <li data-i18n="serv.av.l7">Identidad de marca: logotipo, tipografía y eslogan propios, con el mismo cuidado que la de este estudio</li>
         </ul>
       </div>
 
       <div class="pliego__mesa copias" aria-hidden="true">
-        <figure class="copia posable" style="--giro:-5deg"><video data-bucle data-src="media/copia_naranjas.mp4?v=2" poster="img/copia_naranjas.jpg?v=2" muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback width="360" height="640"></video><span class="pieza__ia" data-i18n="pieza.ia">Generado con IA</span></figure>
-        <figure class="copia posable" style="--giro:3deg"><video data-bucle data-src="media/copia_lara_nocturna.mp4?v=3" poster="img/copia_lara_nocturna.jpg?v=3" muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback width="360" height="640"></video><span class="pieza__ia" data-i18n="pieza.ia">Generado con IA</span></figure>
-        <figure class="copia posable" style="--giro:-1.5deg"><video data-bucle data-src="media/copia_urban.mp4?v=3" poster="img/copia_urban.jpg?v=3" muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback width="360" height="640"></video><span class="pieza__ia" data-i18n="pieza.ia">Generado con IA</span></figure>
+        <figure class="copia posable" style="--giro:-5deg"><video data-bucle data-src="media/copia_naranjas.mp4?v=3" poster="img/copia_naranjas.jpg?v=3" muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback width="360" height="640"></video><span class="pieza__ia" data-i18n="pieza.ia">Generado con IA</span></figure>
+        <figure class="copia posable" style="--giro:3deg"><video data-bucle data-src="media/copia_lara_nocturna.mp4?v=4" poster="img/copia_lara_nocturna.jpg?v=4" muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback width="360" height="640"></video><span class="pieza__ia" data-i18n="pieza.ia">Generado con IA</span></figure>
+        <figure class="copia posable" style="--giro:-1.5deg"><video data-bucle data-src="media/copia_urban.mp4?v=4" poster="img/copia_urban.jpg?v=4" muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback width="360" height="640"></video><span class="pieza__ia" data-i18n="pieza.ia">Generado con IA</span></figure>
+        <p class="copias__ley"><span data-i18n="ley.guion">Guion</span><span data-i18n="ley.gen">Generación</span><span data-i18n="ley.montaje">Montaje</span></p>
       </div>
     </article>
     </div></div>
+
+    <!-- la piedra, al final (14-oct, Javi): primero se ve la muestra y después «Ver todo». Al abrir vuelve a su sitio
+         de antes, junto al texto, y la sección se recompone como siempre (web.js, recomponer) -->
+    <div class="seccion__pie">
+      <button class="piedra" type="button" aria-expanded="false" aria-controls="serv-pliegue">
+        <img src="intro/assets/capitel.webp" alt="" width="344" height="295">
+        <span class="piedra__abrir" data-i18n="ap.ver.serv">Ver todo lo que hacemos</span>
+        <span class="piedra__cerrar" data-i18n="pliegue.cerrar">Cerrar</span>
+      </button>
+    </div>
   </section>
 
   <!-- ───────── TRABAJO: sobre la mesa ───────── -->
@@ -180,13 +191,56 @@ def a_medida(negocio):
       <div class="cab__losa"><h2 class="titulo estela" data-estela data-i18n="trab.titulo">Sobre la mesa.</h2></div>
       <div class="cab__texto">
         <p class="entrada" data-i18n="trab.entrada">Cada trabajo nace de un problema concreto: una clínica que perdía llamadas, una copistería que imprimía a mano cada pedido, un chef que quería una imagen a la altura de su cocina. Aquí, cómo lo resolvimos.</p>
-        <button class="piedra" type="button" aria-expanded="false" aria-controls="trab-pliegue">
-          <img src="intro/assets/capitel.webp" alt="" width="344" height="295">
-          <span class="piedra__abrir" data-i18n="trab.abrir">Ver el trabajo</span>
-          <span class="piedra__cerrar" data-i18n="pliegue.cerrar">Cerrar</span>
-        </button>
       </div>
     </header>
+
+    <!-- APERITIVO (13-oct): los seis trabajos en pequeño, posados en la mesa; cada ficha abre la sección en el suyo -->
+    <div class="aperitivo aperitivo--trab">
+      <div class="ap-fichas">
+        <!-- orden (15-oct, Javi): en el móvil, dos filas de tres (una de software y dos de vídeo en cada una); en el
+             ordenador, en una línea con el mismo orden -->
+        <figure class="ap-ficha rama-soft" style="--retraso:0s">
+          <button class="ap-ficha__foto posable" type="button" data-ap-trab="tr-clinica" aria-labelledby="ap-clin" style="--giro:-1.6deg">
+            <video data-bucle data-src="media/copia_clinica.mp4?v=1" poster="img/aperitivo/clinica.jpg?v=2" muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback controlslist="nodownload noplaybackrate" aria-hidden="true" width="360" height="450"></video>
+          </button>
+          <figcaption class="ap-ficha__pie" id="ap-clin" data-i18n="trab.sel.clin">Recepcionista 24/7</figcaption>
+        </figure>
+        <figure class="ap-ficha rama-av" style="--retraso:0.12s">
+          <button class="ap-ficha__foto posable" type="button" data-ap-trab="tr-chef" aria-labelledby="ap-chef" style="--giro:1.2deg">
+            <video data-bucle data-src="media/copia_chef.mp4?v=1" poster="img/copia_chef.jpg?v=1" muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback controlslist="nodownload noplaybackrate" aria-hidden="true" width="360" height="450"></video>
+            <span class="pieza__ia" data-i18n="pieza.ia">Generado con IA</span>
+          </button>
+          <figcaption class="ap-ficha__pie" id="ap-chef" data-i18n="trab.sel.chef">Eventos y marca personal</figcaption>
+        </figure>
+        <figure class="ap-ficha rama-av" style="--retraso:0.24s">
+          <button class="ap-ficha__foto posable" type="button" data-ap-trab="tr-moda" aria-labelledby="ap-moda" style="--giro:-1.4deg">
+            <video data-bucle data-src="media/copia_melissa_urbano.mp4?v=1" poster="img/aperitivo/melissa_urbano.jpg?v=1" muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback controlslist="nodownload noplaybackrate" aria-hidden="true" width="360" height="450"></video>
+            <span class="pieza__ia" data-i18n="pieza.ia">Generado con IA</span>
+          </button>
+          <figcaption class="ap-ficha__pie" id="ap-moda" data-i18n="trab.sel.moda">Campañas de moda</figcaption>
+        </figure>
+        <figure class="ap-ficha rama-soft" style="--retraso:0.36s">
+          <button class="ap-ficha__foto posable" type="button" data-ap-trab="tr-copisteria" aria-labelledby="ap-copi" style="--giro:1.4deg">
+            <video data-bucle data-src="media/copia_copisteria.mp4?v=1" poster="img/aperitivo/copisteria.jpg?v=2" muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback controlslist="nodownload noplaybackrate" aria-hidden="true" width="360" height="450"></video>
+          </button>
+          <figcaption class="ap-ficha__pie" id="ap-copi" data-i18n="trab.sel.copi">Producción automatizada</figcaption>
+        </figure>
+        <figure class="ap-ficha rama-av" style="--retraso:0.48s">
+          <button class="ap-ficha__foto posable" type="button" data-ap-trab="tr-serenica" aria-labelledby="ap-seren" style="--giro:-1deg">
+            <video data-bucle data-src="media/copia_serenica.mp4?v=3" poster="img/copia_serenica.jpg?v=3" muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback controlslist="nodownload noplaybackrate" aria-hidden="true" width="360" height="450"></video>
+            <span class="pieza__ia" data-i18n="pieza.ia">Generado con IA</span>
+          </button>
+          <figcaption class="ap-ficha__pie" id="ap-seren" data-i18n="ap.seren">Publicidad e‑commerce</figcaption>
+        </figure>
+        <figure class="ap-ficha rama-av" style="--retraso:0.6s">
+          <button class="ap-ficha__foto posable" type="button" data-ap-trab="tr-lucy" aria-labelledby="ap-lucy" style="--giro:1.8deg">
+            <video data-bucle data-src="media/copia_lucy.mp4?v=1" poster="img/aperitivo/lucy.jpg?v=1" muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback controlslist="nodownload noplaybackrate" aria-hidden="true" width="360" height="450"></video>
+            <span class="pieza__ia" data-i18n="pieza.ia">Generado con IA</span>
+          </button>
+          <figcaption class="ap-ficha__pie" id="ap-lucy" data-i18n="trab.sel.lucy">Creadores de contenido</figcaption>
+        </figure>
+      </div>
+    </div>
 
     <div class="pliegue" id="trab-pliegue"><div class="pliegue__dentro">
     <!-- TRABAJOS EN DOS RAMAS (06-oct, tarde, Javi: «divídelos en dos: Software / Audiovisual… los trabajos no se
@@ -226,6 +280,7 @@ def a_medida(negocio):
       <div class="trabajo-sel" role="tablist" aria-label="Trabajos de software" data-i18n-aria="trab.lista.soft">
         <button class="trabajo-sel__b rama-soft" type="button" role="tab" id="tr-clinica" aria-controls="clinica" aria-selected="true"><span data-i18n="trab.sel.clin">Recepcionista 24/7</span></button>
         <button class="trabajo-sel__b rama-soft" type="button" role="tab" id="tr-copisteria" aria-controls="copisteria" aria-selected="false"><span data-i18n="trab.sel.copi">Producción automatizada</span></button>
+        <button class="trabajo-sel__b rama-soft" type="button" role="tab" id="tr-otras" aria-controls="otras" aria-selected="false"><span data-i18n="trab.sel.otras">Otras creaciones</span></button>
       </div>
     <article class="caso rama-soft" id="clinica" role="tabpanel" aria-labelledby="tr-clinica">
       <div class="caso__media">
@@ -239,10 +294,10 @@ def a_medida(negocio):
       <div class="caso__texto">
         <h3 class="subtitulo" data-i18n="clin.titulo">Recepcionista 24/7 para clínica de fisioterapia</h3>
         <p class="caso__tipo" data-i18n="clin.tipo">Salud · Software a medida · Ninguna llamada sin respuesta</p>
-        <p data-i18n="clin.cuerpo">En una clínica, el teléfono suena justo cuando el fisioterapeuta está con un paciente, y cada llamada perdida puede acabar en otra clínica. Para FisioBoost hicimos una recepcionista virtual que atiende las 24 horas: habla con naturalidad, contesta con la información de la clínica y, si alguien quiere cita, recoge sus datos y se los manda al momento por WhatsApp al fisioterapeuta, que confirma la hora personalmente.</p>
+        <p data-i18n="clin.cuerpo">En una clínica, el teléfono suena justo cuando el fisioterapeuta está con un paciente, y cada llamada perdida puede acabar en otra clínica. Para FisioBoost hicimos una recepcionista virtual que atiende las 24 horas: habla con naturalidad, contesta con la información de la clínica y, si alguien quiere cita, recoge sus datos y se los manda al momento por WhatsApp al fisioterapeuta, que confirma la hora personalmente. Está preparada para crecer —tomar más datos de cada paciente o dar ella misma las citas en la agenda—, pero el fisioterapeuta prefirió mantenerlo sencillo y que cada cita siga pasando por sus manos.</p>
         <dl class="ficha">
           <div><dt data-i18n="clin.f1">Cliente</dt><dd>FisioBoost</dd></div>
-          <div><dt data-i18n="clin.f2">Atiende</dt><dd data-i18n="clin.f2v">24 horas, 7 días</dd></div>
+          <div><dt data-i18n="clin.f2">Ha recuperado</dt><dd data-i18n="clin.f2v">Al menos 20 pacientes que llamaron cuando nadie podía coger el teléfono</dd></div>
           <div><dt data-i18n="clin.f3">En marcha</dt><dd data-i18n="clin.f3v">Desde agosto</dd></div>
         </dl>
       </div>
@@ -259,16 +314,18 @@ def a_medida(negocio):
       <div class="caso__texto">
         <h3 class="subtitulo" data-i18n="copi.titulo">Agente de impresión para una gran copistería</h3>
         <p class="caso__tipo" data-i18n="copi.tipo">Software a medida · Impresión automática de pedidos</p>
-        <p data-i18n="copi.cuerpo">Iris Copy es una copistería con un gran volumen de pedidos, que vende por su web y envía a toda España. Cada pedido había que imprimirlo a mano —descargar los archivos, revisar las opciones, mandarlos a la impresora uno a uno— mientras se atendía el mostrador. Desarrollamos un agente que trabaja en el ordenador de la tienda: prepara cada pedido pagado con su papel, su color y sus copias, lo envía a la impresora adecuada, y al equipo solo le queda empaquetarlo. Lo que no puede hacer con garantías lo aparta y avisa a una persona.</p>
+        <p data-i18n="copi.cuerpo">Iris Copy es una copistería con un gran volumen de pedidos, que vende por su web y envía a toda España. Cada pedido había que imprimirlo a mano —descargar los archivos, revisar las opciones, mandarlos a la impresora uno a uno— mientras se atendía el mostrador. Desarrollamos un agente que trabaja en el ordenador de la tienda: prepara cada pedido pagado con su papel, su color y sus copias, lo envía a la impresora adecuada, y al equipo solo le queda empaquetarlo. Lo que no puede hacer con garantías lo aparta y avisa a una persona. Además, diseñamos y entregamos una aplicación a medida para supervisar al agente: desde el móvil, la tienda ve en cada momento qué está haciendo, qué pedidos tiene en cola y cómo va el día, y puede preguntarle por cualquier pedido sin acercarse al ordenador.</p>
         <dl class="ficha">
           <div><dt data-i18n="copi.f0">Cliente</dt><dd>Iris Copy</dd></div>
           <div><dt data-i18n="copi.f1">En marcha</dt><dd data-i18n="copi.f1v">Desde septiembre</dd></div>
-          <div><dt data-i18n="copi.f2">Probado</dt><dd data-i18n="copi.f2v">Más de 700 pruebas automáticas en cada versión</dd></div>
+          <div><dt data-i18n="copi.f2">Ahorra</dt><dd data-i18n="copi.f2v">Un día de trabajo a la semana (unas 8 horas)</dd></div>
         </dl>
       </div>
     </article>
 
-    <section class="filas rama-soft" aria-labelledby="tambien">
+    <!-- «Otras creaciones» y «Avatares» (15-oct, Javi): una pestaña más en la fila de trabajos, para que quien lee vea que
+         hay más; dentro conservan su título («También en la mesa», «Estrellas de diseño») -->
+    <section class="filas rama-soft" id="otras" role="tabpanel" aria-labelledby="tr-otras">
       <h3 class="filas__titulo" id="tambien" data-i18n="tamb.titulo">También en la mesa</h3>
       <p class="filas__entrada" data-i18n="tamb.entrada">Más programas salidos de este estudio, para clientes y para uso propio. Las imágenes son recreaciones con datos de ejemplo; pulsa una para verla en grande.</p>
       <!-- cada trabajo con su foto posada: recreaciones con datos de ejemplo (no las pantallas reales del cliente),
@@ -364,6 +421,7 @@ def a_medida(negocio):
         <button class="trabajo-sel__b rama-av" type="button" role="tab" id="tr-serenica" aria-controls="serenica" aria-selected="false"><span data-i18n="trab.sel.seren">Publicidad e-commerce</span></button>
         <button class="trabajo-sel__b rama-av" type="button" role="tab" id="tr-moda" aria-controls="moda" aria-selected="false"><span data-i18n="trab.sel.moda">Campañas de moda</span></button>
         <button class="trabajo-sel__b rama-av" type="button" role="tab" id="tr-lucy" aria-controls="lucy" aria-selected="false"><span data-i18n="trab.sel.lucy">Creadores de contenido</span></button>
+        <button class="trabajo-sel__b rama-av" type="button" role="tab" id="tr-avatares" aria-controls="estrellas" aria-selected="false"><span data-i18n="trab.sel.avatares">Avatares</span></button>
       </div>
     <article class="caso rama-av" id="chef" role="tabpanel" aria-labelledby="tr-chef">
       <div class="caso__media">
@@ -478,7 +536,7 @@ def a_medida(negocio):
          lo elegantes y porque están literalmente diseñados. Descartados por Javi: Avatares de la casa, Personajes en
          busca de marca, De carne y píxel). Antes era la sección
          #reparto, con su losa y su piedra; las pestañas y las fichas son las mismas -->
-    <section class="filas filas--avatares rama-av" aria-labelledby="avatares">
+    <section class="filas filas--avatares rama-av" id="estrellas" role="tabpanel" aria-labelledby="tr-avatares">
       <h3 class="filas__titulo" id="avatares" data-i18n="rep.titulo">Estrellas de diseño</h3>
       <p class="filas__entrada" data-i18n="rep.entrada">Los creamos y los cuidamos nosotros, cada uno con su historia, su manera de hablar y su público. Ninguno es de carne y hueso, y nunca lo escondemos; pero las emociones que transmiten son de verdad. Una marca puede trabajar con uno de ellos o encargarnos el suyo.</p>
       <div class="reparto-sel" role="tablist" aria-label="Estrellas de diseño" data-i18n-aria="rep.lista">
@@ -652,7 +710,7 @@ def a_medida(negocio):
         <div class="personaje__ficha">
           <h3 class="subtitulo">Lucy Rivero</h3>
           <p class="caso__tipo" data-i18n="rep.lucy.apodo">La Amiga Local</p>
-          <p data-i18n="rep.lucy.cuerpo">Andaluza de toda la vida y virtual de nacimiento. Enseña el sur como lo haría una amiga: dónde se come bien de verdad y qué no debería pedir nunca un turista. Habla en inglés y se despide siempre igual: «See you in the South». Con ella, viajar se parece a llegar a casa.</p>
+          <p data-i18n="rep.lucy.cuerpo">Andaluza de raíces y virtual de nacimiento. Dulce, divertida y amable, enseña a viajar como lo haría una amiga: es la guía bilingüe de confianza que cualquiera querría encontrarse al llegar. Con ella, un destino, una excursión o un bar de toda la vida se sienten como la recomendación de alguien de casa.</p>
           <dl class="personaje__datos">
             <div><dt data-i18n="rep.d.clave">Palabra clave</dt><dd data-i18n="rep.lucy.clave">Conexión</dd></div>
             <div><dt data-i18n="rep.d.publico">Público</dt><dd data-i18n="rep.lucy.publico">Viajeros angloparlantes de 22 a 45 años que visitan Andalucía</dd></div>
@@ -686,6 +744,14 @@ def a_medida(negocio):
     </section>
     </div>
     </div></div>
+
+    <div class="seccion__pie">
+      <button class="piedra" type="button" aria-expanded="false" aria-controls="trab-pliegue">
+        <img src="intro/assets/capitel.webp" alt="" width="344" height="295">
+        <span class="piedra__abrir" data-i18n="ap.ver.trab">Ver todo el trabajo</span>
+        <span class="piedra__cerrar" data-i18n="pliegue.cerrar">Cerrar</span>
+      </button>
+    </div>
   </section>
 
   <!-- ───────── CÓMO TRABAJAMOS: el ánfora (06-oct, Javi: el método se funde con el ánfora, «ponemos aquí la
@@ -837,7 +903,7 @@ def a_medida(negocio):
       <ul class="lista lista--dos">
         <li><strong data-i18n="noes.l1a">Entregar lo primero que sale de la máquina.</strong> <span data-i18n="noes.l1">Lo primero que sale es solo el punto de partida. Cada pieza pasa por varias vueltas y por ojos humanos antes de llegar a ti.</span></li>
         <li><strong data-i18n="noes.l2a">Usar plantillas.</strong> <span data-i18n="noes.l2">Tu negocio no es el de al lado. Partimos de tu problema, de tu público y de tu forma de hablar, y cada pieza se hace para ti.</span></li>
-        <li><strong data-i18n="noes.l3a">Esconder lo que está generado.</strong> <span data-i18n="noes.l3">Lo decimos siempre y con claridad, en la propia pieza. La confianza de tus clientes vale más que cualquier efecto.</span></li>
+        <li><strong data-i18n="noes.l3a">Esconder lo que está generado.</strong> <span data-i18n="noes.l3">Lo decimos siempre y con claridad: en la propia pieza o con la etiqueta de la plataforma donde se publica. La confianza de tus clientes vale más que cualquier efecto.</span></li>
         <li><strong data-i18n="noes.l4a">Atarte a una suscripción para seguir teniendo lo tuyo.</strong> <span data-i18n="noes.l4">Los archivos y el código son tuyos desde el primer día. Si un día decides seguir por tu cuenta, te lo llevas todo.</span></li>
       </ul>
     </div>
@@ -929,7 +995,8 @@ def a_medida(negocio):
 <footer class="pie">
   <img class="pie__marca" src="img/marca/mesa10_horizontal_oscuro.svg?v=2" alt="Mesa 10 Studio" width="237" height="39" loading="lazy">
   <p class="pie__desc" data-i18n="desc">Software a medida y producción audiovisual.</p>
-  <nav class="pie__enlaces" aria-label="Información legal" data-i18n-aria="pie.legal">
+  <nav class="pie__enlaces" aria-label="Información" data-i18n-aria="pie.legal">
+    <a href="faq.html" data-i18n="pie.faq">Preguntas frecuentes</a>
     <a href="legal.html#aviso" data-i18n="pie.aviso">Aviso legal</a>
     <a href="legal.html#privacidad" data-i18n="pie.privacidad">Privacidad</a>
     <a href="legal.html#cookies" data-i18n="pie.cookies">Cookies</a>
@@ -939,7 +1006,7 @@ def a_medida(negocio):
 
 <script src="js/gsap.min.js"></script>
 <script src="js/intro.js?v=2610041801"></script>
-<script src="js/web.js?v=95"></script>
+<script src="js/web.js?v=111"></script>
 <script type="module" src="js/anfora.js?v=8"></script>
 </body>
 </html>

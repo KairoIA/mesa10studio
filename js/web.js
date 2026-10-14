@@ -25,6 +25,7 @@
     'nav.servicios': 'What we do',
     'nav.trabajo': 'Work',
     'nav.metodo': 'How we work',
+    'nav.faq': 'FAQ',
     'nav.contacto': 'Contact',
     'portada.otra': 'Watch again',
     'portada.bajar': 'Scroll to the content',
@@ -36,7 +37,7 @@
     'accion': 'Tell us your idea',
 
     'serv.titulo': 'Two branches, one table.',
-    'serv.entrada': 'We make software that saves you work and videos that get you seen. We don’t start from a tool but from your case: first we understand what you need, then we choose how to make it.',
+    'serv.entrada': 'We create software that saves you time and work, and videos that put your brand on a level with the big names. We don’t start from a tool but from your case: first we understand what you need, then we choose how to make it.',
     'serv.abrir': 'See what we do',
     'pliegue.cerrar': 'Close',
     'serv.soft.titulo': 'Custom software and tools',
@@ -44,7 +45,7 @@
     'serv.soft.l1': 'Task and process automation: invoices that file themselves, enquiries that reach whoever should handle them and production that moves on without manual work',
     'serv.soft.l2': 'Voice and WhatsApp assistants that answer for you, book appointments and run your diary',
     'serv.soft.l3': 'Custom software — management (ERP), customers (CRM) and in-house tools — connected to what you already use, so no one copies data by hand',
-    'serv.soft.l4': 'Websites and mobile apps: design, development and upkeep',
+    'serv.soft.l4': 'Websites and mobile apps: design, development and upkeep, with our review room, so you can tell us your changes right on the site, easily and clearly',
     'serv.soft.l6': 'Large-scale data search: what would take weeks to find online, verified and organised in a simple tool',
     'serv.soft.editor': 'Code example: how we build a made-to-measure tool',
     'serv.soft.pie': 'A sketch of how we work, not a client’s code.',
@@ -59,6 +60,7 @@
     'serv.av.l3': 'Avatars: your face in digital form or a character of your own, with a personality, a voice and a story; we create and manage it',
     'serv.av.l4': 'Already have footage? We’ll cut it: streams, recordings or the videos piling up on your phone, turned into pieces that tell a story, adapted to every platform and language',
     'serv.av.l5': 'Your product and your premises, in productions with a cinematic finish, with no shoot and no sets',
+    'serv.av.l8': 'Our own review room: you tell us your changes right on the video, faster and more clearly',
     'serv.av.l7': 'Brand identity: a logo, typeface and tagline of your own, made with the same care as this studio’s',
 
     'trab.titulo': 'On the table.',
@@ -75,6 +77,19 @@
     'trab.sel.seren': 'E-commerce advertising',
     'trab.sel.lucy': 'Content creators',
     'trab.sel.moda': 'Fashion campaigns',
+    'ap.ver.serv': 'See everything we do',
+    'ap.ver.trab': 'See all the work',
+    'ap.editor': 'What we build in software, written as code',
+    'maq.aria': 'An example of automation: a call, an invoice and an order go into the agent and come out done: an appointment in the calendar, the invoice recorded and the order packed.',
+    'maq.llega': 'In',
+    'maq.agente': 'Agent',
+    'maq.listo': 'Done',
+    'trab.sel.otras': 'Other creations',
+    'trab.sel.avatares': 'Avatars',
+    'ley.guion': 'Script',
+    'ley.gen': 'Generation',
+    'ley.montaje': 'Editing',
+    'ap.seren': 'E‑commerce advertising',
     'pieza.sonido': 'Sound',
     'pieza.ia': 'AI-generated',
     'caso.chef.tipo': 'Food & hospitality · Audiovisual production · An image that matches his cooking',
@@ -91,11 +106,11 @@
     'ficha.protagonista': 'Lead',
     'clin.titulo': '24/7 receptionist for a physiotherapy clinic',
     'clin.tipo': 'Health · Custom software · No call left unanswered',
-    'clin.cuerpo': 'In a clinic, the phone rings just when the physiotherapist is with a patient, and every missed call can end up at another clinic. For FisioBoost we built a virtual receptionist that answers around the clock: it speaks naturally, answers with the clinic’s information and, when someone wants an appointment, takes their details and sends them straight to the physiotherapist on WhatsApp, who confirms the time in person.',
+    'clin.cuerpo': 'In a clinic, the phone rings just when the physiotherapist is with a patient, and every missed call can end up at another clinic. For FisioBoost we built a virtual receptionist that answers around the clock: it speaks naturally, answers with the clinic’s information and, when someone wants an appointment, takes their details and sends them straight to the physiotherapist on WhatsApp, who confirms the time in person. It is ready to grow —taking more details from each patient or booking appointments straight into the diary— but the physiotherapist preferred to keep it simple and stay in control of every appointment.',
     'clin.f1': 'Client',
     'clin.f1v': 'Live since August',
-    'clin.f2': 'Answers',
-    'clin.f2v': '24 hours, 7 days',
+    'clin.f2': 'Recovered',
+    'clin.f2v': 'At least 20 patients who called when no one could pick up',
     'clin.llamada': 'After-hours call',
     'clin.quien1': 'Patient',
     'clin.quien2': 'Receptionist · AI',
@@ -109,11 +124,11 @@
     'caso.serenica.producto': 'Real, unretouched',
     'copi.titulo': 'Print agent for a large copy shop',
     'copi.tipo': 'Custom software · Automatic order printing',
-    'copi.cuerpo': 'Iris Copy is a high-volume copy shop that sells through its website and ships across Spain. Every order had to be printed by hand — download the files, check the options, send them to the printer one by one — while serving the counter. We built them an agent that lives on the shop’s computer: it prepares every paid order with its paper, colour and copies, sends it to the right printer, and the team only has to pack it. Whatever it can’t do reliably, it sets aside and flags for a person.',
+    'copi.cuerpo': 'Iris Copy is a high-volume copy shop that sells through its website and ships across Spain. Every order had to be printed by hand — download the files, check the options, send them to the printer one by one — while serving the counter. We built them an agent that lives on the shop’s computer: it prepares every paid order with its paper, colour and copies, sends it to the right printer, and the team only has to pack it. Whatever it can’t do reliably, it sets aside and flags for a person. We also designed and delivered a custom app to supervise the agent: from their phone, the shop can see at any moment what it is doing, which orders are queued and how the day is going, and ask it about any order without walking over to the computer.',
     'copi.f1': 'Running',
     'copi.f1v': 'Since September',
-    'copi.f2': 'Tested',
-    'copi.f2v': 'Over 700 automated tests on every version',
+    'copi.f2': 'Saves',
+    'copi.f2v': 'A full working day every week (about 8 hours)',
     'copi.hoja': 'Order sheet',
     'copi.h.archivos': 'Files',
     'copi.h.archivosv': '3 · 214 sheets',
@@ -198,7 +213,7 @@
     'rep.lara.formato': 'Fragrance and beauty spots, night campaigns, luxury launches',
     'rep.lara.pie': 'Introduction reel · “Slow Gold” · 35 s',
     'rep.lucy.apodo': 'The Local Friend',
-    'rep.lucy.cuerpo': 'Andalusian through and through, and virtual by design. She shows the south the way a friend would: where you really eat well and what a tourist should never order. She speaks English and always signs off the same way: “See you in the South.” With her, travelling feels like coming home.',
+    'rep.lucy.cuerpo': 'Andalusian roots, virtual from birth. Sweet, fun and kind, she teaches you to travel the way a friend would: the trusted bilingual guide anyone would hope to meet on arrival. With her, a destination, a day trip or a proper local bar feels like a tip from someone who lives there.',
     'rep.lucy.clave': 'Connection',
     'rep.lucy.publico': 'English-speaking travellers aged 22–45 visiting Andalusia',
     'rep.lucy.encaja': 'Destinations and tourist boards · experiences and tours · transport and rentals · bars and local food',
@@ -270,7 +285,7 @@
     'noes.l2a': 'Use templates.',
     'noes.l2': 'Your business isn’t the one next door. We start from your problem, your audience and the way you speak, and every piece is made for you.',
     'noes.l3a': 'Hide what is generated.',
-    'noes.l3': 'We always say so, clearly, in the piece itself. Your customers’ trust is worth more than any effect.',
+    'noes.l3': 'We always say so, clearly: in the piece itself or with the label of the platform where it’s published. Your customers’ trust is worth more than any effect.',
     'noes.l4a': 'Tie you to a subscription to keep what is yours.',
     'noes.l4': 'The files and the code are yours from day one. If you ever decide to carry on by yourself, you take everything with you.',
 
@@ -302,7 +317,8 @@
     'buzon.err.muchos': 'You’ve written to us several times in a row. Wait a few minutes or message us on WhatsApp.',
     'buzon.err.red': 'It couldn’t be sent. Try again in a moment, or write to us by email or WhatsApp.',
     'buzon.privacidad': 'How we handle your data',
-    'pie.legal': 'Legal information',
+    'pie.legal': 'Information',
+    'pie.faq': 'FAQ',
     'pie.aviso': 'Legal notice',
     'pie.privacidad': 'Privacy',
     'pie.cookies': 'Cookies',
@@ -443,28 +459,32 @@
   var portada = document.getElementById('portada');
   var mesa = document.getElementById('mesa');
   var hayIntro = !!(window.MesaIntro && window.gsap && mesa);
-  /* QUIETOS MIENTRAS SE MONTA LA MESA (04-oct, Javi): hasta que acaba la intro (~14,5 s, más lo que tarden sus
-     imágenes, como mucho 6 s) la página no baja: ni rueda, ni dedo, ni teclas, ni enlaces #. Bajar a media intro
-     frenaba las demás animaciones y se trababa; además Javi prefiere que se vea entera. Por si la intro no avisa al
-     acabar, se suelta sola a los 26 s: la página nunca se queda atascada */
-  var raiz = document.documentElement, soltarTras = null;
+  /* MIENTRAS SE MONTA LA MESA hay dos cosas distintas (13-oct, Javi: «que a los 4 segundos ya puedas bajar»):
+     - mesa-montando: la intro corre y se ve «Saltar animación»; dura hasta que acaba (o a los 26 s, por si no avisa).
+     - mesa-quieta: la página no baja (ni rueda, ni dedo, ni teclas, ni enlaces #), para que nadie se la salte de
+       un tirón sin querer. Se suelta cuando la animación lleva BAJAR_A segundos de verdad (no desde que carga la
+       página: sus imágenes pueden tardar), y como mucho a los 10 s */
+  var raiz = document.documentElement, soltarTras = null, dejarBajarTras = null, BAJAR_A = 4;
   function bloquear() {
     if (!hayIntro) return;
-    raiz.classList.add('mesa-montando');
-    clearTimeout(soltarTras);
+    raiz.classList.add('mesa-montando', 'mesa-quieta');
+    clearTimeout(soltarTras); clearTimeout(dejarBajarTras);
     soltarTras = setTimeout(soltar, 26000);
+    dejarBajarTras = setTimeout(dejarBajar, 10000);
   }
-  function soltar() { clearTimeout(soltarTras); raiz.classList.remove('mesa-montando'); }
+  function dejarBajar() { clearTimeout(dejarBajarTras); raiz.classList.remove('mesa-quieta'); }
+  function soltar() { clearTimeout(soltarTras); dejarBajar(); raiz.classList.remove('mesa-montando'); }
   function montando() { return raiz.classList.contains('mesa-montando'); }
-  function quieta(e) { if (montando() && e.cancelable) e.preventDefault(); }
+  function bloqueada() { return raiz.classList.contains('mesa-quieta'); }
+  function quieta(e) { if (bloqueada() && e.cancelable) e.preventDefault(); }
   window.addEventListener('wheel', quieta, { passive: false });
   window.addEventListener('touchmove', quieta, { passive: false });
   window.addEventListener('keydown', function (e) {
-    if (!montando() || (e.target.closest && e.target.closest('input, textarea, select, button, [contenteditable]'))) return;
+    if (!bloqueada() || (e.target.closest && e.target.closest('input, textarea, select, button, [contenteditable]'))) return;
     if (['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'End', 'Home', ' ', 'Spacebar'].indexOf(e.key) >= 0) e.preventDefault();
   });
   document.addEventListener('click', function (e) {
-    var a = montando() && e.target.closest && e.target.closest('a[href^="#"]');
+    var a = bloqueada() && e.target.closest && e.target.closest('a[href^="#"]');
     if (a) { e.preventDefault(); e.stopImmediatePropagation(); }
   }, true);
   if (hayIntro) {
@@ -548,7 +568,10 @@
       if (avanceCada || !montando()) return;
       avanceCada = setInterval(function () {
         var tl = window.__intro && window.__intro.tl;
-        if (tl) botonSaltar.style.setProperty('--avance', tl.progress().toFixed(3));
+        if (tl) {
+          botonSaltar.style.setProperty('--avance', tl.progress().toFixed(3));
+          if (bloqueada() && tl.time() >= BAJAR_A) dejarBajar();
+        }
         if (!montando()) { clearInterval(avanceCada); avanceCada = null; }
       }, 100);
     };
@@ -940,7 +963,8 @@
     }
     var alto = 0;                                              // el hueco del más largo de los dos, para que nada salte
     ['en', 'es'].forEach(function (lang) { cargar(lang); pinta(texto.length, false); alto = Math.max(alto, pre.offsetHeight); });
-    pre.style.minHeight = alto + 'px';
+    // en em y no en px: si la letra cambia con el ancho (la tablet del aperitivo), el hueco cambia con ella
+    pre.style.minHeight = (alto / (parseFloat(getComputedStyle(pre).fontSize) || 16)).toFixed(3) + 'em';
     cargar(idioma);
     alIdioma.push(function (lang) {                            // al cambiar de idioma, el mismo punto en el otro texto
       cargar(lang);
@@ -948,19 +972,40 @@
     });
     if (QUIETO) { listo = true; pinta(texto.length, false); fig.classList.add('ejecutado'); return function () {}; }
     pinta(0, true);
-    return function (espera) {
-      setTimeout(function () {
-        var t0 = performance.now();
-        (function paso(ahora) {
-          var s = (ahora - t0) / 1000;
-          var antes = n;
-          while (n < tiempos.length && tiempos[n] <= s) n++;
-          if (n !== antes) pinta(n, true);
-          if (n < tiempos.length) requestAnimationFrame(paso);
-          else setTimeout(function () { listo = true; pinta(texto.length, false); fig.classList.add('ejecutado'); }, 600);
-        })(t0);
-      }, espera || 0);
-    };
+    /* EN BUCLE (15-oct, Javi: «que se reescriba a sí misma, que no acabe… para que parezca viva, igual que la cadena»):
+       escrita y ejecutada, se deja leer unos segundos, se borra deprisa de abajo arriba y vuelve a escribirse. Solo
+       mientras se ve: fuera de la pantalla espera y sigue al volver */
+    var PAUSA = 4500, BORRA = 900, vista = true, esperando = false;
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (e) {
+      vista = e[0].isIntersecting;
+      if (vista && esperando) { esperando = false; borrar(); }
+    }, { rootMargin: '80px 0px' }).observe(fig);
+    function teclear() {
+      listo = false; n = 0; fig.classList.remove('ejecutado');
+      var t0 = performance.now();
+      (function paso(ahora) {
+        var s = (ahora - t0) / 1000;
+        var antes = n;
+        while (n < tiempos.length && tiempos[n] <= s) n++;
+        if (n !== antes) pinta(n, true);
+        if (n < tiempos.length) requestAnimationFrame(paso);
+        else setTimeout(function () {
+          listo = true; pinta(texto.length, false); fig.classList.add('ejecutado');
+          setTimeout(otraVez, PAUSA);
+        }, 600);
+      })(t0);
+    }
+    function otraVez() { if (vista) borrar(); else esperando = true; }
+    function borrar() {
+      listo = false; fig.classList.remove('ejecutado');
+      var total = texto.length, t0 = performance.now();
+      (function paso(ahora) {
+        var k = Math.max(0, Math.round(total * (1 - (ahora - t0) / BORRA)));
+        if (k !== n) { n = k; pinta(k, true); }
+        if (k > 0) requestAnimationFrame(paso); else setTimeout(teclear, 350);
+      })(t0);
+    }
+    return function (espera) { setTimeout(teclear, espera || 0); };
   }
 
   var SVGNS = 'http://www.w3.org/2000/svg';
@@ -1459,10 +1504,10 @@
       // 09-oct: el toque se resuelve UNA vez (pointerup, pointercancel o pointerleave: el primero que llegue).
       // En móvil, al levantar el dedo, pointerup y pointerleave pueden llegar los dos seguidos; sin "resuelto"
       // el segundo volvía a disparar pararOSeguir() y la animación se quedaba pausada sin querer (Javi, 09-oct).
-      var MANTENER_MS = 180, enEspera = null, manteniendo = false, yaEstabaQuieta = false, resuelto = true;
+      var MANTENER_MS = 180, enEspera = null, manteniendo = false, yaEstabaQuieta = false, resuelto = true, x0 = 0, y0 = 0;
       function empezar(e) {
         if (e.pointerType === 'mouse') return;              // el ratón ya tiene su propio click en los mandos
-        yaEstabaQuieta = quieto; manteniendo = false; resuelto = false;
+        yaEstabaQuieta = quieto; manteniendo = false; resuelto = false; x0 = e.clientX; y0 = e.clientY;
         clearTimeout(enEspera);
         enEspera = setTimeout(function () {
           manteniendo = true;
@@ -1473,6 +1518,15 @@
         if (e.pointerType === 'mouse' || resuelto) return;
         resuelto = true;
         clearTimeout(enEspera);
+        /* DESLIZAR (15-oct, Javi: «en el móvil debería poder ser deslizable con táctil»): de lado, a la escena siguiente
+           o a la anterior, como en las stories; si estaba parada a propósito, sigue parada en la escena nueva */
+        var dx = e.clientX - x0, dy = e.clientY - y0;
+        if (e.type === 'pointerup' && Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+          if (manteniendo && !yaEstabaQuieta) quieto = false;
+          irA(Math.max(0, Math.min(INI.length - 1, pasoActual() + (dx < 0 ? 1 : -1))));
+          verMandos();
+          return;
+        }
         if (manteniendo) {
           if (!yaEstabaQuieta) { quieto = false; if (v.ended) irA(0); else seguir(); iconos(); verMandos(); }
         } else if (esVideo && e.type === 'pointerup') pararOSeguir();   // toque corto en el vídeo: el de siempre
@@ -1807,7 +1861,9 @@
   var acciones = new Map();
   /* POSAR (04-oct): cada pieza entra desde fuera por el lado de su columna (en el ordenador) o por el lado al que
      está torcida (en el móvil, donde todo va en una columna); el giro de entrada va hacia ese mismo lado */
-  var ATERRIZA = 2700;                                         // ms hasta que toca la mesa (css: posar-llega, 2,8 s)
+  function aterriza(el) {                                    // ms hasta que toca la mesa: lo que dura su posar-llega (css)
+    return (parseFloat(getComputedStyle(el).animationDuration) || 2.8) * 1000 - 100;
+  }
   function fuera(r, lado) {                                   // lo justo para que empiece entera fuera de la pantalla
     return Math.round(lado > 0 ? window.innerWidth - r.left + 40 : -(r.right + 40));
   }
@@ -1818,6 +1874,7 @@
     el.style.setProperty('--dx', fuera(r, lado) + 'px');
     el.style.setProperty('--dgiro', lado * (movil ? 6 : 8) + 'deg');
     el.classList.add('posado');
+    el.dispatchEvent(new CustomEvent('posandose'));
     /* PIES PEGADOS A SU VÍDEO (06-oct, noche, Javi: «no están adheridos a su animación, ya están fijos»): el pie que va
        justo debajo (moda, creadores, avatares) llega con su pieza, por el mismo camino y al mismo ritmo */
     var pie = el.nextElementSibling;
@@ -1830,11 +1887,34 @@
       pie.classList.add('pie--posado');
     }
     var retraso = parseFloat(getComputedStyle(el).getPropertyValue('--retraso')) || 0;   // las copias van escalonadas
-    setTimeout(function () { el.classList.add('asentado'); el.dispatchEvent(new CustomEvent('asentado')); }, ATERRIZA + retraso * 1000);
+    setTimeout(function () { el.classList.add('asentado'); el.dispatchEvent(new CustomEvent('asentado')); }, aterriza(el) + retraso * 1000);
   }
   document.querySelectorAll('.posable').forEach(function (el) {
     if (el.closest('.inscripcion')) return;                  // lo de la inscripción va en su orden (inscripcion)
     acciones.set(el, function () { posar(el); });
+  });
+  /* LA CADENA, CON SU TABLET (15-oct, Javi: «que se despliegue con la tablet a la misma vez; ahora va cuando bajas un
+     poco»): no espera a verse ella; se posa cuando se posa la tablet, por el mismo lado */
+  document.querySelectorAll('.maq.posable').forEach(function (fig) {
+    var mesa = fig.closest('.pliego__mesa'), tablet = mesa && mesa.querySelector('.editor.posable');
+    if (!tablet || !acciones.has(tablet)) return;
+    acciones.delete(fig);
+    var antes = acciones.get(tablet);
+    acciones.set(tablet, function () { antes(); posar(fig); });
+  });
+  /* LOS PASOS DEL ÁNFORA (15-oct, Javi: «el 1, 2, 3, 4, 5 y 6 ya está ahí puesto; tiene que entrar desplazándose
+     suavemente, como todo lo demás»): la barra de escenas (móvil) y la lista llegan desde fuera, uno detrás de otro */
+  function pasosLlegan(lista) {
+    lista.classList.add('llegan');
+    if (!lista.animate) return;
+    [].forEach.call(lista.children, function (li, k) {
+      var r = li.getBoundingClientRect(), dx = Math.round(window.innerWidth - Math.max(0, r.left) + 40);
+      li.animate([{ translate: dx + 'px -24px' }, { translate: '0 0' }],
+        { duration: 1900, delay: k * 110, easing: 'cubic-bezier(.22, .61, .24, 1)', fill: 'backwards' });
+    });
+  }
+  document.querySelectorAll('.taller__pasos, .taller__hilo').forEach(function (lista) {
+    acciones.set(lista, function () { pasosLlegan(lista); });
   });
   var DESENROLLA = 1750;                                       // lo que tarda el mármol en desenrollarse
   estelas.forEach(function (el) {
@@ -1862,7 +1942,10 @@
   }
   function cabecera(cab) {
     cab.classList.add('cab--texto');
-    var piedra = cab.querySelector('.piedra');
+    cab._texto = Date.now();                                   // lo que va debajo puede esperar a esto (la muestra)
+    cab.dispatchEvent(new CustomEvent('cab:texto'));
+    var sec = cab.closest('section');                          // la piedra puede esperar al final de la sección
+    var piedra = cab.querySelector('.piedra') || (sec && sec.querySelector('.piedra'));
     if (!piedra) return;
     cuandoSeVea(piedra, function () {                          // entra a la vez que se ilumina el texto
       posarPiedra(piedra);
@@ -1908,7 +1991,7 @@
   }
   function ademas(el, hacer) {                                 // se posa y además se escribe: escribe al tocar la mesa
     var antes = acciones.get(el);
-    acciones.set(el, function () { if (antes) antes(); hacer(antes ? ATERRIZA : 0); });
+    acciones.set(el, function () { if (antes) antes(); hacer(antes ? aterriza(el) : 0); });
   }
   document.querySelectorAll('[data-recep]').forEach(function (fig) { ademas(fig, prepararRecep(fig)); });
   document.querySelectorAll('.editor').forEach(function (fig) { ademas(fig, prepararEditor(fig)); });
@@ -2131,6 +2214,58 @@
       });
     }, { rootMargin: '0px 0px -12% 0px', threshold: 0.3 });
     acciones.forEach(function (_, el) { vigia.observe(el); });
+    /* LA MUESTRA DE «QUÉ HACEMOS» (15-oct, Javi: «tienen que arrancar un poco antes… está demasiado abajo el comienzo»):
+       antes cada pieza esperaba a verse en un tercio, cuando su borde de arriba ya iba por los tres cuartos de la
+       pantalla, y se veía el título solo con el hueco debajo. Ahora cada rama arranca en cuanto su título asoma por
+       abajo: la pieza empieza a llegar justo antes de entrar en la pantalla y el título se ilumina a la vez (css).
+       15-oct (Javi: «los títulos no pueden aparecer antes que el desenrollamiento del mármol y la descripción; un poco
+       después, y luego los ejemplos, para que sea coordinado»): en orden, mármol → descripción → (1 s) títulos →
+       (0,7 s) ejemplos. Si la cabecera ya se encendió hace rato (se baja despacio, o en el móvil la segunda rama),
+       el título sale al asomar y los ejemplos 0,7 s después.
+       14-oct (Javi: «te has colado saliendo tan rápido: un poco más abajo, pero no tan abajo como antes»): los ejemplos
+       esperan además a que el borde de arriba de su mesa pase del 88 % de la pantalla (antes, del 72-75 %; con el
+       cambio del 15, salían aún fuera, por debajo). Los vídeos del abanico ya se ponen en marcha con el título, de
+       modo que llegan moviéndose (bucle de abajo, «preparate») */
+    var TITULO_TRAS_TEXTO = 1000, PIEZAS_TRAS_TITULO = 700, ESPERA_MAX = 6000;
+    function arrancarRama(pliego) {
+      var cab = pliego.closest('section').querySelector('.cab'), hecho = false, mesaVista = false, tituloHecho = false;
+      function piezas() {
+        if (!mesaVista || !tituloHecho || pliego._posada) return;
+        pliego._posada = true;
+        pliego.querySelectorAll('.posable').forEach(function (el) {
+          var hacer = acciones.get(el);
+          if (hacer) { vigia.unobserve(el); hacer(); }
+        });
+      }
+      var mesa = pliego.querySelector('.pliego__mesa');
+      var vigiaMesa = new IntersectionObserver(function (e) {
+        if (!e[0].isIntersecting) return;
+        vigiaMesa.disconnect(); mesaVista = true; piezas();
+      }, { rootMargin: '0px 0px -12% 0px', threshold: 0 });
+      if (mesa) vigiaMesa.observe(mesa); else mesaVista = true;
+      // los vídeos se cargan y arrancan ya al asomar la rama (aún sin verse): así van en marcha cuando llegan
+      pliego.querySelectorAll('.posable').forEach(function (el) { el.dispatchEvent(new CustomEvent('preparate')); });
+      function ya() {
+        if (hecho) return; hecho = true;
+        pliego.classList.add('pliego--visto');
+        setTimeout(function () { tituloHecho = true; piezas(); }, PIEZAS_TRAS_TITULO);
+      }
+      if (!cab || cab._texto) { setTimeout(ya, cab ? Math.max(0, cab._texto + TITULO_TRAS_TEXTO - Date.now()) : 0); return; }
+      cab.addEventListener('cab:texto', function () { setTimeout(ya, TITULO_TRAS_TEXTO); }, { once: true });
+      setTimeout(ya, ESPERA_MAX);                              // por si la cabecera no llegara a encenderse
+    }
+    document.documentElement.classList.add('muestra-sincro');
+    var vigiaMuestra = new IntersectionObserver(function (entradas) {
+      entradas.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        vigiaMuestra.unobserve(e.target);
+        arrancarRama(e.target);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0 });
+    document.querySelectorAll('.plegable--muestra .pliego').forEach(function (p) {
+      p.querySelectorAll('.posable').forEach(function (el) { vigia.unobserve(el); });
+      vigiaMuestra.observe(p);
+    });
     /* TRABAJOS EN EL MÓVIL (04-oct, Javi): el título entra a la vez que su vídeo o su animación, cuando ya se ve al
        menos la mitad de arriba; antes asomaba el título solo, con el hueco debajo. Lo de cada trabajo se posa a la
        vez (deja de vigilarlo el vigía general). 06-oct (Javi, con captura): «la mitad» era la mitad del recuadro, y el
@@ -2160,10 +2295,15 @@
   document.querySelectorAll('video[data-bucle]').forEach(function (v) {
     v.muted = true;
     var copia = v.closest('.posable'), visible = false;
+    // las fichas de «Sobre la mesa» (15-oct, Javi): ya se mueven mientras llegan, no esperan a tocar la mesa.
+    // El abanico de «Qué hacemos» (14-oct, Javi: «tienen que estar reproduciéndose desde que empieza el
+    // desplazamiento»): arranca con su título («preparate», antes de posarse), así llega ya en marcha
+    var alVuelo = !!(copia && (copia.classList.contains('ap-ficha__foto') || copia.classList.contains('copia')));
+    var preparada = false;
     function dale() {
       if (!visible) return;
       if (!v.src) v.src = v.dataset.src;                        // se va cargando mientras llega
-      if (copia && !copia.classList.contains('asentado')) return;
+      if (copia && !preparada && !copia.classList.contains(alVuelo ? 'posado' : 'asentado')) return;
       /* A LA PAR (04-oct, Javi): las tres duran lo mismo (546 fotogramas); la que se posa más tarde se engancha al
          tiempo de la que ya va, y así van juntas en cada vuelta */
       var mesa = v.closest('.copias');
@@ -2173,46 +2313,361 @@
       }
       var p = v.play(); if (p && p.catch) p.catch(function () {});
     }
-    if (copia) copia.addEventListener('asentado', dale);
+    if (copia && alVuelo) copia.addEventListener('posandose', function () { if (!v.src) v.src = v.dataset.src; dale(); });
+    else if (copia) copia.addEventListener('asentado', dale);
+    if (copia) copia.addEventListener('preparate', function () { preparada = true; v.preload = 'auto'; if (!v.src) v.src = v.dataset.src; dale(); });
+    /* A LA PAR TAMBIÉN AL ARRANCAR JUNTAS (14-oct): si las tres arrancan a la vez, cada una empieza cuando le llegan
+       sus datos y quedaban hasta medio segundo desfasadas. Al empezar a moverse de verdad, una vez, se engancha al
+       tiempo de la que ya iba */
+    var enganchada = false;
+    v.addEventListener('playing', function () {
+      var mesa = v.closest('.copias');
+      if (!mesa || enganchada) return;
+      enganchada = true;
+      var guia = [].filter.call(mesa.querySelectorAll('video[data-bucle]'), function (o) {
+        return o !== v && !o.paused && o.readyState >= 3 && o.currentTime > 0.05;
+      })[0];
+      if (guia && Math.abs(guia.currentTime - v.currentTime) > 0.08) v.currentTime = guia.currentTime;
+    });
     if (!('IntersectionObserver' in window)) { visible = true; dale(); return; }
-    new IntersectionObserver(function (e) { visible = e[0].isIntersecting; if (visible) dale(); else v.pause(); }, { rootMargin: '120px 0px' }).observe(v);
+    new IntersectionObserver(function (e) {
+      // mientras la ficha llega (sale de fuera de la pantalla) no cuenta como «fuera»: sigue en marcha
+      if (!e[0].isIntersecting && alVuelo && copia.classList.contains('posado') && !copia.classList.contains('asentado')) return;
+      visible = e[0].isIntersecting; if (visible) dale(); else v.pause();
+    }, { rootMargin: '120px 0px' }).observe(v);
   });
 
   /* ── Desplegables: la piedra sujeta la losa; al levantarla se abre la sección ── */
+  /* LA PIEDRA, DE SITIO (14-oct, Javi): cerrada, al final de la sección, debajo de la muestra («Ver todo…»); abierta,
+     en su sitio de siempre, junto al texto de la cabecera («Cerrar»). Si la sección no tiene pie, no se mueve */
+  function moverPiedra(sec, abierta) {
+    var piedra = sec.querySelector('.piedra'), pie = sec.querySelector('.seccion__pie'), cab = sec.querySelector('.cab__texto');
+    if (!piedra || !pie || !cab) return;
+    var sitio = abierta ? cab : pie;
+    if (piedra.parentNode === sitio) return;
+    var conFoco = document.activeElement === piedra;
+    sitio.appendChild(piedra);
+    // al cambiarla de sitio el navegador le reinicia la entrada (llegaba otra vez volando desde fuera): ya llegó
+    piedra.querySelectorAll('img').forEach(function (img) {
+      if (img.getAnimations) img.getAnimations().forEach(function (a) { if (/^piedra-/.test(a.animationName)) a.finish(); });
+    });
+    if (conFoco) piedra.focus({ preventScroll: true });       // quien va con teclado no pierde su sitio
+  }
+  /* LEYENDA Y RÓTULOS A LA MISMA ALTURA (15-oct, Javi: simetría): cerrada y en el ordenador, «Guion · Generación ·
+     Montaje» (bajo las fotos) se coloca a la altura de «Llega · Agente · Listo» (bajo la tablet). Cada columna mide
+     distinto según el ancho, así que se mide: con posiciones de maqueta (offsetTop), que no cambian mientras algo
+     se mueve */
+  function alturaReal(el) { var y = 0; while (el) { y += el.offsetTop; el = el.offsetParent; } return y; }
+  function alinearLeyenda() {
+    var ley = document.querySelector('.copias__ley'), caja = document.querySelector('.maq'), rot = caja && caja.querySelector('.cadena__rot');   // la figura: se mueve con sus rótulos
+    if (!ley || !rot) return;
+    var sec = ley.closest('.plegable');
+    ley.style.translate = '';
+    if (!sec || sec.classList.contains('abierta') || window.innerWidth <= 860) return;
+    var copias = ley.closest('.copias');
+    // por el centro de las letras y con medidas de maqueta: el rótulo, en las coordenadas del dibujo (getBBox), que no
+    // cambian aunque la cadena esté llegando girada; la leyenda, por offsetTop
+    var svg = rot.ownerSVGElement, bb = rot.getBBox(), vb = svg.viewBox.baseVal;
+    var rotY = alturaReal(caja) + (bb.y + bb.height / 2) * caja.offsetHeight / vb.height;
+    var leyY = alturaReal(copias) + ley.offsetTop + ley.offsetHeight / 2;
+    ley.style.translate = '0 ' + Math.round(rotY - leyY) + 'px';
+  }
+  var alinearLuego;
+  window.addEventListener('resize', function () { clearTimeout(alinearLuego); alinearLuego = setTimeout(alinearLeyenda, 150); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(alinearLeyenda);
+  window.addEventListener('load', alinearLeyenda);
+  alIdioma.push(function () { setTimeout(alinearLeyenda, 0); });
   function abrir(sec, abierta) {
-    var boton = sec.querySelector('.piedra'), pliegue = sec.querySelector('.pliegue');
+    var boton = sec.querySelector('.piedra'), pliegue = sec.querySelector('.pliegue'), ap = sec.querySelector('.aperitivo');
     sec.classList.toggle('abierta', abierta);
     boton.setAttribute('aria-expanded', abierta ? 'true' : 'false');
-    if ('inert' in pliegue) pliegue.inert = !abierta;
+    // la muestra de «Qué hacemos» está dentro del pliegue y se ve cerrada: ese pliegue nunca es inerte
+    if ('inert' in pliegue) pliegue.inert = !abierta && !sec.classList.contains('plegable--muestra');
+    if (ap && !ap._recoger) ap.hidden = abierta;
+    moverPiedra(sec, abierta);
+    alinearLeyenda();
   }
   /* PERGAMINO (03-oct, noche): al pulsar, la sección se desenrolla (o se enrolla) con suavidad. Solo rueda lo que
      se ve: de donde empieza el pliegue hasta el pie de la pantalla; lo de más abajo se abre o se recoge de golpe,
      sin verse. Ritmo según lo que hay que recorrer (0,9 a 1,6 s). Si se pulsa a medio rodar, sigue desde donde va.
      Antes: grid 0fr→1fr con una curva de arranque brusco (casi todo en el primer instante) y, al cerrar, la página
-     se movía a la vez (scrollIntoView); ahora la piedra se queda donde está */
-  var RODAR = 'cubic-bezier(.45, .05, .2, 1)';
+     se movía a la vez (scrollIntoView).
+     14-oct (la piedra, al final): lo que el usuario tiene delante se queda quieto en la pantalla (al abrir, la
+     muestra; al cerrar, la cabecera) aunque la piedra cambie de sitio por encima. En «Qué hacemos» las piezas se
+     recolocan (recomponer); en «Sobre la mesa» las fichas se recogen mientras se desenrolla el trabajo */
+  var RODAR = 'cubic-bezier(.45, .05, .2, 1)', RECOLOCA = 1500, RECOLOCA_MOVIL = 1150;
+  function enMovil() { return window.matchMedia('(max-width: 860px)').matches; }
+  function curvaDe(x1, y1, x2, y2) {                           // una cubic-bezier hecha a mano: dónde va algo en cada instante
+    function eje(a, b, t) { return ((1 - 3 * b + 3 * a) * t + (3 * b - 6 * a)) * t * t + 3 * a * t; }
+    return function (x) {
+      var lo = 0, hi = 1, t = x;
+      for (var i = 0; i < 22; i++) { t = (lo + hi) / 2; if (eje(x1, x2, t) < x) lo = t; else hi = t; }
+      return eje(y1, y2, t);
+    };
+  }
+  var curvaRodar = curvaDe(.45, .05, .2, 1), curvaPulso = curvaDe(.65, 0, .35, 1);
+  function sinSuave(hacer) {                                    // html va con scroll-behavior: smooth; esto, de golpe
+    var h = document.documentElement, antes = h.style.scrollBehavior;
+    h.style.scrollBehavior = 'auto'; hacer(); h.style.scrollBehavior = antes;
+  }
+  function llevar(el, antes, ms) {                             // de donde estaba a su sitio nuevo, sin saltos
+    var b = el.getBoundingClientRect(), dx = antes.left - b.left, dy = antes.top - b.top;
+    if (Math.abs(dx) < 1 && Math.abs(dy) < 1) return;
+    el._llevar = el.animate([{ translate: dx + 'px ' + dy + 'px' }, { translate: '0 0' }], { duration: ms, easing: RODAR });
+    el._llevar.onfinish = function () { el._llevar = null; };
+  }
+  /* LA CORTINA (14-oct, móvil): un texto que aparece (o se va) entre dos piezas que se mueven se ve justo en el hueco
+     que deja la pieza de debajo: asoma de arriba abajo a la vez que ella baja y, al cerrar, ella lo tapa al subir.
+     Se calcula con la misma curva que mueve la pieza, en 16 pasos */
+  function cortina(t, caja, debajo, dura, queda) {
+    var h = caja.height, kf = [];
+    if (h < 1) return;
+    for (var k = 0; k <= 16; k++) {
+      var s = k / 16, v = Math.max(0, Math.min(h, debajo(curvaRodar(s)) - caja.top));
+      kf.push({ clipPath: 'inset(0 0 ' + (h - v).toFixed(1) + 'px 0)', opacity: (0.25 + 0.75 * v / h).toFixed(3), offset: s });
+    }
+    t._cortina = t.animate(kf, { duration: dura, easing: 'linear', fill: queda ? 'forwards' : 'none' });   // al cerrar, tapado hasta soltarlo
+  }
+  /* al cerrar, los textos ya no ocupan sitio: se quedan pintados donde estaban mientras se van */
+  function fijarTexto(t, caja, display) {
+    t.style.display = display; t.style.position = 'absolute'; t.style.margin = '0';
+    t.style.width = caja.width + 'px'; t.style.pointerEvents = 'none';
+    var p = (t.offsetParent || document.body).getBoundingClientRect();
+    t.style.left = (caja.left - p.left) + 'px'; t.style.top = (caja.top - p.top) + 'px';
+  }
+  function soltarTexto(t) {
+    if (t._cortina) { t._cortina.cancel(); t._cortina = null; }
+    ['display', 'position', 'margin', 'width', 'pointerEvents', 'left', 'top'].forEach(function (k) { t.style[k] = ''; });
+  }
+  /* un título que cambia mucho de sitio no vuela: una copia quieta se apaga donde estaba (con su ancho de antes, para
+     que no cambie de líneas) mientras el de verdad se enciende en el nuevo. La copia va en su mismo pliego (mismos
+     estilos) y no ocupa sitio */
+  function fantasma(el, caja, ms) {
+    var c = el.cloneNode(true), pliego = el.closest('.pliego');
+    c.removeAttribute('id'); c.removeAttribute('data-i18n'); c.setAttribute('aria-hidden', 'true'); c.classList.add('fantasma');
+    c.style.position = 'absolute'; c.style.margin = '0'; c.style.width = caja.width + 'px'; c.style.pointerEvents = 'none';
+    pliego.appendChild(c);
+    var p = (c.offsetParent || document.body).getBoundingClientRect();
+    c.style.left = (caja.left - p.left) + 'px'; c.style.top = (caja.top - p.top) + 'px';
+    var a = c.animate([{ opacity: 1 }, { opacity: 0 }], { duration: ms, easing: 'ease-out', fill: 'forwards' });
+    a.onfinish = a.oncancel = function () { if (c.parentNode) c.parentNode.removeChild(c); };
+  }
   function desplegar(sec, abierta) {
-    var pl = sec.querySelector('.pliegue');
-    var desde = pl.getBoundingClientRect().height;
+    var pl = sec.querySelector('.pliegue'), ap = sec.querySelector('.aperitivo'), piedra = sec.querySelector('.piedra');
+    var muestra = sec.classList.contains('plegable--muestra'), movil = muestra && enMovil();
+    var piezas = [].slice.call(sec.querySelectorAll(muestra ? '.pliego .subtitulo, .editor, .maq-caja, .copias' : '.nada'));
+    var textos = muestra ? [].slice.call(sec.querySelectorAll('.pliego__texto > :not(.subtitulo)')) : [];
+    textos.forEach(soltarTexto);
+    [].forEach.call(sec.querySelectorAll('.fantasma'), function (c) { c.parentNode.removeChild(c); });
+    piezas.concat(piedra).forEach(function (el) { if (el._llevar) { el._llevar.cancel(); el._llevar = null; } });
     if (pl._rodar) { pl._rodar.cancel(); pl._rodar = null; }
+    if (ap && ap._anim) { ap._anim.cancel(); ap._anim = null; }
+    var antes = piezas.map(function (el) { return el.getBoundingClientRect(); });
+    var textosAntes = abierta ? null : textos.map(function (t) { return { caja: t.getBoundingClientRect(), display: getComputedStyle(t).display }; });
+    var piedraAntes = piedra.getBoundingClientRect();
+    // al abrir, lo que se está mirando (el pliegue, ya subido al principio); al cerrar, la cabecera
+    var ancla = abierta ? (ap && !ap.hidden ? ap : pl) : sec.querySelector('.cab');
+    var anclaAntes = ancla.getBoundingClientRect().top;
+    var desde = pl.getBoundingClientRect().height;
+    var apAlto = ap && !ap.hidden ? ap.getBoundingClientRect().height : 0;
+    // lo compensamos nosotros, no el navegador (Chrome, en la página principal, solo atiende al de body)
+    var anclajes = [document.documentElement, document.body];
+    anclajes.forEach(function (n) { n.style.overflowAnchor = 'none'; });
+    if (ap) ap._recoger = abierta && !ap.hidden && !!ap.animate;
     abrir(sec, abierta);
-    if (!pl.animate) return;
-    var caja = pl.getBoundingClientRect();
-    var vista = Math.max(0, window.innerHeight - caja.top + 60);
-    var de = Math.min(desde, vista), hasta = Math.min(abierta ? caja.height : 0, vista);
-    if (Math.abs(hasta - de) < 4) return;
-    pl.classList.add('rodando');
-    pl._rodar = pl.animate([{ height: de + 'px' }, { height: hasta + 'px' }],
-      { duration: Math.round(Math.min(1600, Math.max(900, Math.abs(hasta - de) * 1.7))), easing: RODAR });
-    pl._rodar.onfinish = function () { pl.classList.remove('rodando'); pl._rodar = null; };
+    var mover = ancla.getBoundingClientRect().top - anclaAntes;
+    if (Math.abs(mover) > 1) sinSuave(function () { window.scrollBy(0, mover); });
+    var soltarAnclaje = function () { anclajes.forEach(function (n) { n.style.overflowAnchor = ''; }); };
+    if (!pl.animate) { if (ap) { ap._recoger = false; ap.hidden = abierta; } soltarAnclaje(); return; }
+    var dura;
+    if (muestra) {
+      var hasta = pl.getBoundingClientRect().height, CORTE = 0.45;
+      dura = movil ? RECOLOCA_MOVIL : RECOLOCA;
+      sec.classList.add('preparando');                         // su capa, mientras dura (ya puesta si se fue a pulsar)
+      clearTimeout(sec._sinCapa);
+      sec._sinCapa = setTimeout(function () { sec.classList.remove('preparando'); }, dura + 150);
+      var mov = piezas.map(function (el, i) {
+        var b = el.getBoundingClientRect();
+        return { el: el, b: b, dx: antes[i].left - b.left, dy: antes[i].top - b.top };
+      });
+      var dentro = sec.querySelector('.pliegue__dentro');
+      dentro.style.position = 'relative';                      // para lo que se queda pintado donde estaba
+      setTimeout(function () { if (!sec.querySelector('.fantasma') && !textos.some(function (t) { return t.style.position; })) dentro.style.position = ''; }, dura + 60);
+      if (!abierta) {                                          // los textos se quedan donde estaban mientras se van
+        textos.forEach(function (t, k) { fijarTexto(t, textosAntes[k].caja, textosAntes[k].display); });
+        setTimeout(function () { if (!sec.classList.contains('abierta')) textos.forEach(soltarTexto); }, dura + 30);
+      }
+      if (movil) {
+        /* EN EL MÓVIL (14-oct, Javi: «que se recoloque todo muy suave y muy sutilmente… en el móvil es donde me
+           chirría»): una sola columna y el mismo orden abierta y cerrada, así que nada se cruza. Todo baja (o sube) a la
+           vez y con la misma curva, el pliegue crece a su paso y cada texto asoma por el hueco que le deja la pieza de
+           debajo (al cerrar, la pieza que sube lo va tapando). Nada desaparece de golpe ni se queda la pantalla vacía */
+        // sin recortar (sin .rodando): nada pasa del borde de abajo, que va a su ritmo, y arriba la primera pieza
+        // puede venir de un poco más arriba que el pliegue (la piedra ha entrado en la cabecera y lo ha empujado)
+        if (Math.abs(hasta - desde) > 4) {
+          pl._rodar = pl.animate([{ height: desde + 'px' }, { height: hasta + 'px' }], { duration: dura, easing: RODAR });
+          pl._rodar.onfinish = function () { pl._rodar = null; };
+        }
+        mov.forEach(function (m) {
+          if (Math.abs(m.dx) < 1 && Math.abs(m.dy) < 1) return;
+          m.el._llevar = m.el.animate([{ translate: m.dx + 'px ' + m.dy + 'px' }, { translate: '0 0' }], { duration: dura, easing: RODAR });
+          m.el._llevar.onfinish = function () { m.el._llevar = null; };
+        });
+        var plArriba = pl.getBoundingClientRect().top;
+        textos.forEach(function (t, k) {
+          var caja = abierta ? t.getBoundingClientRect() : textosAntes[k].caja, sig = null;
+          // la pieza que tiene justo debajo donde se ve el texto (abierta: al final; al cerrar: al principio)
+          mov.forEach(function (m) {
+            var top = abierta ? m.b.top : m.b.top + m.dy;
+            if (top >= caja.bottom - 2 && (!sig || top < (abierta ? sig.b.top : sig.b.top + sig.dy))) sig = m;
+          });
+          var debajo;
+          if (sig) {
+            var hueco = (abierta ? sig.b.top : sig.b.top + sig.dy) - caja.bottom;
+            debajo = function (e) { return sig.b.top + sig.dy * (1 - e) - hueco; };
+          } else {                                             // el último: lo destapa (o lo tapa) el borde del pliegue
+            var holgura = plArriba + (abierta ? hasta : desde) - caja.bottom;
+            debajo = function (e) { return plArriba + desde + (hasta - desde) * e - holgura; };
+          }
+          cortina(t, caja, debajo, dura, !abierta);
+        });
+      } else {
+        /* COMO QUIEN RECOLOCA UNA MESA (14-oct, Javi: que nada pase por dentro de nada). Al abrir, las fotos bajan
+           primero (el pliegue crece a su paso) y luego van a su sitio; la tablet espera a que quede el hueco y se
+           desliza. Al cerrar, al revés: la tablet vuelve primero, las fotos van por abajo y suben al final (el pliegue
+           encoge a su paso). Los títulos que cambian mucho de sitio no vuelan: se apagan en su sitio y se encienden en
+           el nuevo (antes desaparecían de golpe) */
+        if (Math.abs(hasta - desde) > 4) {
+          pl.classList.add('rodando');
+          pl._rodar = pl.animate(abierta
+            ? [{ height: desde + 'px', easing: RODAR }, { height: hasta + 'px', offset: CORTE }, { height: hasta + 'px' }]
+            : [{ height: desde + 'px' }, { height: desde + 'px', offset: CORTE, easing: RODAR }, { height: hasta + 'px' }],
+            { duration: dura });
+          pl._rodar.onfinish = function () { pl.classList.remove('rodando'); pl._rodar = null; };
+        }
+        mov.forEach(function (m, i) {
+          var el = m.el, dx = m.dx, dy = m.dy;
+          if (Math.abs(dx) < 1 && Math.abs(dy) < 1) return;
+          var t = function (x, y) { return { translate: x + 'px ' + y + 'px' }; }, kf;
+          if (el.classList.contains('subtitulo')) {
+            if (Math.hypot(dx, dy) < 60) {                    // se corre un poco: al abrir, cuando la tablet ya ha pasado
+              kf = abierta ? [t(dx, dy), Object.assign(t(dx, dy), { offset: 0.66, easing: RODAR }), t(0, 0)]
+                : [Object.assign(t(dx, dy), { easing: RODAR }), Object.assign(t(0, 0), { offset: 0.45 }), t(0, 0)];
+              el._llevar = el.animate(kf, { duration: dura });
+              el._llevar.onfinish = function () { el._llevar = null; };
+              return;
+            }
+            fantasma(el, antes[i], 260);
+            el._llevar = el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 600, delay: dura * 0.78, easing: 'ease', fill: 'backwards' });
+            el._llevar.onfinish = function () { el._llevar = null; };
+            return;
+          }
+          if (el.classList.contains('copias')) kf = abierta
+            ? [Object.assign(t(dx, dy), { easing: RODAR }), Object.assign(t(dx, 0), { offset: CORTE, easing: RODAR }), t(0, 0)]
+            : [t(dx, dy), Object.assign(t(dx, dy), { offset: 0.1, easing: RODAR }), Object.assign(t(0, dy), { offset: 0.5, easing: RODAR }), t(0, 0)];
+          else kf = abierta                                    // la tablet y su cadena, juntas
+            ? [t(dx, dy), Object.assign(t(dx, dy), { offset: 0.3, easing: RODAR }), t(0, 0)]
+            : [Object.assign(t(dx, dy), { easing: RODAR }), Object.assign(t(0, 0), { offset: 0.6 }), t(0, 0)];
+          el._llevar = el.animate(kf, { duration: dura });
+          el._llevar.onfinish = function () { el._llevar = null; };
+        });
+        textos.forEach(function (txt, k) {
+          var av = txt.closest('.pliego--vuelta');             // los de audiovisual, cuando las fotos ya han dejado su sitio
+          if (abierta) txt._cortina = txt.animate([{ opacity: 0, translate: '0 14px' }, { opacity: 1, translate: '0 0' }],
+            { duration: 750, delay: dura * (av ? 0.78 : 0.6) + k * 90, easing: 'cubic-bezier(.16, 1, .3, 1)', fill: 'backwards' });
+          else txt._cortina = txt.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 240, easing: 'ease-out', fill: 'forwards' });
+        });
+      }
+    } else {
+      var caja = pl.getBoundingClientRect();
+      var vista = Math.max(0, window.innerHeight - caja.top + apAlto + 60);   // las fichas se recogen a la vez
+      var de = Math.min(desde, vista), hastaV = Math.min(abierta ? caja.height : 0, vista);
+      dura = Math.round(Math.min(1600, Math.max(900, Math.abs(hastaV - de) * 1.7)));
+      if (Math.abs(hastaV - de) >= 4) {
+        pl.classList.add('rodando');
+        pl._rodar = pl.animate([{ height: de + 'px' }, { height: hastaV + 'px' }], { duration: dura, easing: RODAR });
+        pl._rodar.onfinish = function () { pl.classList.remove('rodando'); pl._rodar = null; };
+      }
+      if (ap) {                                                // las fichas: se recogen al abrir; vuelven al cerrar
+        var alto = abierta ? apAlto : ap.getBoundingClientRect().height, margen = getComputedStyle(ap).marginTop;
+        var lleno = { height: alto + 'px', marginTop: margen, opacity: 1 }, vacio = { height: '0px', marginTop: '0px', opacity: 0 };
+        ap.style.overflow = 'hidden';
+        // forwards: al acabar de recogerse no vuelve a asomar un instante antes de esconderse
+        var anim = ap._anim = ap.animate(abierta ? [lleno, vacio] : [vacio, lleno], { duration: dura, easing: RODAR, fill: 'forwards' });
+        anim.onfinish = function () {
+          if (ap._recoger) { ap._recoger = false; ap.hidden = true; }
+          ap.style.overflow = ''; anim.cancel(); if (ap._anim === anim) ap._anim = null;
+        };
+      }
+    }
+    var posarse = function (ms) {                              // la piedra aparece en su sitio nuevo, como posándose
+      piedra.animate([{ opacity: 0, translate: '0 -14px' }, { opacity: 1, translate: '0 0' }],
+        { duration: 600, delay: ms, easing: 'cubic-bezier(.16, 1, .3, 1)', fill: 'backwards' });
+    };
+    // en «Qué hacemos» no cruza la sección volando por encima de las piezas: se posa arriba cuando ya hay sitio
+    if (abierta && muestra) posarse(dura * 0.55);
+    else if (abierta) llevar(piedra, piedraAntes, dura);       // en «Sobre la mesa», sube a su sitio
+    else if (sec.querySelector('.seccion__pie')) posarse(dura - 150);   // y se posa al final
+    clearTimeout(desplegar._soltar);
+    desplegar._soltar = setTimeout(soltarAnclaje, dura + 100);
+  }
+  /* «VER TODO» (14-oct, en el móvil; 15-oct, también en el ordenador, Javi: «que te lleve arriba del todo para
+     empezar la lectura, justo donde empieza el software a medida»): la piedra está al final de la muestra y abrir ahí
+     dejaba al usuario a mitad de la sección. Antes de recolocar, la página sube suave hasta que el primer título queda
+     arriba, bajo la barra, y la recolocación se ve delante. Si el usuario toca la pantalla mientras sube, se para y
+     se abre ahí mismo */
+  function subirYAbrir(sec) {
+    var pl = sec.querySelector('.pliegue'), tit = sec.querySelector('.pliego .subtitulo') || pl;
+    sec.classList.add('preparando'); clearTimeout(sec._sinCapa);   // mientras sube, las piezas ya van a su capa
+    var barra = document.getElementById('barra'), arriba = barra ? Math.max(0, barra.getBoundingClientRect().bottom) : 0;
+    var d = tit.getBoundingClientRect().top - (arriba + 24);
+    if (Math.abs(d) < 40 || !window.requestAnimationFrame) { desplegar(sec, true); return; }
+    var y0 = window.scrollY, ms = Math.round(Math.min(950, Math.max(450, Math.abs(d) * 0.45))), t0 = null, hecho = false;
+    var acabar = function () {
+      if (hecho) return;
+      hecho = true; sec._subiendo = false;
+      window.removeEventListener('touchstart', acabar); window.removeEventListener('wheel', acabar);
+      desplegar(sec, true);
+    };
+    sec._subiendo = true;
+    window.addEventListener('touchstart', acabar, { passive: true }); window.addEventListener('wheel', acabar, { passive: true });
+    requestAnimationFrame(function paso(ahora) {
+      if (hecho) return;
+      if (t0 === null) t0 = ahora;
+      var s = Math.min(1, (ahora - t0) / ms);
+      sinSuave(function () { window.scrollTo(0, y0 + d * curvaPulso(s)); });
+      if (s < 1) requestAnimationFrame(paso); else acabar();
+    });
   }
   var plegables = document.querySelectorAll('.plegable');
   plegables.forEach(function (sec) {
     var boton = sec.querySelector('.piedra');
     abrir(sec, false);
-    boton.addEventListener('click', function () { desplegar(sec, !sec.classList.contains('abierta')); });
+    if (sec.classList.contains('plegable--muestra')) {
+      /* LAS CAPAS, SOLO AL IR A USARLAS (14-oct): al acercarse a la piedra (ratón, dedo o teclado) las piezas pasan a
+         su propia capa (css, .preparando); desplegar() la quita al acabar de recolocar, y si no se pulsa, a los 4 s */
+      var preparar = function () {
+        sec.classList.add('preparando');
+        clearTimeout(sec._sinCapa);
+        sec._sinCapa = setTimeout(function () { sec.classList.remove('preparando'); }, 4000);
+      };
+      ['pointerenter', 'touchstart', 'focus'].forEach(function (ev) { boton.addEventListener(ev, preparar, { passive: true }); });
+    }
+    boton.addEventListener('click', function () {
+      if (sec._subiendo) return;
+      var abrirla = !sec.classList.contains('abierta');
+      if (abrirla && sec.classList.contains('plegable--muestra')) subirYAbrir(sec);
+      else desplegar(sec, abrirla);
+    });
     sec.querySelector('.cab__losa .estela').addEventListener('click', function () { boton.click(); });
   });
+  /* LAS RAYAS QUE INVITAN A PULSAR, A LA VEZ (14-oct, Javi: «la de arriba llega antes que la de abajo»): cada raya
+     empieza cuando se pinta su pestaña, y al cambiar de rama o de trabajo nacen rayas nuevas desacompasadas. Se las
+     pone a todas en el mismo reloj (el de la página): Software/Audiovisual y los trabajos se dibujan juntos */
+  function acompasarRayas() {
+    if (!document.getAnimations) return;
+    document.getAnimations().forEach(function (a) { if (a.animationName === 'invita') a.startTime = 0; });
+  }
   /* pestañas (accesibles, con flechas): el reparto (una copia por personaje; al elegirla se ve su ficha) y, desde el
      06-oct, los trabajos (Javi: «que ocupen menos espacio»): uno a la vista y los demás a un clic */
   document.querySelectorAll('[role="tablist"]').forEach(function (lista) {
@@ -2225,6 +2680,7 @@
         document.getElementById(o.getAttribute('aria-controls')).hidden = !sel;
       });
       if (foco) b.focus();
+      acompasarRayas();
     }
     pestanas.forEach(function (b, i) {
       b.addEventListener('click', function () { elegir(b); });
@@ -2236,12 +2692,121 @@
     if (pestanas.length) elegir(pestanas[0]);
   });
 
+  /* APERITIVO (13-oct, Javi): cada ficha de trabajo abre la sección ya en el suyo (su rama y su pestaña) y baja hasta
+     él cuando el pergamino acaba de desenrollarse. Primero se abre: con la sección cerrada el pliegue es inerte y no
+     acepta clics */
+  document.querySelectorAll('.aperitivo').forEach(function (ap) {
+    var sec = ap.closest('.plegable');
+    if (!sec) return;
+    var pl = sec.querySelector('.pliegue');
+    ap.querySelectorAll('[data-ap-trab]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var tab = document.getElementById(b.getAttribute('data-ap-trab'));
+        if (!tab) return;
+        if (!sec.classList.contains('abierta')) desplegar(sec, true);
+        var panel = tab.closest('[role="tabpanel"]');
+        var rama = panel && document.querySelector('[role="tab"][aria-controls="' + panel.id + '"]');
+        if (rama) rama.click();
+        tab.click();
+        var destino = (rama && rama.closest('.ramas-sel')) || document.getElementById(tab.getAttribute('aria-controls'));
+        var bajar = function () { destino.scrollIntoView({ behavior: 'smooth', block: 'start' }); };
+        // se baja cuando ya está todo en su sitio: el trabajo desenrollado y las fichas recogidas y escondidas
+        var esperar = [pl._rodar, ap._anim].filter(function (a) { return a && a.finished; })
+          .map(function (a) { return a.finished.catch(function () {}); });
+        if (esperar.length && window.Promise) Promise.all(esperar).then(function () { setTimeout(bajar, 60); });
+        else bajar();
+      });
+    });
+  });
+
   /* las animaciones de las ramas (Software / Audiovisual), quietas mientras no se ven */
   var ramasSel = document.querySelector('.ramas-sel');
   if (ramasSel && 'IntersectionObserver' in window) {
     ramasSel.classList.add('ramas-sel--quieta');
     new IntersectionObserver(function (e) { ramasSel.classList.toggle('ramas-sel--quieta', !e[0].isIntersecting); }).observe(ramasSel);
   }
+
+  /* la cadena de la tablet, igual: se mueve solo mientras se ve */
+  document.querySelectorAll('.maq').forEach(function (fig) {
+    if (!('IntersectionObserver' in window)) { fig.classList.add('cadena--viva'); return; }
+    new IntersectionObserver(function (e) { fig.classList.toggle('cadena--viva', e[0].isIntersecting); }).observe(fig);
+  });
+
+  /* DESLIZAR, EN EL MÓVIL (14-oct, Javi: «que en el móvil deslizando puedas pasar de tipo de trabajo… y si deslizas
+     en la parte de software y producción audiovisual, se desliza de rama… a la altura que sea… inclusive en la misma
+     descripción del trabajo»). Además de pulsar: en la fila de las ramas se cambia de rama; en un trabajo (sus
+     pestañas, su dibujo o vídeo y su texto) se pasa al siguiente o al anterior, y del último de una rama al primero de
+     la otra; sobre las estrellas de diseño, de una a otra. Lo que ya se desliza de lado
+     por su cuenta (la tira de obras) manda. Solo cuentan los gestos claramente de lado: el scroll no se toca. Lo nuevo
+     entra por el lado hacia el que se desliza; si no hay más, un amago. Si la fila de pestañas quedó por encima de la
+     pantalla, se sube a ella para ver lo nuevo desde el principio */
+  (function deslizar() {
+    var zona = document.getElementById('trab-pliegue'), sec = document.getElementById('trabajo');
+    var ramas = document.querySelector('.ramas-sel');
+    if (!zona || !sec || !ramas || !('ontouchstart' in window)) return;
+    var pestanas = function (lista) { return lista ? [].slice.call(lista.querySelectorAll('[role="tab"]')) : []; };
+    var ramasB = pestanas(ramas), x0 = 0, y0 = 0, t0 = 0, origen = null;
+    var elegida = function (bs) { for (var i = 0; i < bs.length; i++) if (bs[i].getAttribute('aria-selected') === 'true') return i; return 0; };
+    var panel = function (b) { return document.getElementById(b.getAttribute('aria-controls')); };
+    function entrar(el, paso) {
+      if (el && el.animate) el.animate([{ translate: (paso * 44) + 'px 0', opacity: 0 }, { translate: '0 0', opacity: 1 }],
+        { duration: 460, easing: 'cubic-bezier(.16, 1, .3, 1)' });
+    }
+    function tope(el, paso) {
+      if (el && el.animate) el.animate([{ translate: '0 0' }, { translate: (-paso * 16) + 'px 0' }, { translate: '0 0' }],
+        { duration: 320, easing: 'ease-out' });
+    }
+    function verArriba(lista) {
+      if (lista.getBoundingClientRect().top < 80) lista.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    function pasar(bs, paso, lista) {                           // dentro de una misma fila; false si no hay más
+      var i = elegida(bs), j = i + paso;
+      if (j < 0 || j >= bs.length) return false;
+      bs[j].click(); entrar(panel(bs[j]), paso); verArriba(lista);
+      return true;
+    }
+    function cambiarRama(paso) {
+      if (!pasar(ramasB, paso, ramas)) tope(panel(ramasB[elegida(ramasB)]), paso);
+    }
+    function cambiarTrabajo(rp, paso) {
+      var lista = rp.querySelector('.trabajo-sel'), bs = pestanas(lista);
+      if (pasar(bs, paso, lista)) return;
+      var k = elegida(ramasB) + paso;
+      if (k < 0 || k >= ramasB.length) { tope(panel(bs[elegida(bs)]), paso); return; }
+      var otra = panel(ramasB[k]), obs = pestanas(otra.querySelector('.trabajo-sel'));
+      ramasB[k].click();
+      if (obs.length) (paso > 0 ? obs[0] : obs[obs.length - 1]).click();
+      entrar(otra, paso); verArriba(ramas);
+    }
+    zona.addEventListener('touchstart', function (e) {
+      origen = null;
+      if (e.touches.length !== 1 || !sec.classList.contains('abierta')) return;
+      var el = e.target;
+      if (el.closest('input, select, textarea, [data-sin-deslizar]')) return;
+      for (var n = el; n && n !== zona; n = n.parentElement) {
+        if (n.scrollWidth > n.clientWidth + 2 && /auto|scroll/.test(getComputedStyle(n).overflowX)) return;
+      }
+      origen = el; x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; t0 = Date.now();
+    }, { passive: true });
+    zona.addEventListener('touchcancel', function () { origen = null; }, { passive: true });
+    zona.addEventListener('touchend', function (e) {
+      var el = origen;
+      origen = null;
+      if (!el) return;
+      var t = e.changedTouches[0], dx = t.clientX - x0, dy = t.clientY - y0;
+      if (Math.abs(dx) < 48 || Math.abs(dx) < Math.abs(dy) * 1.7 || Date.now() - t0 > 900) return;
+      // 15-oct: «Otras creaciones» y «Avatares» son una pestaña más de su rama: dentro se pasa de trabajo como en los
+      // demás, salvo sobre las estrellas (sus pestañas o su ficha), donde se pasa de estrella
+      var paso = dx < 0 ? 1 : -1, estrella = el.closest('.reparto-sel, .personaje'), rp = el.closest('.rama-panel');
+      if (el.closest('.ramas-sel')) cambiarRama(paso);
+      else if (estrella) {
+        var rep = estrella.closest('.filas').querySelector('.reparto-sel'), rbs = pestanas(rep);
+        if (!pasar(rbs, paso, rep)) tope(panel(rbs[elegida(rbs)]), paso);
+      }
+      else if (rp) cambiarTrabajo(rp, paso);
+      else cambiarRama(paso);
+    }, { passive: true });
+  })();
 
   /* el menú y los enlaces llevan a la sección abierta */
   function irA(id) {

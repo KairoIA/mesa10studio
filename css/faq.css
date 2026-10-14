@@ -1,0 +1,78 @@
+/* Preguntas frecuentes (14-oct-2026). Va encima de legal.css (mismas letras, colores, cabecera y pie): aquí solo lo
+   propio de esta página. Cada pregunta se abre al pulsarla (<details>, sin JavaScript); el signo + y la raya de cada
+   bloque llevan el color de su rama: rojo el software, azul lo audiovisual, y los dos colores lo común. */
+[hidden] { display: none !important; }
+
+/* arriba: volver y el idioma, juntos a la derecha */
+.arriba__der { display: flex; align-items: center; gap: 1.2rem; }
+.idioma { display: flex; gap: .15rem; }
+.idioma button {
+  background: none; border: 0; cursor: pointer; color: inherit;
+  font: inherit; font-size: .8125rem; font-weight: 520; letter-spacing: .07em; line-height: 1;
+  padding: .5rem .45rem; opacity: .5;
+  transition: opacity .3s var(--curva);
+}
+.idioma button:hover { opacity: .85; }
+.idioma button[aria-pressed="true"] { opacity: 1; text-decoration: underline 1px; text-underline-offset: 6px; }
+
+/* los bloques: la raya de arriba, del color de su rama */
+.faq .bloque { --signo: var(--tinta-2); }
+.faq .bloque--soft { --signo: var(--rojo); }
+.faq .bloque--soft h2 { border-image: linear-gradient(90deg, var(--l1), var(--l1)) 1; }
+.faq .bloque--av { --signo: var(--azul); }
+.faq .bloque--av h2 { border-image: linear-gradient(90deg, var(--l2), var(--l2)) 1; }
+.faq .bloque h2 { margin-bottom: .4rem; }
+
+/* cada pregunta */
+.pregunta { border-bottom: 1px solid var(--raya); }
+.pregunta summary {
+  list-style: none; cursor: pointer;
+  display: flex; align-items: baseline; justify-content: space-between; gap: 1.2rem;
+  padding: 1.05rem 0;
+  font-size: 1.125rem; font-weight: 560; line-height: 1.4;
+  -webkit-user-select: none; user-select: none;
+  transition: color .3s var(--curva);
+}
+.pregunta summary::-webkit-details-marker { display: none; }
+.pregunta summary:hover { color: var(--signo); }
+/* el signo: una cruz que, al abrir, se queda en raya */
+.pregunta summary::after {
+  content: ""; flex: none; width: 13px; height: 13px; position: relative; top: 1px;
+  background:
+    linear-gradient(var(--signo), var(--signo)) center / 100% 1.5px no-repeat,
+    linear-gradient(var(--signo), var(--signo)) center / 1.5px 100% no-repeat;
+  transition: transform .45s var(--curva);
+}
+.pregunta[open] summary::after {
+  background: linear-gradient(var(--signo), var(--signo)) center / 100% 1.5px no-repeat;
+  transform: rotate(180deg);
+}
+.respuesta { padding: 0 2.2rem 1.2rem 0; }
+.respuesta p { margin: 0; color: var(--tinta-2); }
+.respuesta p + p { margin-top: .75rem; }
+
+/* se abre deslizándose, donde el navegador lo sabe hacer (Chrome y Edge); en los demás, se abre sin más */
+@supports (interpolate-size: allow-keywords) {
+  :root { interpolate-size: allow-keywords; }
+  .pregunta::details-content {
+    block-size: 0; overflow: clip;
+    transition: block-size .45s var(--curva), content-visibility .45s allow-discrete;
+  }
+  .pregunta[open]::details-content { block-size: auto; }
+}
+
+/* el final: si no está la pregunta, escribirnos */
+.cierre { margin-top: clamp(56px, 7vw, 88px); }
+.cierre h2 { margin-bottom: .9rem; }
+.cierre p { font-size: 1.125rem; }
+
+@media (max-width: 560px) {
+  .arriba__der { gap: .5rem; }
+  .arriba__volver { font-size: .875rem; }
+  .pregunta summary { font-size: 1.0625rem; }
+  .respuesta { padding-right: 0; }
+}
+@media print {
+  .idioma { display: none; }
+  .pregunta::details-content { block-size: auto; content-visibility: visible; }
+}
