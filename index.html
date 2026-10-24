@@ -18,7 +18,9 @@
 <meta property="og:site_name" content="Mesa 10 Studio">
 <meta property="og:title" content="Mesa 10 Studio">
 <meta property="og:description" content="El arte de siempre, con las herramientas de ahora. Software a medida y producción audiovisual.">
-<meta property="og:image" content="img/og.jpg">
+<meta property="og:url" content="https://mesa10studio.com/">
+<meta property="og:locale" content="es_ES">
+<meta property="og:image" content="https://mesa10studio.com/img/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
@@ -31,17 +33,49 @@
 <link rel="stylesheet" href="css/estilo.css?v=90">
 <script src="js/arranque.js"></script>
 
+<!-- Datos para buscadores e IA (18-oct, posicionamiento): quiénes somos, dónde estamos (solo la ciudad: la
+     dirección no se publica) y qué hacemos. El nombre de la web (WebSite) es el que Google enseña sobre el enlace.
+     Sin correo aquí: va al revés en la página para que no lo recojan los robots. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  "name": "Mesa 10 Studio",
-  "description": "Software a medida y producción audiovisual, con el arte de siempre y las herramientas de ahora, inteligencia artificial incluida.",
-  "url": "https://mesa10studio.com/",
-  "slogan": "Lo nuevo, a conciencia.",
-  "founder": { "@type": "Person", "name": "Javier" },
-  "areaServed": "ES",
-  "knowsLanguage": ["es", "en"]
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://mesa10studio.com/#empresa",
+      "name": "Mesa 10 Studio",
+      "description": "Software a medida y producción audiovisual para pymes, autónomos y creadores de contenido: automatizaciones, asistentes de voz y de WhatsApp, programas de gestión, webs y vídeo hecho con inteligencia artificial.",
+      "url": "https://mesa10studio.com/",
+      "logo": "https://mesa10studio.com/img/marca/mesa10_logo_320.png",
+      "image": "https://mesa10studio.com/img/og.jpg",
+      "slogan": "Lo nuevo, a conciencia.",
+      "founder": { "@type": "Person", "name": "Javier" },
+      "address": { "@type": "PostalAddress", "addressLocality": "Sevilla", "addressRegion": "Andalucía", "addressCountry": "ES" },
+      "areaServed": [
+        { "@type": "City", "name": "Sevilla" },
+        { "@type": "AdministrativeArea", "name": "Andalucía" },
+        { "@type": "Country", "name": "España" }
+      ],
+      "knowsLanguage": ["es", "en"],
+      "knowsAbout": ["Software a medida", "Automatización de procesos", "Asistentes de voz y de WhatsApp", "ERP y CRM para pequeñas empresas", "Diseño y desarrollo web", "Producción audiovisual", "Vídeo con inteligencia artificial", "Avatares digitales"],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Servicios",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Software y herramientas a medida", "description": "Automatizaciones, asistentes de voz y de WhatsApp, programas de gestión a medida, conexiones entre programas, webs y aplicaciones para móvil." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Producción audiovisual", "description": "Anuncios, contenido para redes sociales y avatares, con idea, guion y montaje humanos y ejecución con inteligencia artificial." } }
+        ]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://mesa10studio.com/#web",
+      "name": "Mesa 10 Studio",
+      "url": "https://mesa10studio.com/",
+      "inLanguage": "es",
+      "publisher": { "@id": "https://mesa10studio.com/#empresa" }
+    }
+  ]
 }
 </script>
 </head>

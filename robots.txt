@@ -1,0 +1,6 @@
+# Mesa 10 Studio (18-oct-2026): todo se puede leer e indexar. La página legal lleva «noindex» en su cabecera
+# (_headers): se deja leer para que los buscadores vean ese «noindex».
+User-agent: *
+Allow: /
+
+Sitemap: https://mesa10studio.com/sitemap.xml
