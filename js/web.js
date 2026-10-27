@@ -460,6 +460,19 @@
   var portada = document.getElementById('portada');
   var mesa = document.getElementById('mesa');
   var hayIntro = !!(window.MesaIntro && window.gsap && mesa);
+  /* CARGA ESCALONADA (27-oct-2026, Javi: «optimiza la velocidad de la web»): los pósters de los vídeos (data-poster) y
+     las fotos del reparto (data-src) están muy por debajo de la mesa y no se pedían al abrir la web, pero se descargaban
+     igual (~1,7 MB) y le quitaban ancho de banda a la intro. Se piden cuando la página ya se puede bajar (a los 4 s de
+     animación, o a los 10 s, o al saltarla), que es antes de que nadie llegue a verlos */
+  var cargadoTarde = false;
+  function cargarTarde() {
+    if (cargadoTarde) return;
+    cargadoTarde = true;
+    document.querySelectorAll('video[data-poster]').forEach(function (v) { v.poster = v.getAttribute('data-poster'); });
+    // las fotos del reparto están en una pestaña cerrada (Audiovisual): sin «lazy» se piden ya, para que al abrirla estén
+    document.querySelectorAll('img[data-src]').forEach(function (i) { i.loading = 'eager'; i.src = i.getAttribute('data-src'); });
+  }
+  if (!hayIntro) cargarTarde();
   /* MIENTRAS SE MONTA LA MESA hay dos cosas distintas (13-oct, Javi: «que a los 4 segundos ya puedas bajar»):
      - mesa-montando: la intro corre y se ve «Saltar animación»; dura hasta que acaba (o a los 26 s, por si no avisa).
      - mesa-quieta: la página no baja (ni rueda, ni dedo, ni teclas, ni enlaces #), para que nadie se la salte de
@@ -473,7 +486,7 @@
     soltarTras = setTimeout(soltar, 26000);
     dejarBajarTras = setTimeout(dejarBajar, 10000);
   }
-  function dejarBajar() { clearTimeout(dejarBajarTras); raiz.classList.remove('mesa-quieta'); }
+  function dejarBajar() { clearTimeout(dejarBajarTras); raiz.classList.remove('mesa-quieta'); cargarTarde(); }
   function soltar() { clearTimeout(soltarTras); dejarBajar(); raiz.classList.remove('mesa-montando'); }
   function montando() { return raiz.classList.contains('mesa-montando'); }
   function bloqueada() { return raiz.classList.contains('mesa-quieta'); }
@@ -2331,11 +2344,16 @@
       if (guia && Math.abs(guia.currentTime - v.currentTime) > 0.08) v.currentTime = guia.currentTime;
     });
     if (!('IntersectionObserver' in window)) { visible = true; dale(); return; }
+    var enPantalla = false;
     new IntersectionObserver(function (e) {
+      enPantalla = e[0].isIntersecting;
       // mientras la ficha llega (sale de fuera de la pantalla) no cuenta como «fuera»: sigue en marcha
-      if (!e[0].isIntersecting && alVuelo && copia.classList.contains('posado') && !copia.classList.contains('asentado')) return;
-      visible = e[0].isIntersecting; if (visible) dale(); else v.pause();
+      if (!enPantalla && alVuelo && copia.classList.contains('posado') && !copia.classList.contains('asentado')) return;
+      visible = enPantalla; if (visible) dale(); else v.pause();
     }, { rootMargin: '120px 0px' }).observe(v);
+    // (27-oct, velocidad) si la ficha salió de la pantalla mientras llegaba (se bajó deprisa), al asentarse se para:
+    // antes se quedaba reproduciendo fuera de la pantalla para siempre, y con las otras cinco gastaba CPU al desplazar
+    if (alVuelo) copia.addEventListener('asentado', function () { if (!enPantalla) { visible = false; v.pause(); } });
   });
 
   /* ── Desplegables: la piedra sujeta la losa; al levantarla se abre la sección ── */

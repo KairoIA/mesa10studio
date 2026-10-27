@@ -36,6 +36,17 @@
   Cache-Control: public, max-age=604800
 /fonts/*
   Cache-Control: public, max-age=31536000, immutable
+# 27-oct-2026 (velocidad): el JS, el CSS y la intro llevan ?v=N en cada referencia y N sube con cada cambio, así que
+# el navegador puede guardarlos una semana sin volver a preguntar (antes revalidaba cada uno en cada visita).
+# OJO: al editar un .js o .css, subir su ?v= (index.html, faq.html, legal.html, intro.js), si no, se ve el viejo
+/js/*
+  Cache-Control: public, max-age=604800
+/css/*
+  Cache-Control: public, max-age=604800
+/intro/*
+  Cache-Control: public, max-age=604800
+/vendor/*
+  Cache-Control: public, max-age=604800
 
 # logo de la firma de correo: otros sitios (los correos de Gmail, Outlook...) tienen que poder cargarlo
 /firma/*
