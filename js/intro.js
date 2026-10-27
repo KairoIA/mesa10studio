@@ -5,7 +5,7 @@
 window.MesaIntro = (function () {
 "use strict";
 let contenedor, BASE = "intro/", formato = null, encajar = () => {};
-const VERSION = "2610271815";                  // cambia en cada copia: el navegador no tira de lo que tenía guardado
+const VERSION = "2610271840";                  // cambia en cada copia: el navegador no tira de lo que tenía guardado
 const ruta = s => BASE + s + "?v=" + VERSION;
 // una imagen que falla (red del móvil, túnel) se pide otra vez una sola vez
 function cargarImg(i, src) {
