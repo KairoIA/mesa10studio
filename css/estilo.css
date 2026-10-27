@@ -705,11 +705,21 @@ h1.estela { font-size: clamp(1.15rem, .75rem + 1.35vw, 2.1rem); }
 .js .posable.posado {
   opacity: 1; translate: 0 0; scale: 1; rotate: var(--giro, 0deg); box-shadow: var(--sombra-posada);
   animation: posar-llega 2.8s cubic-bezier(.22, .61, .24, 1) var(--retraso, 0s) backwards,
-             posar-gira 3.6s linear var(--retraso, 0s) backwards;
+             posar-gira 3.6s linear var(--retraso, 0s) backwards,
+             posar-sombra 2.8s cubic-bezier(.22, .61, .24, 1) var(--retraso, 0s) backwards;
 }
+/* LA SOMBRA, APARTE (27-oct-2026, velocidad; Javi: «los vídeos que se desplazan van a tirones»): box-shadow no se puede
+   animar en la tarjeta gráfica, y con él dentro, el movimiento entero (translate y scale) se hacía en el hilo principal,
+   fotograma a fotograma, compitiendo con los vídeos y el resto. Separada la sombra en su propia animación (mismos
+   tiempos y curva: sale idéntico), translate y scale pasan a la tarjeta gráfica. Las listas de duración y curva de
+   «.plegable--muestra .posable.posado» se repiten en ciclo, así que la tercera copia la de la primera */
 @keyframes posar-llega {
-  0% { translate: var(--dx, 600px) -44px; scale: 1.06; box-shadow: var(--sombra-alzada); }
-  100% { translate: 0 0; scale: 1; box-shadow: var(--sombra-posada); }
+  0% { translate: var(--dx, 600px) -44px; scale: 1.06; }
+  100% { translate: 0 0; scale: 1; }
+}
+@keyframes posar-sombra {
+  0% { box-shadow: var(--sombra-alzada); }
+  100% { box-shadow: var(--sombra-posada); }
 }
 @keyframes posar-gira {
   0%, 30% { rotate: calc(var(--giro, 0deg) + var(--dgiro, 7deg)); animation-timing-function: cubic-bezier(.42, 0, .22, 1); }
