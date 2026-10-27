@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="es" class="sin-js">
+<html lang="es" class="sin-js" data-en="/en-faq">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Preguntas frecuentes (14-oct-2026, Javi: «en una página aparte, como la parte legal, señalada en las pestañas de
      arriba y al final de la web»; textos revisados por Javi el mismo día). Misma CSP que index.html. En español y en
-     inglés: las dos versiones van enteras (data-version) y js/faq.js enseña la del idioma que se eligió en la web
-     (m10-lang). Sin JavaScript, en español. El titular va en el mármol de la web (css/paginas.css, js/paginas.js).
+     inglés: las dos versiones van enteras (data-version) en esta página, y la inglesa se publica además aparte, en
+     /en-faq, hecha con _tools/version_ingles.py (cada idioma es su propia página desde el 27-oct; js/faq.js sigue el
+     <html lang>). Si cambia un texto, hay que volver a pasar ese script. Sin JavaScript, en español. El titular va en el mármol de la web (css/paginas.css, js/paginas.js).
      Lo que se promete aquí (primer mes de soporte, dos rondas de cambios, exclusividad de las Estrellas, contrato de
      encargado del tratamiento) lo decidió Javi: si cambia, se cambia aquí y en el presupuesto. -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; style-src-attr 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self'; font-src 'self'; connect-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'; upgrade-insecure-requests">
@@ -15,13 +16,17 @@
 <meta name="description" content="Lo que suelen preguntarnos antes de empezar: precios, plazos, software a medida y vídeos hechos con inteligencia artificial.">
 <meta name="theme-color" content="#EAEAEB">
 <link rel="canonical" href="https://mesa10studio.com/faq">
+<link rel="alternate" hreflang="es" href="https://mesa10studio.com/faq">
+<link rel="alternate" hreflang="en" href="https://mesa10studio.com/en-faq">
+<link rel="alternate" hreflang="x-default" href="https://mesa10studio.com/faq">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Mesa 10 Studio">
 <meta property="og:title" content="Preguntas frecuentes — Mesa 10 Studio">
 <meta property="og:description" content="Lo que suelen preguntarnos antes de empezar: precios, plazos, software a medida y vídeos hechos con inteligencia artificial.">
 <meta property="og:url" content="https://mesa10studio.com/faq">
 <meta property="og:locale" content="es_ES">
-<meta property="og:image" content="https://mesa10studio.com/img/og.jpg">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:image" content="https://mesa10studio.com/img/og.jpg?v=2">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="img/favicon.ico" sizes="any">
@@ -29,7 +34,7 @@
 <link rel="stylesheet" href="css/legal.css?v=2">
 <link rel="stylesheet" href="css/paginas.css?v=3">
 <link rel="stylesheet" href="css/faq.css?v=2">
-<script src="js/arranque.js"></script>
+<script src="js/arranque.js?v=2"></script>
 <!-- Las preguntas, para buscadores e IA (18-oct): salen de la versión en español. Si cambia alguna, se rehacen con
      python _tools/datos_preguntas.py -->
 <script type="application/ld+json" id="datos-preguntas">
@@ -429,7 +434,7 @@
 
 <footer class="pie">
   <img class="pie__marca" src="img/marca/mesa10_horizontal_oscuro.svg?v=2" alt="Mesa 10 Studio" width="237" height="39" loading="lazy">
-  <p class="pie__desc"><span data-version="es">Software a medida y producción audiovisual.</span><span data-version="en" hidden>Custom software and audiovisual production.</span></p>
+  <p class="pie__desc"><span data-version="es">Software a medida y producción audiovisual. Desde Sevilla, para toda España y Europa.</span><span data-version="en" hidden>Custom software and audiovisual production. Based in Seville, working across Spain and Europe.</span></p>
   <nav class="pie__enlaces" aria-label="Información">
     <a href="legal.html#aviso"><span data-version="es">Aviso legal</span><span data-version="en" hidden>Legal notice</span></a>
     <a href="legal.html#privacidad"><span data-version="es">Privacidad</span><span data-version="en" hidden>Privacy</span></a>
@@ -439,6 +444,6 @@
 </footer>
 
 <script src="js/paginas.js?v=3"></script>
-<script src="js/faq.js?v=2"></script>
+<script src="js/faq.js?v=4"></script>
 </body>
 </html>

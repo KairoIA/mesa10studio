@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" class="sin-js">
+<html lang="es" class="sin-js" data-en="/en">
 <head>
 <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,11 +8,14 @@
      cabecera HTTP; esta copia en <meta> protege también donde no se pueden poner cabeceras (GitHub Pages). -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; style-src-attr 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self'; font-src 'self'; connect-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<title>Mesa 10 Studio — Software a medida y producción audiovisual</title>
+<title>Software a medida y productora audiovisual en Sevilla | Mesa 10 Studio</title>
 
-<meta name="description" content="Software a medida (automatizaciones, programas, apps y webs) y producción audiovisual (anuncios, redes y avatares) para empresas, pymes, autónomos y creadores. El arte de siempre, con las herramientas de ahora.">
+<meta name="description" content="Desde Sevilla para toda España: software a medida, automatización y asistentes con IA, y producción de vídeo, anuncios UGC y reels para empresas y autónomos.">
 <meta name="theme-color" content="#EAEAEB">
 <link rel="canonical" href="https://mesa10studio.com/">
+<link rel="alternate" hreflang="es" href="https://mesa10studio.com/">
+<link rel="alternate" hreflang="en" href="https://mesa10studio.com/en">
+<link rel="alternate" hreflang="x-default" href="https://mesa10studio.com/">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Mesa 10 Studio">
@@ -20,7 +23,8 @@
 <meta property="og:description" content="El arte de siempre, con las herramientas de ahora. Software a medida y producción audiovisual.">
 <meta property="og:url" content="https://mesa10studio.com/">
 <meta property="og:locale" content="es_ES">
-<meta property="og:image" content="https://mesa10studio.com/img/og.jpg">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:image" content="https://mesa10studio.com/img/og.jpg?v=2">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
@@ -31,7 +35,7 @@
 
 <link rel="stylesheet" href="css/intro.css?v=2610041801">
 <link rel="stylesheet" href="css/estilo.css?v=90">
-<script src="js/arranque.js"></script>
+<script src="js/arranque.js?v=2"></script>
 
 <!-- Datos para buscadores e IA (18-oct, posicionamiento): quiénes somos, dónde estamos (solo la ciudad: la
      dirección no se publica) y qué hacemos. El nombre de la web (WebSite) es el que Google enseña sobre el enlace.
@@ -47,8 +51,10 @@
       "description": "Software a medida y producción audiovisual para pymes, autónomos y creadores de contenido: automatizaciones, asistentes de voz y de WhatsApp, programas de gestión, webs y vídeo hecho con inteligencia artificial.",
       "url": "https://mesa10studio.com/",
       "logo": "https://mesa10studio.com/img/marca/mesa10_logo_320.png",
-      "image": "https://mesa10studio.com/img/og.jpg",
+      "image": "https://mesa10studio.com/img/og.jpg?v=2",
       "slogan": "Lo nuevo, a conciencia.",
+      "hasMap": "https://maps.google.com/?cid=8841618379207456145",
+      "sameAs": ["https://maps.google.com/?cid=8841618379207456145"],
       "founder": { "@type": "Person", "name": "Javier" },
       "address": { "@type": "PostalAddress", "addressLocality": "Sevilla", "addressRegion": "Andalucía", "addressCountry": "ES" },
       "areaServed": [
@@ -63,7 +69,7 @@
         "name": "Servicios",
         "itemListElement": [
           { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Software y herramientas a medida", "description": "Automatizaciones, asistentes de voz y de WhatsApp, programas de gestión a medida, conexiones entre programas, webs y aplicaciones para móvil." } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Producción audiovisual", "description": "Anuncios, contenido para redes sociales y avatares, con idea, guion y montaje humanos y ejecución con inteligencia artificial." } }
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Producción audiovisual", "description": "Anuncios con calidad de cine, reels, contenido UGC, edición profesional y avatares, con idea, guion y montaje humanos y ejecución con inteligencia artificial." } }
         ]
       }
     },
@@ -152,7 +158,7 @@
         <h3 class="subtitulo" data-i18n="serv.soft.titulo">Software y herramientas a medida</h3>
         <p data-i18n="serv.soft.cuerpo">Herramientas pensadas para tu forma de trabajar, y no al revés. Entendemos tu proceso —qué se repite, dónde se pierde el tiempo— y construimos la solución sobre lo que ya usas, con inteligencia artificial solo donde aporta.</p>
         <ul class="lista">
-          <li data-i18n="serv.soft.l1">Automatización de tareas y procesos: facturas que se registran solas, consultas que llegan a quien debe resolverlas y una producción que avanza sin trabajo manual</li>
+          <li data-i18n="serv.soft.l1">Automatización de tareas y procesos: facturas que se registran solas, consultas que llegan a quien debe resolverlas y pedidos que pasan solos a producción, sin trabajo manual</li>
           <li data-i18n="serv.soft.l2">Asistentes de voz y de WhatsApp que atienden por ti, dan citas y gestionan tu agenda</li>
           <li data-i18n="serv.soft.l3">Programas de gestión a medida —ERP y CRM a la escala de un negocio pequeño— y herramientas internas, hechos a tu forma de trabajar</li>
           <li data-i18n="serv.soft.l7">Conexiones entre los programas y las máquinas que ya usas (middleware): ventas, citas, cobros, almacén o producción, funcionando como un solo sistema</li>
@@ -191,10 +197,10 @@ estudio.hacer(servicios)</code></pre>
         <h3 class="subtitulo" data-i18n="serv.av.titulo">Producción audiovisual</h3>
         <p data-i18n="serv.av.cuerpo">Trabajamos como una productora: idea, guion, montaje, color y sonido. La inteligencia artificial nos ahorra el rodaje —actores, localizaciones, cámaras—, pero lo que hace que una pieza funcione sigue siendo humano: la idea, el gusto y la mano que decide cada plano.</p>
         <ul class="lista">
-          <li data-i18n="serv.av.l1">Anuncios y contenido para redes: reels, piezas de producto, campañas y vídeos UGC (los que parecen grabados por un cliente con su móvil)</li>
+          <li data-i18n="serv.av.l1">Anuncios con calidad de cine a un precio accesible, reels y contenido UGC (el que parece grabado por un cliente con su móvil) para redes sociales y negocios</li>
           <li data-i18n="serv.av.l3">Avatares: tu cara en digital o un personaje propio, con personalidad, voz e historia; lo creamos y lo gestionamos</li>
-          <li data-i18n="serv.av.l5">Tu producto y tu local, en producciones de acabado cinematográfico, sin rodaje ni decorados</li>
-          <li data-i18n="serv.av.l4">¿Ya tienes material? Lo montamos: directos, grabaciones o los vídeos que guardas en el móvil, convertidos en piezas que cuentan una historia, adaptadas a cada red y a cada idioma</li>
+          <li data-i18n="serv.av.l5">Tu producto y tu local, con imagen de gran campaña, sin rodaje ni decorados</li>
+          <li data-i18n="serv.av.l4">Edición profesional para redes sociales y creadores de contenido: tus directos, grabaciones o los vídeos que guardas en el móvil, convertidos en piezas que cuentan una historia, adaptadas a cada red y a cada idioma</li>
           <li data-i18n="serv.av.l8">Sala de revisión propia: nos comunicas tus cambios sobre el propio vídeo, de forma más rápida y clara</li>
           <li data-i18n="serv.av.l7">Identidad de marca: logotipo, tipografía y eslogan propios, con el mismo cuidado que la de este estudio</li>
         </ul>
@@ -1029,7 +1035,7 @@ estudio.hacer(servicios)</code></pre>
 
 <footer class="pie">
   <img class="pie__marca" src="img/marca/mesa10_horizontal_oscuro.svg?v=2" alt="Mesa 10 Studio" width="237" height="39" loading="lazy">
-  <p class="pie__desc" data-i18n="desc">Software a medida y producción audiovisual.</p>
+  <p class="pie__desc" data-i18n="desc">Software a medida y producción audiovisual. Desde Sevilla, para toda España y Europa.</p>
   <nav class="pie__enlaces" aria-label="Información" data-i18n-aria="pie.legal">
     <a href="faq.html" data-i18n="pie.faq">Preguntas frecuentes</a>
     <a href="legal.html#aviso" data-i18n="pie.aviso">Aviso legal</a>
@@ -1040,8 +1046,8 @@ estudio.hacer(servicios)</code></pre>
 </footer>
 
 <script src="js/gsap.min.js"></script>
-<script src="js/intro.js?v=2610041801"></script>
-<script src="js/web.js?v=112"></script>
+<script src="js/intro.js?v=2610271725"></script>
+<script src="js/web.js?v=116"></script>
 <script type="module" src="js/anfora.js?v=8"></script>
 </body>
 </html>

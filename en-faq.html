@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+
+<html class="sin-js" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<!-- Preguntas frecuentes (14-oct-2026, Javi: «en una página aparte, como la parte legal, señalada en las pestañas de
+     arriba y al final de la web»; textos revisados por Javi el mismo día). Misma CSP que index.html. En español y en
+     inglés: las dos versiones van enteras (data-version) en esta página, y la inglesa se publica además aparte, en
+     /en-faq, hecha con _tools/version_ingles.py (cada idioma es su propia página desde el 27-oct; js/faq.js sigue el
+     <html lang>). Si cambia un texto, hay que volver a pasar ese script. Sin JavaScript, en español. El titular va en el mármol de la web (css/paginas.css, js/paginas.js).
+     Lo que se promete aquí (primer mes de soporte, dos rondas de cambios, exclusividad de las Estrellas, contrato de
+     encargado del tratamiento) lo decidió Javi: si cambia, se cambia aquí y en el presupuesto. -->
+<meta content="default-src 'none'; script-src 'self'; style-src 'self'; style-src-attr 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self'; font-src 'self'; connect-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'; upgrade-insecure-requests" http-equiv="Content-Security-Policy"/>
+<meta content="strict-origin-when-cross-origin" name="referrer"/>
+<title>FAQ — Mesa 10 Studio</title>
+<meta content="What people usually ask us before starting: prices, timelines, custom software and videos made with artificial intelligence." name="description"/>
+<meta content="#EAEAEB" name="theme-color"/>
+<link href="https://mesa10studio.com/en-faq" rel="canonical"/>
+<link href="https://mesa10studio.com/faq" hreflang="es" rel="alternate"/>
+<link href="https://mesa10studio.com/en-faq" hreflang="en" rel="alternate"/>
+<link href="https://mesa10studio.com/faq" hreflang="x-default" rel="alternate"/>
+<meta content="website" property="og:type"/>
+<meta content="Mesa 10 Studio" property="og:site_name"/>
+<meta content="FAQ — Mesa 10 Studio" property="og:title"/>
+<meta content="What people usually ask us before starting: prices, timelines, custom software and videos made with artificial intelligence." property="og:description"/>
+<meta content="https://mesa10studio.com/en-faq" property="og:url"/>
+<meta content="en_GB" property="og:locale"/>
+<meta content="es_ES" property="og:locale:alternate"/>
+<meta content="https://mesa10studio.com/img/og.jpg?v=2" property="og:image"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<link href="img/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="img/favicon.ico" rel="alternate icon" sizes="any"/>
+<link as="font" crossorigin="" href="fonts/MesaEntasis.woff2" rel="preload" type="font/woff2"/>
+<link href="css/legal.css?v=2" rel="stylesheet"/>
+<link href="css/paginas.css?v=3" rel="stylesheet"/>
+<link href="css/faq.css?v=2" rel="stylesheet"/>
+<script src="js/arranque.js?v=2"></script>
+<!-- Las preguntas, para buscadores e IA (18-oct): salen de la versión en español. Si cambia alguna, se rehacen con
+     python _tools/datos_preguntas.py -->
+<script id="datos-preguntas" type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "inLanguage": "en",
+ "url": "https://mesa10studio.com/en-faq",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "What kind of businesses do you work with?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Small and medium-sized businesses, freelancers and content creators in any sector. We build custom software and produce video, together or separately: some people only need a video, others want to get rid of a task that eats up their hours."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How much does it cost?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "It depends on what you need, so we don’t work with fixed rates or charge by the hour. First we understand your case, then we give you a fixed quote, in writing. Ask us, with no obligation."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How long does it take?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "It depends on the project and on how much work we have at the time. Together with the quote we tell you when you’ll have it, with a margin set aside for touch-ups, your requests and any changes that come up along the way: we’d rather give you a date we can keep."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Do you work remotely?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Almost always: most jobs and projects are done remotely, wherever you are. We’re based in Seville and, if a project calls for it, after studying its feasibility we can travel anywhere in Spain or Europe. In Seville and Cádiz we can also meet in person, if you prefer, to tell you how we work."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How do we get started?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Write to us and tell us what you need. Before anything else, we study whether the idea is feasible and the best way to make it happen. Then we talk it through with no obligation and tell you what we’d do, how long it would take and how much it would cost. No endless meetings."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Do I have to change the programs I already use?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Usually not: we build on what you already use —your email, your invoicing program, your online shop or your calendar— so everything fits without changing the way you work. Only in some cases will we advise you to switch: when your program can’t connect to anything or falls short of what you need. Then we suggest a better alternative or design one of your own, made to measure, as the foundation on which to build everything else."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Do I need to know about computers?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No. We hand it over tested and explain how it works, calmly, until you’re comfortable using it. The first month of support, for your questions and for adjustments, is free, unless the project needs active support from day one, with someone making sure it works every day."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How do I tell you the changes I want on my website?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "With our review room, a tool of our own: you see the website before it’s published, circle what you’d like changed with your finger or mouse and leave your comment right on it. It’s the easiest and clearest way to tell us what you need, without getting lost in emails."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Are there monthly costs?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "It depends on the job. Some tools are delivered with minimal monthly costs; others need a monthly subscription with us or paying for the services that make them run, such as a phone number or the artificial intelligence behind it. We explain it before we start, and we always look for the best value for money for you."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What if something goes wrong?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "During the first month, as we said, adjustments are included. After that you can take out monthly maintenance, so we keep an eye on it and keep it up to date, or carry on by yourself: it’s all yours."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Does the assistant say it’s an AI?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes. In customer service projects —voice or WhatsApp assistants that answer for you— the assistant introduces itself as virtual from the very start and never pretends to be a person: it’s what European law requires and, above all, what earns the caller’s trust. And not everything uses artificial intelligence: we only use it where it adds something. When a task follows clear rules —an order, an invoice, an alert— we solve it with our own software from start to finish: it always does the same thing and never makes anything up."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What happens to my data and my customers’ data?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "We only use what’s essential, never for anything else, and we comply with the General Data Protection Regulation (GDPR). We protect it with restricted access, encrypted connections and by keeping nothing we don’t need. If the system handles your customers’ data, we sign the data processing agreement the law requires."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Is what you build mine?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes. The files and the code are yours from day one. If one day you decide to carry on by yourself, you take everything with you."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Are the videos made with artificial intelligence?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "With artificial intelligence, yes, but directed by people from start to finish: the creativity is human and the execution is AI. From generating the images to the edit and the choice of music, every decision is made by a human mind. AI saves us the shoot, the actors and the locations; not the judgement. And it’s always made clear that it’s generated."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Is it legal to advertise with AI-made videos?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes, as long as it’s made clear that the content is generated, as the European AI Act requires. Some platforms, like Instagram, already add their own label when you publish, and then there’s no need to add it to the piece: we decide it with you depending on the platform and your account."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Can I appear in it, or my product, or my premises?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes. From your photos, and always with your permission, we put you, your product or your premises into a cinematic-quality production, with no shoot and no sets. And if you like, we can also clone your voice, so the video speaks like you."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Can I use one of the Designer stars for my brand?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes, that’s what they’re for: each one is designed for a different audience, so together we choose the one that connects best with yours. If you prefer, we can reserve them exclusively for you within your sector for as long as we agree."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How many changes can I ask for?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "The quote includes two rounds of changes. Before generating anything we agree the script and the style with you, and during the edit you have our review room at your disposal, a tool of our own where you mark on the video itself what you’d like changed. That way you tell us your changes faster and more clearly, and they come through right the first time, without going beyond those two rounds."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "For which platforms and in which languages?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "The ones you use: each piece is adapted to each platform’s format, vertical or horizontal, and to each language."
+   }
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header class="arriba">
+<a aria-label="Mesa 10 Studio: volver a la web" class="arriba__marca" data-volver="" href="index.html">
+<img alt="Mesa 10 Studio" height="26" src="img/marca/mesa10_horizontal_pequeno_claro.svg" width="160"/>
+</a>
+<div class="arriba__der">
+<a class="arriba__volver" data-volver="" href="en"><span data-version="en">Back<span class="arriba__largo"> to the site</span></span></a>
+<div aria-label="Idioma · Language" class="idioma" role="group">
+<button aria-pressed="false" data-lang="es" type="button">ES</button>
+<button aria-pressed="true" data-lang="en" type="button">EN</button>
+</div>
+</div>
+</header>
+<div class="cabeza">
+<h1 class="estela" data-en="Common questions" data-es="Preguntas frecuentes" data-estela="">Common questions</h1>
+</div>
+<!-- ───────── EN ESPAÑOL ───────── -->
+
+<!-- ───────── IN ENGLISH ───────── -->
+<main class="legal faq" data-version="en" lang="en">
+<p class="entrada">What people usually ask us before we start, answered plainly.</p>
+<nav aria-label="On this page" class="indice">
+<a href="#en-start">Getting started</a>
+<a href="#en-software">Software</a>
+<a href="#en-video">Video</a>
+</nav>
+<section aria-labelledby="t-en-start" class="bloque" id="en-start">
+<h2 id="t-en-start">Getting started</h2>
+<details class="pregunta">
+<summary>What kind of businesses do you work with?</summary>
+<div class="respuesta"><p>Small and medium-sized businesses, freelancers and content creators in any sector. We build custom software and produce video, together or separately: some people only need a video, others want to get rid of a task that eats up their hours.</p></div>
+</details>
+<details class="pregunta">
+<summary>How much does it cost?</summary>
+<div class="respuesta"><p>It depends on what you need, so we don’t work with fixed rates or charge by the hour. First we understand your case, then we give you a fixed quote, in writing. Ask us, with no obligation.</p></div>
+</details>
+<details class="pregunta">
+<summary>How long does it take?</summary>
+<div class="respuesta"><p>It depends on the project and on how much work we have at the time. Together with the quote we tell you when you’ll have it, with a margin set aside for touch-ups, your requests and any changes that come up along the way: we’d rather give you a date we can keep.</p></div>
+</details>
+<details class="pregunta">
+<summary>Do you work remotely?</summary>
+<div class="respuesta"><p>Almost always: most jobs and projects are done remotely, wherever you are. We’re based in Seville and, if a project calls for it, after studying its feasibility we can travel anywhere in Spain or Europe. In Seville and Cádiz we can also meet in person, if you prefer, to tell you how we work.</p></div>
+</details>
+<details class="pregunta">
+<summary>How do we get started?</summary>
+<div class="respuesta"><p>Write to us and tell us what you need. Before anything else, we study whether the idea is feasible and the best way to make it happen. Then we talk it through with no obligation and tell you what we’d do, how long it would take and how much it would cost. No endless meetings.</p></div>
+</details>
+</section>
+<section aria-labelledby="t-en-software" class="bloque bloque--soft" id="en-software">
+<h2 id="t-en-software">Software</h2>
+<details class="pregunta">
+<summary>Do I have to change the programs I already use?</summary>
+<div class="respuesta"><p>Usually not: we build on what you already use —your email, your invoicing program, your online shop or your calendar— so everything fits without changing the way you work.</p><p>Only in some cases will we advise you to switch: when your program can’t connect to anything or falls short of what you need. Then we suggest a better alternative or design one of your own, made to measure, as the foundation on which to build everything else.</p></div>
+</details>
+<details class="pregunta">
+<summary>Do I need to know about computers?</summary>
+<div class="respuesta"><p>No. We hand it over tested and explain how it works, calmly, until you’re comfortable using it. The first month of support, for your questions and for adjustments, is free, unless the project needs active support from day one, with someone making sure it works every day.</p></div>
+</details>
+<details class="pregunta">
+<summary>How do I tell you the changes I want on my website?</summary>
+<div class="respuesta"><p>With our review room, a tool of our own: you see the website before it’s published, circle what you’d like changed with your finger or mouse and leave your comment right on it. It’s the easiest and clearest way to tell us what you need, without getting lost in emails.</p></div>
+</details>
+<details class="pregunta">
+<summary>Are there monthly costs?</summary>
+<div class="respuesta"><p>It depends on the job. Some tools are delivered with minimal monthly costs; others need a monthly subscription with us or paying for the services that make them run, such as a phone number or the artificial intelligence behind it. We explain it before we start, and we always look for the best value for money for you.</p></div>
+</details>
+<details class="pregunta">
+<summary>What if something goes wrong?</summary>
+<div class="respuesta"><p>During the first month, as we said, adjustments are included. After that you can take out monthly maintenance, so we keep an eye on it and keep it up to date, or carry on by yourself: it’s all yours.</p></div>
+</details>
+<details class="pregunta">
+<summary>Does the assistant say it’s an AI?</summary>
+<div class="respuesta"><p>Yes. In customer service projects —voice or WhatsApp assistants that answer for you— the assistant introduces itself as virtual from the very start and never pretends to be a person: it’s what European law requires and, above all, what earns the caller’s trust.</p><p>And not everything uses artificial intelligence: we only use it where it adds something. When a task follows clear rules —an order, an invoice, an alert— we solve it with our own software from start to finish: it always does the same thing and never makes anything up.</p></div>
+</details>
+<details class="pregunta">
+<summary>What happens to my data and my customers’ data?</summary>
+<div class="respuesta"><p>We only use what’s essential, never for anything else, and we comply with the General Data Protection Regulation (GDPR). We protect it with restricted access, encrypted connections and by keeping nothing we don’t need. If the system handles your customers’ data, we sign the data processing agreement the law requires.</p></div>
+</details>
+<details class="pregunta">
+<summary>Is what you build mine?</summary>
+<div class="respuesta"><p>Yes. The files and the code are yours from day one. If one day you decide to carry on by yourself, you take everything with you.</p></div>
+</details>
+</section>
+<section aria-labelledby="t-en-video" class="bloque bloque--av" id="en-video">
+<h2 id="t-en-video">Video</h2>
+<details class="pregunta">
+<summary>Are the videos made with artificial intelligence?</summary>
+<div class="respuesta"><p>With artificial intelligence, yes, but directed by people from start to finish: the creativity is human and the execution is AI. From generating the images to the edit and the choice of music, every decision is made by a human mind. AI saves us the shoot, the actors and the locations; not the judgement. And it’s always made clear that it’s generated.</p></div>
+</details>
+<details class="pregunta">
+<summary>Is it legal to advertise with AI-made videos?</summary>
+<div class="respuesta"><p>Yes, as long as it’s made clear that the content is generated, as the European AI Act requires. Some platforms, like Instagram, already add their own label when you publish, and then there’s no need to add it to the piece: we decide it with you depending on the platform and your account.</p></div>
+</details>
+<details class="pregunta">
+<summary>Can I appear in it, or my product, or my premises?</summary>
+<div class="respuesta"><p>Yes. From your photos, and always with your permission, we put you, your product or your premises into a cinematic-quality production, with no shoot and no sets. And if you like, we can also clone your voice, so the video speaks like you.</p></div>
+</details>
+<details class="pregunta">
+<summary>Can I use one of the Designer stars for my brand?</summary>
+<div class="respuesta"><p>Yes, that’s what they’re for: each one is designed for a different audience, so together we choose the one that connects best with yours. If you prefer, we can reserve them exclusively for you within your sector for as long as we agree.</p></div>
+</details>
+<details class="pregunta">
+<summary>How many changes can I ask for?</summary>
+<div class="respuesta"><p>The quote includes two rounds of changes. Before generating anything we agree the script and the style with you, and during the edit you have our review room at your disposal, a tool of our own where you mark on the video itself what you’d like changed. That way you tell us your changes faster and more clearly, and they come through right the first time, without going beyond those two rounds.</p></div>
+</details>
+<details class="pregunta">
+<summary>For which platforms and in which languages?</summary>
+<div class="respuesta"><p>The ones you use: each piece is adapted to each platform’s format, vertical or horizontal, and to each language.</p></div>
+</details>
+</section>
+<aside class="cierre">
+<h2>Can’t find your question?</h2>
+<p>Write to us at <a class="dato dato--correo" data-r="moc.oiduts01asem@reivaj" href="index.html">our email</a>, or go back to the site and leave your idea in the mailbox. You’ll get an answer from us, not from a robot.</p>
+</aside>
+</main>
+<div aria-hidden="true" class="olivo">
+<img alt="" class="olivo__alta" loading="lazy" src="intro/assets/rama0_mesa.webp"/>
+<img alt="" class="olivo__baja" loading="lazy" src="intro/assets/rama2_mesa.webp"/>
+</div>
+<footer class="pie">
+<img alt="Mesa 10 Studio" class="pie__marca" height="39" loading="lazy" src="img/marca/mesa10_horizontal_oscuro.svg?v=2" width="237"/>
+<p class="pie__desc"><span data-version="en">Custom software and audiovisual production. Based in Seville, working across Spain and Europe.</span></p>
+<nav aria-label="Information" class="pie__enlaces">
+<a href="legal.html#aviso"><span data-version="en">Legal notice</span></a>
+<a href="legal.html#privacidad"><span data-version="en">Privacy</span></a>
+<a href="legal.html#cookies">Cookies</a>
+</nav>
+<p class="pie__legal">© <span id="anio">2026</span> Mesa 10 Studio</p>
+</footer>
+<script src="js/paginas.js?v=3"></script>
+<script src="js/faq.js?v=4"></script>
+</body>
+</html>

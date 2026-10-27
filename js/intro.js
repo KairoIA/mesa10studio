@@ -5,7 +5,7 @@
 window.MesaIntro = (function () {
 "use strict";
 let contenedor, BASE = "intro/", formato = null, encajar = () => {};
-const VERSION = "2610041801";                  // cambia en cada copia: el navegador no tira de lo que tenía guardado
+const VERSION = "2610271725";                  // cambia en cada copia: el navegador no tira de lo que tenía guardado
 const ruta = s => BASE + s + "?v=" + VERSION;
 // una imagen que falla (red del móvil, túnel) se pide otra vez una sola vez
 function cargarImg(i, src) {
@@ -256,7 +256,7 @@ function arrancar() {
   // --- la tablet: se programa de verdad ------------------------------------------------------------
   // lo que se programa (03-oct, Javi): tres partes. El estudio (quiénes somos, cómo trabajamos, el lema), el
   // software y lo audiovisual (cómo lo hacemos y ejemplos). Líneas de 44 como mucho: si no, se cortan
-  const PROGRAMAS = [
+  const PROGRAMAS_ES = [
     { nombre: "estudio.py", salida: "Lo nuevo, a conciencia.", codigo:
 `# Mesa 10 Studio · estudio.py
 from mesa10 import oficio, criterio
@@ -318,6 +318,70 @@ ejemplos = [
 ]
 pieza(tu_marca, "campaña de temporada")` },
   ];
+  // la versión en inglés (27-oct, página /en): lo que se programa, igual que arriba pero en inglés
+  const PROGRAMAS_EN = [
+    { nombre: "studio.py", salida: "New tools, done right.", codigo:
+`# Mesa 10 Studio · studio.py
+from mesa10 import craft, judgment
+import tools  # timeless and today's
+
+class Mesa10Studio:
+    motto = "New tools, done right."
+    art = "the timeless kind"
+    using = "today's tools"
+    clients = ["businesses", "freelancers",
+               "creators"]
+    branches = ["custom software",
+                "audiovisual production"]
+
+    def commission(self, idea):
+        case = judgment.listen(idea)
+        plan = judgment.study(case)
+        work = tools.make(plan)
+        return craft.deliver(work)
+
+studio = Mesa10Studio()
+print(studio.motto)` },
+    { nombre: "software.py", salida: "✓ working with what you already use", codigo:
+`# custom software · software.py
+from mesa10 import studio, ai
+
+def custom(business):
+    process = studio.understand(business)
+    for task in process.repetitive():
+        task.automate(using=ai)
+    app = studio.build(process)
+    app.connect(business.tools)
+    app.test(real_data=True)
+    return app.deliver()
+
+examples = [
+    "invoices that log themselves",
+    "voice and WhatsApp receptionist",
+    "large-scale data search",
+    "apps, websites and virtual offices",
+]
+custom(your_business)` },
+    { nombre: "audiovisual.py", salida: "✓ ready for instagram and tiktok", codigo:
+`# audiovisual production · audiovisual.py
+from mesa10 import script, ai, editing
+
+def piece(brand, idea):
+    text = script.write(idea, tone=brand)
+    shots = ai.generate(text, shoot=None)
+    cut = editing.pick(shots)  # by hand
+    final = editing.grade(cut)
+    return final.export("instagram", "tiktok")
+
+examples = [
+    "ads for any channel",
+    "reels and campaigns for social media",
+    "avatars: your face or a character",
+    "editing of your own footage",
+]
+piece(your_brand, "seasonal campaign")` },
+  ];
+  const PROGRAMAS = document.documentElement.lang === "en" ? PROGRAMAS_EN : PROGRAMAS_ES;
   const COL = { com: "c-com", kw: "c-kw", fn: "c-fn", st: "c-st", cte: "c-cte", tx: "c-tx" };   // los colores, en el CSS
   const PAL = "A-Za-z_áéíóúñÁÉÍÓÚÑ";
   const KW = /^(from|import|class|def|return|for|in|if|print)$/, CTE = /^(None|True|False|self)$/;

@@ -32,7 +32,7 @@
 
     'lema': 'Timeless art, with today’s tools.',
     'publico': 'Custom software and audiovisual production for small businesses, freelancers and social media content creators.',
-    'desc': 'Custom software and audiovisual production.',
+    'desc': 'Custom software and audiovisual production. Based in Seville, working across Spain and Europe.',
     'eslogan': 'New tools, done right.',
     'accion': 'Tell us your idea',
 
@@ -42,7 +42,7 @@
     'pliegue.cerrar': 'Close',
     'serv.soft.titulo': 'Custom software and tools',
     'serv.soft.cuerpo': 'Tools built around the way you work, not the other way round. We understand your process — what repeats, where time gets lost — and build the solution on what you already use, with artificial intelligence only where it helps.',
-    'serv.soft.l1': 'Task and process automation: invoices that file themselves, enquiries that reach whoever should handle them and production that moves on without manual work',
+    'serv.soft.l1': 'Task and process automation: invoices that file themselves, enquiries that reach whoever should handle them and orders that move into production on their own, with no manual work',
     'serv.soft.l2': 'Voice and WhatsApp assistants that answer for you, book appointments and run your diary',
     'serv.soft.l3': 'Custom management software — ERP and CRM sized for a small business — and in-house tools, built around the way you work',
     'serv.soft.l7': 'Connections between the software and machines you already use (middleware): sales, bookings, payments, stock or production, working as a single system',
@@ -57,10 +57,10 @@
     'serv.soft.sal2': 'done: it runs on what you already use',
     'serv.av.titulo': 'Audiovisual production',
     'serv.av.cuerpo': 'We work like a production company: idea, script, editing, colour and sound. Artificial intelligence spares us the shoot — actors, locations, cameras — but what makes a piece work is still human: the idea, the taste and the hand that decides every shot.',
-    'serv.av.l1': 'Ads and social content: reels, product pieces, campaigns and UGC videos (the kind that look filmed by a customer on their phone)',
+    'serv.av.l1': 'Cinematic-quality ads at an affordable price, reels and UGC content (the kind that looks filmed by a customer on their phone) for social media and businesses',
     'serv.av.l3': 'Avatars: your face in digital form or a character of your own, with a personality, a voice and a story; we create and manage it',
-    'serv.av.l4': 'Already have footage? We’ll cut it: streams, recordings or the videos piling up on your phone, turned into pieces that tell a story, adapted to every platform and language',
-    'serv.av.l5': 'Your product and your premises, in productions with a cinematic finish, with no shoot and no sets',
+    'serv.av.l4': 'Professional editing for social media and content creators: your streams, recordings or the videos piling up on your phone, turned into pieces that tell a story, adapted to every platform and language',
+    'serv.av.l5': 'Your product and your premises, with the look of a major campaign and no shoot or sets',
     'serv.av.l8': 'Our own review room: you tell us your changes right on the video, faster and more clearly',
     'serv.av.l7': 'Brand identity: a logo, typeface and tagline of your own, made with the same care as this studio’s',
 
@@ -384,10 +384,10 @@
     'caso.moda.nuestro': 'Set, music, pace and edit'
   };
   var META = {
-    es: { title: 'Mesa 10 Studio — Software a medida y producción audiovisual',
-          desc: 'Software a medida (automatizaciones, programas, apps y webs) y producción audiovisual (anuncios, redes y avatares) para empresas, pymes, autónomos y creadores. El arte de siempre, con las herramientas de ahora.' },
-    en: { title: 'Mesa 10 Studio — Custom software and audiovisual production',
-          desc: 'Custom software (automations, programs, apps and websites) and audiovisual production (ads, social content and avatars) for companies, small businesses, freelancers and creators. Timeless art, with today’s tools.' }
+    es: { title: 'Software a medida y productora audiovisual en Sevilla | Mesa 10 Studio',
+          desc: 'Desde Sevilla para toda España: software a medida, automatización y asistentes con IA, y producción de vídeo, anuncios UGC y reels para empresas y autónomos.' },
+    en: { title: 'Custom software and video production in Seville | Mesa 10 Studio',
+          desc: 'Custom software, automation and AI assistants for WhatsApp and phone, plus video production, UGC ads and reels for small businesses and freelancers. From Seville, working across Spain and Europe.' }
   };
 
   var ES = {}, ESaria = {};
@@ -580,13 +580,13 @@
     new MutationObserver(seguirAvance).observe(raiz, { attributes: true, attributeFilter: ['class'] });
   }
 
-  /* el idioma: al cambiarlo, la mesa se vuelve a montar (decisión de Javi, 30-sep) */
+  /* el idioma: cada idioma es su propia página (/ y /en, desde el 27-oct); al cambiarlo se va a la otra y la mesa
+     se vuelve a montar al cargar (decisión de Javi, 30-sep) */
   document.querySelectorAll('.idioma button').forEach(function (b) {
     b.addEventListener('click', function () {
       if (b.dataset.lang === idioma) return;
-      setLang(b.dataset.lang, true);
-      window.scrollTo({ top: 0, behavior: 'auto' });
-      otraVez();
+      try { localStorage.setItem('m10-lang', b.dataset.lang); } catch (e) {}
+      location.href = b.dataset.lang === 'en' ? '/en' : '/';
     });
   });
 
@@ -2881,10 +2881,11 @@
     document.querySelectorAll('[data-video]').forEach(function (v) { v.src = v.dataset.src; v.setAttribute('controls', ''); });
   }
 
-  /* ── Idioma guardado, y el año del pie ──────────────────── */
-  var guardado = null;
-  try { guardado = localStorage.getItem('m10-lang'); } catch (e) {}
-  if (!guardado) guardado = (navigator.language || 'es').toLowerCase().indexOf('es') === 0 ? 'es' : 'en';
-  if (guardado === 'en') setLang('en', false);
+  /* ── Idioma de la página, y el año del pie ──────────────────── */
+  /* Cada idioma es su propia página (27-oct, posicionamiento): la inglesa (/en, hecha con _tools/version_ingles.py)
+     ya viene escrita en inglés, y aquí solo se avisa a lo que cambia en vivo (el código de la tablet, los enlaces de
+     contacto, las cartelas del ánfora…). Quien entra por la española con el navegador en inglés ya habrá pasado a la
+     inglesa en js/arranque.js (los buscadores no: ven el español en /) */
+  if (document.documentElement.lang === 'en') setLang('en', false);
   document.getElementById('anio').textContent = new Date().getFullYear();
 })();

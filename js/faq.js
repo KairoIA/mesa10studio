@@ -1,12 +1,15 @@
-/* Preguntas frecuentes (14-oct-2026). Va después de js/paginas.js (el mármol, los datos al revés y el año):
-   - el idioma: el mismo que se eligió en la web (m10-lang) o, si no, el del navegador, como en la portada; con ES / EN
-     se cambia y se recuerda. Las dos versiones van enteras en la página (data-version); el titular del mármol se
-     vuelve a tallar en el otro idioma (data-es / data-en). Volver a la web, en js/paginas.js. */
+/* Preguntas frecuentes (14-oct-2026). Va después de js/paginas.js (el mármol, los datos al revés y el año).
+   Desde el 27-oct cada idioma es su propia página (/faq y /en-faq, la inglesa hecha con _tools/version_ingles.py), así
+   que el idioma es el del <html lang>; con ES / EN se va a la otra página y se recuerda (m10-lang). Quien entra por la
+   española con el navegador en inglés ya habrá pasado a la inglesa en js/arranque.js. Las dos versiones siguen
+   marcadas con data-version (la española lleva las dos; la inglesa, solo la suya); el titular del mármol se talla
+   en el idioma de la página (data-es / data-en). Volver a la web, en js/paginas.js. */
 (function () {
   var html = document.documentElement;
   var TITULO = { es: 'Preguntas frecuentes — Mesa 10 Studio', en: 'FAQ — Mesa 10 Studio' };
+  var OTRA = { es: '/en-faq', en: '/faq' };
 
-  function ponerIdioma(lang, recordar) {
+  function ponerIdioma(lang) {
     html.lang = lang;
     document.querySelectorAll('[data-version]').forEach(function (el) { el.hidden = el.getAttribute('data-version') !== lang; });
     document.querySelectorAll('.idioma button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.lang === lang)); });
@@ -14,14 +17,15 @@
       if (window.MesaLosa) window.MesaLosa.cambiar(el, el.getAttribute('data-' + lang));
     });
     document.title = TITULO[lang];
-    if (recordar) { try { localStorage.setItem('m10-lang', lang); } catch (e) {} }
   }
-  var guardado = null;
-  try { guardado = localStorage.getItem('m10-lang'); } catch (e) {}
-  if (!guardado) guardado = (navigator.language || 'es').toLowerCase().indexOf('es') === 0 ? 'es' : 'en';
-  ponerIdioma(guardado === 'en' ? 'en' : 'es', false);
+  var lang = html.lang === 'en' ? 'en' : 'es';
+  ponerIdioma(lang);
   document.querySelectorAll('.idioma button').forEach(function (b) {
-    b.addEventListener('click', function () { ponerIdioma(b.dataset.lang, true); });
+    b.addEventListener('click', function () {
+      if (b.dataset.lang === lang) return;
+      try { localStorage.setItem('m10-lang', b.dataset.lang); } catch (e) {}
+      location.href = b.dataset.lang === 'en' ? OTRA.es : OTRA.en;
+    });
   });
 
 })();
